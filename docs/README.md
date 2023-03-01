@@ -3,5 +3,8 @@
 ![Feature](./pic/feature.jpg)
 last modified @ 1 march 2023
 
-# Figma Desgin
-<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FKnPvfhgXbEzDCtDbK6kv9Z%2Fe-book%3Fnode-id%3D0%253A1%26t%3D5BTvm1etsIqcerSq-1" allowfullscreen></iframe>
+<br>
+
+# Figma Design
+## [FigmaDesign](https://www.figma.com/file/KnPvfhgXbEzDCtDbK6kv9Z/e-book?node-id=0%3A1&t=5BTvm1etsIqcerSq-1) <-- Click Here
+![picFigma](./pic/figma.jpg)
