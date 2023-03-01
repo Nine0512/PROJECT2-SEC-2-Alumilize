@@ -1,3 +1,3 @@
 # Feature Planning (Trello)
 \
-![Feature](/pic/feature.jpg)
+![Feature](./pic/feature.jpg)
