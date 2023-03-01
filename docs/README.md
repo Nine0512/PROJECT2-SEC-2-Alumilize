@@ -10,3 +10,8 @@ last modified @ 1 march 2023
 
 
 ![picFigma](./pic/figma.jpg)
+
+<br>
+
+# What problems did our team encounter?
+Every issue we encounter each week will be included in the <b>[issues](https://github.com/Nine0512/PROJECT2-SEC-2-Alumilize/issues)</b>
