@@ -1,6 +1,5 @@
 <script setup>
 import {computed, onMounted, ref} from "vue";
-// import {getImg} from "@/composable/fetch";
 import router from "@/router";
 
 const logo = '/images/Logo.png'
@@ -62,10 +61,10 @@ let selectBook = (id) => {
         <img :src="logo" alt="logo">
       </div>
       <div class="col-span-3 max-xl:hidden grid grid-cols-4 place-items-center font-bold">
-        <router-link to="/">Home</router-link>
-        <router-link to="#">Category</router-link>
-        <router-link to="#">Highlight</router-link>
-        <router-link to="/all">All Book</router-link>
+        <a href="#">Home</a>
+        <a href="#">Category</a>
+        <a href="#">Highlight</a>
+        <a href="#">All Book</a>
       </div>
       <div class="col-span-2 grid grid-cols-4 lg:grid-cols-3 place-items-center">
         <div class="form-control col-span-2 lg:col-span-2">
@@ -112,16 +111,16 @@ let selectBook = (id) => {
           </label>
           <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
             <li>
-              <router-link to="/">Home</router-link>
+              <a href="/">Home</a>
             </li>
             <li>
-              <router-link to="/">Category</router-link>
+              <a href="/">Category</a>
             </li>
             <li>
-              <router-link to="/">Highlight</router-link>
+              <a href="/">Highlight</a>
             </li>
             <li>
-              <router-link to="/all">All Book</router-link>
+              <a href="/">All Book</a>
             </li>
           </ul>
         </div>
