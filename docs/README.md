@@ -2,8 +2,8 @@
 [Trello](https://trello.com/b/F0d8WIJd/feature) <-- Click Here
 
 
-![featureUpdate70366](https://user-images.githubusercontent.com/62214133/223423985-85c29f85-2f8b-44fb-9f76-ef7b27ec0c1c.png)
-last modified @ 7 march 2023
+![featureUpdate70366](./pic/feature.jpg)
+last modified @ 24 march 2023
 
 <br>
 
@@ -33,3 +33,18 @@ _This week we focus on logic design and way of thinking. to wait to learn more c
 	- CRUD E-book in stock
 -   106 :  [Preeyaporn Petcharat](https://www.github.com/Preeyapornn)
 	- add remove items in cart
+
+# Responsibilities of each person in _week 2 - 3_
+_In these 2 weeks, we learned about router and fetch, so let's split the task to make view and some additional components._
+
+- 074 :  [Worawit Limthong](https://www.github.com/win2114)
+	- cart page (view) and admin Management (view)
+- 099 :  [Natdanai Nitipan](https://www.github.com/c3bosskung)
+	- sign in and sign up (view)
+-   101 :  [Thaninpong Panthawong](https://www.github.com/nonybueno)
+	- footer (component) and all book page (view)
+-   102 :  [Thanwa Plaengman](https://www.github.com/Nine0512)
+	- Homepage (view), Book detail Page (view), Card(component), Navbar(component) and Banner Slide(component)
+-   106 :  [Preeyaporn Petcharat](https://www.github.com/Preeyapornn)
+	- user profile page (view) and admin Management (view)
+
