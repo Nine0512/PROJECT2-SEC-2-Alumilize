@@ -37,6 +37,8 @@ _This week we focus on logic design and way of thinking. to wait to learn more c
 # Responsibilities of each person in _week 2 - 3_
 _In these 2 weeks, we learned about router and fetch, so let's split the task to make view and some additional components._
 
+###### In this week we found json-server can filter and search with parameter we will adapt it with our project :)
+
 - 074 :  [Worawit Limthong](https://www.github.com/win2114)
 	- cart page (view) and admin Management (view)
 - 099 :  [Natdanai Nitipan](https://www.github.com/c3bosskung)
