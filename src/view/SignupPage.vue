@@ -1,12 +1,11 @@
-<template>
+<script setup>
 
-</template>
-
-<script>
-export default {
-  name: "SignupPage"
-}
+import Navbar from '../component/Navbar.vue'
 </script>
+
+<template>
+<Navbar/>
+</template>
 
 <style scoped>
 
