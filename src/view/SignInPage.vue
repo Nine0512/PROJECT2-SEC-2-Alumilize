@@ -1,51 +1,103 @@
 <script setup>
 import Navbar from '../component/Navbar.vue'
+import {computed, provide, ref} from "vue";
+import toggleIconShowHidePassword from '../composable/toggleShowPassword.js'
+import CationValidInput from "@/component/CationValidInput.vue";
+import Footer from "@/component/Footer.vue";
+import router from "@/router";
+
+// toggle show icon password
+const passwordField = ref(null)
+const isSuccess = ref(true)
+
+
+// login checking
+const userInformation = ref({
+  username: '',
+  password: '',
+  role: '',
+})
+
+
+const authentication = async () => {
+  isSuccess.value = true
+  const raw = await fetch('http://localhost:5000/login')
+  const data = await raw.json()
+  for (let i = 0; i < data.length; i++) {
+    if (data[i].username === userInformation.value.username && data[i].password === userInformation.value.password) {
+      userInformation.value.role = data[i].role
+      router.replace('/AllBook')
+    }
+  }
+  if (userInformation.value.role === '') {
+    isSuccess.value = false
+    userInformation.value.username = ''
+    userInformation.value.password = ''
+  }
+}
+
+const logout = () => {
+  userInformation.value.username = ''
+  userInformation.value.password = ''
+  userInformation.value.role = ''
+}
+
 </script>
 
 <template>
   <div class="flex flex-col w-full h-screen">
     <Navbar/>
+
+    <!--    <div v-if="userInformation.role === 'admin'">-->
+    <!--      <button class="btn">Edit</button>-->
+    <!--      <button class="btn" @click="logout">logout</button>-->
+    <!--    </div>-->
+    <!--    <div v-else-if="userInformation.role === 'user'">-->
+    <!--      <button class="btn">View</button>-->
+    <!--      <button class="btn" @click="logout">logout</button>-->
+    <!--    </div>-->
+    <!--    <div v-else>-->
+    <!--      <button class="btn">Please Login First</button>-->
+    <!--    </div>-->
+
     <div class="flex h-screen">
       <div class="w-full max-lg:w-full max-lg:pb-10 max-lg:pt-5 justify-center flex flex-col items-center space-y-5 ">
         <div
-            class="flex flex-col justify-center items-center p-20 max-sm:p-15 max-lg:p-10 bg-yellow-200 rounded-3xl drop-shadow drop-shadow-2xl">
+            class="flex flex-col justify-center items-center p-20 max-sm:p-15 max-lg:p-10 bg-[#FAE1D2] rounded-3xl drop-shadow drop-shadow-2xl">
           <p class="text-black text-5xl font-bold pb-5 max-xl:text-3xl max-sm:text-lg ">Welcome to Alumilize E-book
             store!</p>
           <p class="text-black text-xl pb-10 max-xl:text-2xl  max-sm:text-sm">Please login first to be more fun 😀</p>
           <div class="flex flex-col text-black">
-            <!--          <label class="pb-2 ">Username</label>-->
-            <!--          <input type="text" class="rounded rounded-xl h-10 bg-white w-[30em] max-xl:w-[20em]">-->
             <div class="relative mb-6">
               <div class="absolute inset-y-0 left-0 ml-2 flex items-center pr-3 cursor-pointer">
-                <img src="https://api.iconify.design/ic:baseline-person.svg?color=%%2300000" class="w-5 h-5">
+                <img src="https://api.iconify.design/ic:baseline-person.svg?color=%%2300000" class="w-5 h-5" alt="userIcon">
               </div>
-              <input type="text" class="input pl-10 input-bordered w-[30em] max-xl:w-[20em] bg-white" placeholder="username">
+              <input type="text" class="input pl-10 input-bordered w-[30em] max-xl:w-[20em] bg-white"
+                     placeholder="username" v-model="userInformation.username">
             </div>
           </div>
-          <div class="flex flex-col text-black">
-            <!--          <label class="pb-2">Password</label>-->
-            <!--          <input type="password" class="rounded rounded-xl h-10 bg-white w-[30em] max-xl:w-[20em]">-->
-            <div class="relative mb-6">
-              <div class="absolute inset-y-0 left-0 ml-2 flex items-center pr-3 cursor-pointer">
-                <img src="https://api.iconify.design/carbon:password.svg?color=%2300000" class="w-5 h-5">
-              </div>
-              <input type="password" class="input pl-10 input-bordered w-[30em] max-xl:w-[20em] bg-white" placeholder="password">
+          <div class="flex flex-col text-black mb-6">
+            <div>
+              <div class="relative">
+                <div class="absolute inset-y-0 left-0 ml-2 flex items-center pr-3 cursor-pointer">
+                  <img src="https://api.iconify.design/carbon:password.svg?color=%2300000" class="w-5 h-5" alt="passwordIcon">
+                </div>
+                <input type="password" class="input pl-10 input-bordered w-[30em] max-xl:w-[20em] bg-white"
+                       ref="passwordField" placeholder="password" v-model="userInformation.password">
+                <div class="absolute inset-y-0 right-0 ml-2 flex items-center pr-3 cursor-pointer tooltip">
+                  <img src="https://api.iconify.design/zondicons:view-show.svg?color=%23888888" class="w-5 h-5 " @click="toggleIconShowHidePassword($event, passwordField)">
+                </div>
+            </div>
+              <CationValidInput text="Username or Password incorrect!" :check="isSuccess" />
             </div>
           </div>
-          <button class="btn btn-accent w-[15em] max-xl:w-[10em] bg-green-500 mb-5">Login</button>
-          <div class="text-register"><span class="bg-yellow-200 p-5 text-black">If you don't have account yet</span>
+          <button class="btn btn-accent w-[15em] max-xl:w-[10em] bg-green-500 mb-5" @click="authentication">Login
+          </button>
+          <div class="text-register"><span class="bg-[#FAE1D2] p-5 text-black">If you don't have account yet</span>
           </div>
-          <button class="btn btn-primary w-[15em] bg-blue-400 text-black max-xl:w-[10em]">Join us</button>
+          <router-link to="/register" class="btn btn-primary w-[15em] bg-blue-400 text-black max-xl:w-[10em]">Join us</router-link>
         </div>
       </div>
-<!--            <div-->
-<!--                class="w-2/6 max-lg:w-full  max-lg:h-full max-lg:pb-10  justify-center flex flex-col items-center bg-yellow-200 space-y-10">-->
-<!--              <img src="/images/Logo.png" alt="Logo">-->
-<!--              <div class="flex items-center space-x-2">-->
-<!--                <p class="text-black text-xl font-semibold">If you don't have account</p>-->
-<!--                <button class="btn btn-success">Join Us</button>-->
-<!--              </div>-->
-<!--            </div>-->
     </div>
   </div>
 

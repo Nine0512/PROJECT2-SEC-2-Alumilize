@@ -55,7 +55,7 @@ let selectBook = (id) => {
 </script>
 
 <template>
-  <div class="navbar w-full bg-yellow-500 flex justify-center">
+  <div class="navbar w-full bg-[#FFAD96] flex justify-center">
     <div class="grid grid-cols-3 mx-5 lg:grid-cols-6 gap-4 w-full lg:w-4/6">
       <div class="flex-1 w-full md:w-5/12 lg:w-9/12 cursor-pointer" @click="router.push('/')">
         <img :src="logo" alt="logo">

@@ -4,6 +4,7 @@ import Carousel from "@/component/Carousel.vue";
 import SignInPage from "@/view/SignInPage.vue";
 import InputModal from "@/component/InputModal.vue";
 import SignupPage from "@/view/SignupPage.vue";
+import AllBook from "@/view/AllBook.vue";
 
 </script>
 
@@ -12,7 +13,10 @@ import SignupPage from "@/view/SignupPage.vue";
 <!--      <Carousel/>-->
 <!--      <InputModal/>-->
 <!--    <SignInPage/>-->
-  <SignupPage/>
+<!--  <SignupPage/>-->
+<!--    <router-view/>-->
+<!--    <AllBook/>-->
+    <router-view/>
   </div>
 </template>
 
