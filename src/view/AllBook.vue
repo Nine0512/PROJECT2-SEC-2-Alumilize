@@ -278,7 +278,6 @@ function sortPrice(item) {
     </div>
   </div>
   <Footer/>
-  <Footer/>
 </template>
 
 <style scoped></style>
