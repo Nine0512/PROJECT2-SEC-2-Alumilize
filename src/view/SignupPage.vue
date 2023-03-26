@@ -2,6 +2,7 @@
 import Navbar from '../component/Navbar.vue'
 import toggleIconShowHidePassword from "@/composable/toggleShowPassword";
 import {ref} from "vue";
+import router from "@/router";
 import CationValidInput from "@/component/CationValidInput.vue";
 
 const passwordField = ref(null)
@@ -76,6 +77,8 @@ const reg = async () => {
           role: 'user'
         })
       })
+      router.replace('/')
+      setRole('user')
     }
   }
 }
@@ -179,7 +182,7 @@ const setRole = (role) => {
               <CationValidInput text="password dont match" :check="isPasswordValid" />
             </div>
           </div>
-          <router-link to="/" class="btn btn-primary w-[15em] bg-green-500 text-black max-xl:w-[10em]" @click="reg; setRole('user')">Join us</router-link>
+          <button class="btn btn-primary w-[15em] bg-green-500 text-black max-xl:w-[10em]" @click="reg">Join us</button>
         </div>
       </div>
     </div>
