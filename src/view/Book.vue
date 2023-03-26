@@ -97,7 +97,7 @@ renderImg()
         <a :href="book" class="btn" target="_blank">Download</a>
       </div>
       <div class="col-span-6 flex justify-end my-5">
-        <router-link :to="'/manage/update/' + pageImg?.id" class="btn ml-2">Update</router-link>
+        <router-link :to="'/manage/update/' + bookInfo?.id" class="btn ml-2">Update</router-link>
         <label for="my-modal-6" class="btn ml-2">Delete</label>
         <input type="checkbox" id="my-modal-6" class="modal-toggle"/>
         <div class="modal modal-bottom sm:modal-middle">
@@ -105,7 +105,7 @@ renderImg()
             <h3 class="font-bold text-lg">Are you sure!</h3>
             <p class="py-4">You won't be able to revert this!</p>
             <div class="modal-action">
-              <a href="/" class="btn btn-error" @click="deleteBook(pageImg?.id)">Delete</a>
+              <a href="/" class="btn btn-error" @click="deleteBook(bookInfo?.id)">Delete</a>
               <label for="my-modal-6" class="btn">Cancel</label>
             </div>
           </div>

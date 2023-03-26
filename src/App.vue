@@ -9,8 +9,8 @@ import Card from "@/component/Card.vue";
 <template>
   <div data-theme="garden">
     <Navbar/>
-<!--    <Carousel/>-->
-    <router-view></router-view>
+    <Carousel/>
+    <InputModal/>
   </div>
 </template>
 <style scoped>
