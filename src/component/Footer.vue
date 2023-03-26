@@ -1,21 +1,23 @@
-<script setup></script>
+<script setup>
+
+</script>
 
 <template>
   <div>
-    <div class="w-full bg-yellow-500 h-64 flex justify-center max-md:hidden">
+    <div class="w-full  bg-[#FFAD96] h-64 flex justify-center max-md:hidden">
       <div class="w-4/6 grid grid-rows-3 pb-2">
         <div class="row-span-2">
           <!-- <div class="grid grid-cols-4">
             <div class="flex justify-end items-end h-40">
-              <img src="../../public/images/footerLogo.png" class="h-28" />
+              <img src="../../public//images/footerLogo.png" class="h-28" />
             </div> -->
           <div
             class="flex justify-center items-center col-span-2 pt-5 relative"
           >
-            <img src="images/black-butler2-transformed.png" class="h-36" />
+            <img src="/images/black-butler2-transformed.png" class="h-36" />
             <div class="flex justify-center items-center pb-5">
               <img
-                src="images/qr-code.png"
+                src="/images/qr-code.png"
                 class="absolute h-28 drop-shadow-xl"
               />
             </div>
@@ -35,7 +37,7 @@
                   href="https://github.com/Nine0512/PROJECT2-SEC-2-Alumilize.git"
                   target="_blank"
                 >
-                  <img src="images/25231.png" class="h-14 w-14" />
+                  <img src="/images/25231.png" class="h-14 w-14" />
                 </a>
               </div>
             </div>
@@ -46,19 +48,19 @@
                 วิธีชำระเงิน
               </div>
               <div class="flex justify-center">
-                <img src="images/payment.png" class="h-9 pt-2 w-20 pl-1" />
+                <img src="/images/payment.png" class="h-9 pt-2 w-20 pl-1" />
               </div>
               <div class="flex justify-center">
-                <img src="images/master.png" class="h-10 pt-2" />
+                <img src="/images/master.png" class="h-10 pt-2" />
               </div>
               <div class="flex justify-center">
-                <img src="images/line.png" class="h-9 pt-2" />
+                <img src="/images/line.png" class="h-9 pt-2" />
               </div>
               <div class="flex justify-center">
-                <img src="images/AirPay_Logo-.png" class="h-12" />
+                <img src="/images/AirPay_Logo-.png" class="h-12" />
               </div>
               <div>
-                <img src="images//truemoney.png" class="h-10 pt-1" />
+                <img src="/images//truemoney.png" class="h-10 pt-1" />
               </div>
             </div>
             <div class="flex justify-center items-end text-xs pt-2">
@@ -71,17 +73,17 @@
               <div class="grid grid-cols-3 row-span-2 gap-2">
                 <div class="flex justify-center items-center hover:scale-110">
                   <a href="https://www.naiin.com" target="_blank">
-                    <img src="images/niin.png" class="h-12 cursor-pointer" />
+                    <img src="/images/niin.png" class="h-12 cursor-pointer" />
                   </a>
                 </div>
                 <div class="flex justify-center items-center hover:scale-110">
                   <a href="https://www.webtoons.com/th/" target="_blank">
-                    <img src="images/webtoon.png" class="h-12 cursor-pointer" />
+                    <img src="/images/webtoon.png" class="h-12 cursor-pointer" />
                   </a>
                 </div>
                 <div class="flex justify-center items-center hover:scale-110">
                   <a href="https://www.mebmarket.com/" target="_blank">
-                    <img src="images/meb.png" class="h-12 cursor-pointer" />
+                    <img src="/images/meb.png" class="h-12 cursor-pointer" />
                   </a>
                 </div>
               </div>
@@ -96,7 +98,7 @@
         <div class="w-full grid grid-cols-10 sm:gap-2 items-center">
           <div class="col-span-2 flex justify-center max-[600px]:ml-5">
             <img
-              src="images/footerLogo.png"
+              src="/images/footerLogo.png"
               class="h-32 max-[600px]:h-20 max-[600px]:w-16"
             />
           </div>
@@ -119,7 +121,7 @@
                   target="_blank"
                 >
                   <img
-                    src="images/25231.png"
+                    src="/images/25231.png"
                     class="h-14 w-14 max-[600px]:h-10 max-[600px]:w-10"
                   />
                 </a>
