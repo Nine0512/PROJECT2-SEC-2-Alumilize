@@ -1,5 +1,6 @@
 <script setup>
 import {inject, ref} from "vue";
+
 import Card from "../component/Card.vue";
 
 import Navbar from "@/component/Navbar.vue";
@@ -91,6 +92,10 @@ function sortPrice(item) {
     }
   });
 }
+
+import {useRoleStore} from "@/store/roleChecking"
+const getRole = useRoleStore().role
+
 </script>
 
 <template>

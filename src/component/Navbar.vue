@@ -41,19 +41,26 @@ let selectBook = (id) => {
   search.value = ''
   router.push({name: 'book', params: {id: id}})
 }
+
+import {useRoleStore} from "@/store/roleChecking"
+const getRole = useRoleStore().role
+const setRole = (role) => {
+  useRoleStore().setRole(role)
+}
+
 </script>
 
 <template>
   <div class="navbar w-full bg-[#FFAD96] flex justify-center">
     <div class="grid grid-cols-3 mx-5 lg:grid-cols-6 gap-4 w-full lg:w-4/6">
-      <div class="flex-1 w-full md:w-5/12 lg:w-9/12 cursor-pointer" @click="router.push('/')">
+      <router-link to="/" class="flex-1 w-full md:w-5/12 lg:w-9/12 cursor-pointer" @click="router.push('/')">
         <img :src="logo" alt="logo">
-      </div>
+      </router-link>
       <div class="col-span-3 max-xl:hidden grid grid-cols-4 place-items-center font-bold">
-        <a href="#">Home</a>
+        <router-link to="/">Home</router-link>
         <a href="#">Category</a>
         <a href="#">Highlight</a>
-        <a href="#">All Book</a>
+        <router-link to="/Allbook">All Book</router-link>
       </div>
       <div class="col-span-2 grid grid-cols-4 lg:grid-cols-3 place-items-center">
         <div class="form-control col-span-2 lg:col-span-2">
@@ -70,12 +77,15 @@ let selectBook = (id) => {
           </div>
         </div>
         <div class="dropdown dropdown-end pl-1 lg:pl-5">
-          <label tabindex="0" class="btn btn-ghost btn-circle avatar">
+          <label v-show="getRole !== ''" tabindex="0" class="btn btn-ghost btn-circle avatar">
             <div class="w-10 rounded-full">
               <img :src="profile"/>
             </div>
           </label>
-          <ul tabindex="0" class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
+          <router-link to="/login" class="btn" v-show="getRole === ''">
+            sign in
+          </router-link>
+          <ul  v-show="getRole !== ''" tabindex="0" class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
             <li>
               <a class="justify-between">
                 Profile
@@ -83,7 +93,7 @@ let selectBook = (id) => {
               </a>
             </li>
             <li><a>Settings</a></li>
-            <li><a>Logout</a></li>
+            <li><router-link to="/login" @click="setRole('')">Logout</router-link></li>
           </ul>
         </div>
         <div class="dropdown dropdown-end w-5/12 lg:hidden">

@@ -18,6 +18,10 @@ const userInformation = ref({
   role: '',
 })
 
+import {useRoleStore} from "@/store/roleChecking"
+
+const role = useRoleStore()
+
 
 const authentication = async () => {
   isSuccess.value = true
@@ -26,7 +30,8 @@ const authentication = async () => {
   for (let i = 0; i < data.length; i++) {
     if (data[i].username === userInformation.value.username && data[i].password === userInformation.value.password) {
       userInformation.value.role = data[i].role
-      router.replace('/AllBook')
+      role.setRole(data[i].role.toString())
+      await router.push('/')
     }
   }
   if (userInformation.value.role === '') {
