@@ -77,18 +77,10 @@ const reg = async () => {
           role: 'user'
         })
       })
-      router.replace('/')
-      setRole('user')
+      await router.push('/Login')
     }
   }
 }
-
-import {useRoleStore} from "@/store/roleChecking"
-const getRole = useRoleStore().role
-const setRole = (role) => {
-  useRoleStore().setRole(role)
-}
-
 
 </script>
 

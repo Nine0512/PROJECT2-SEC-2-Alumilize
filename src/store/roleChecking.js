@@ -2,10 +2,21 @@ import {defineStore} from "pinia";
 import {computed, ref} from "vue";
 
 export const useRoleStore = defineStore("role", () => {
-    const role = ref('')
+    const userInformation = ref({
+        firstname: '',
+        lastname: '',
+        username: '',
+        role: ''
+    })
+    const setInfo = (userInfo) => {
+        userInformation.value.firstname = userInfo.firstname
+        userInformation.value.lastname = userInfo.lastname
+        userInformation.value.username = userInfo.username
+        userInformation.value.role = userInfo.role
+    }
     const setRole= (roleUser) => {
-        role.value = roleUser
+        userInformation.value.role = roleUser
     }
 
-    return {role, setRole}
+    return {userInformation, setInfo, setRole}
 })

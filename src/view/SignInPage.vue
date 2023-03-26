@@ -30,7 +30,7 @@ const authentication = async () => {
   for (let i = 0; i < data.length; i++) {
     if (data[i].username === userInformation.value.username && data[i].password === userInformation.value.password) {
       userInformation.value.role = data[i].role
-      role.setRole(data[i].role.toString())
+      role.setInfo(userInformation.value)
       await router.push('/')
     }
   }

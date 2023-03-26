@@ -9,7 +9,7 @@ import Footer from "@/component/Footer.vue";
 let imgArr = ref([])
 
 import {useRoleStore} from "@/store/roleChecking"
-const getRole = useRoleStore().role
+const getRole = useRoleStore().userInformation.role
 
 const renderImg = async () => {
   const img = await getBook()

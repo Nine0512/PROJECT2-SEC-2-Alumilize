@@ -32,7 +32,7 @@ const renderImg = async () => {
 renderImg()
 
 import {useRoleStore} from "@/store/roleChecking"
-const getRole = useRoleStore().role
+const getRole = useRoleStore().userInformation.role
 
 
 </script>

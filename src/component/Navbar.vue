@@ -43,7 +43,7 @@ let selectBook = (id) => {
 }
 
 import {useRoleStore} from "@/store/roleChecking"
-const getRole = useRoleStore().role
+const getRole = useRoleStore().userInformation.role
 const setRole = (role) => {
   useRoleStore().setRole(role)
 }
