@@ -93,7 +93,7 @@
       </div>
     </div>
 
-    <div class="w-full bg-yellow-500 sm:h-44 flex justify-center md:hidden">
+    <div class="w-full bg-[#FFAD96] sm:h-44 flex justify-center md:hidden">
       <div class="w-full flex justify-center text-white items-center">
         <div class="w-full grid grid-cols-10 sm:gap-2 items-center">
           <div class="col-span-2 flex justify-center max-[600px]:ml-5">
