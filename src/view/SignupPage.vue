@@ -80,6 +80,13 @@ const reg = async () => {
   }
 }
 
+import {useRoleStore} from "@/store/roleChecking"
+const getRole = useRoleStore().role
+const setRole = (role) => {
+  useRoleStore().setRole(role)
+}
+
+
 </script>
 
 <template>
@@ -172,7 +179,7 @@ const reg = async () => {
               <CationValidInput text="password dont match" :check="isPasswordValid" />
             </div>
           </div>
-          <button class="btn btn-primary w-[15em] bg-green-500 text-black max-xl:w-[10em]" @click="reg">Join us</button>
+          <router-link to="/" class="btn btn-primary w-[15em] bg-green-500 text-black max-xl:w-[10em]" @click="reg; setRole('user')">Join us</router-link>
         </div>
       </div>
     </div>
