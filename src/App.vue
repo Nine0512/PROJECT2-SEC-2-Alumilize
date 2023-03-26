@@ -7,9 +7,11 @@ import Card from "@/component/Card.vue";
 </script>
 
 <template>
-  <Navbar/>
-  <Carousel/>
-  <InputModal/>
+  <div data-theme="garden">
+    <Navbar/>
+    <Carousel/>
+    <InputModal/>
+  </div>
 </template>
 <style scoped>
 </style>

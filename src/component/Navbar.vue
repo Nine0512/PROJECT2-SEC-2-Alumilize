@@ -72,7 +72,7 @@ let selectBook = (id) => {
           <div v-if="searchChoice.length"
                class="absolute bg-base-100 p-4 rounded-xl lg:w-2/12 max-h-36 mt-10 overflow-y-scroll z-50">
             <ul v-for="item in searchChoice" :key="item.id">
-              <li class="p-2 rounded-md cursor-pointer hover:bg-blue-100" @click="selectBook(item.id)">{{
+              <li class="p-2 rounded-md cursor-pointer hover:bg-gray-600" @click="selectBook(item.id)">{{
                   item.title
                 }}
               </li>
