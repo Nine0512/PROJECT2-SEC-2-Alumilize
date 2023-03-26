@@ -8,19 +8,8 @@ const profile = '/images/image4.png'
 let search = ref('')
 let infoArr = ref([])
 
-// const getInfo = async () => {
-//   const res = await getImg()
-//   res.forEach(item => {
-//     let infoObj = {
-//       id: item.id,
-//       title: item.title
-//     }
-//     infoArr.value.push(infoObj)
-//   })
-// }
 
 onMounted(() => {
-  // getInfo()
   fetch('http://localhost:5000/Book').then(
     res => res.json()
   ).then(

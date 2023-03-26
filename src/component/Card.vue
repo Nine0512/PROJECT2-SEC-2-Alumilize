@@ -10,7 +10,7 @@ const props = defineProps({
 
 <template>
 
-  <div class="w-full h-auto p-3">
+  <div class="w-full h-auto">
     <router-link :to="{name:'book' , params:{id:props.item.id}}">
       <div class="h-full overflow-hidden">
         <img :src="item.imageBase64" :alt="item.title" class="w-full"/>
@@ -20,16 +20,12 @@ const props = defineProps({
           <h2 class="text-base">{{ item.title }}</h2>
           <h3 class="text-sm">{{ item.author }}</h3>
           <h3 class="text-sm">{{ item.category.join(',') }}</h3>
-        </div>
-        <div class="flex justify-end">
-          <h3 class="text-2xl font-semibold text-orange-500">{{ item.price }} Baht</h3>
+          <h3 class="text-lg font-bold lg:text-2xl lg:font-semibold text-orange-500">{{ item.price }} Baht</h3>
         </div>
       </div>
     </router-link>
-    <div class="grid grid-cols-2 gap-4 place-items-center">
-      <button class="rounded-xl py-2 border-none hover:bg-yellow-400 w-full bg-yellow-300 text-white">Add to cart
-      </button>
-      <button class="rounded-xl py-2 border-none hover:bg-yellow-600 w-full bg-yellow-500 text-white">Buy now
+    <div class="grid place-items-center">
+      <button class="w-full lg:w-11/12 py-0.5 rounded-xl bg-yellow-500 text-sm lg:text-black mb-4">Add to cart
       </button>
     </div>
   </div>
