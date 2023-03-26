@@ -10,7 +10,7 @@ const props = defineProps({
 
 <template>
 
-  <div class="w-full h-auto">
+  <div class="w-full h-1/2">
     <router-link :to="{name:'book' , params:{id:props.item.id}}">
       <div class="h-full overflow-hidden">
         <img :src="item.imageBase64" :alt="item.title" class="w-full"/>
