@@ -110,16 +110,16 @@ const setRole = (role) => {
           </label>
           <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
             <li>
-              <a href="/">Home</a>
+              <router-link to="/">Home</router-link>
             </li>
             <li>
-              <a href="/">Category</a>
+              <router-link to="/">Category</router-link>
             </li>
             <li>
-              <a href="/">Highlight</a>
+                <router-link to="/">Highlight</router-link>
             </li>
             <li>
-              <a href="/">All Book</a>
+              <router-link to="/AllBook">All Book</router-link>
             </li>
           </ul>
         </div>
