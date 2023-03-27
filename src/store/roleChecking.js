@@ -6,6 +6,8 @@ export const useRoleStore = defineStore("role", () => {
         firstname: '',
         lastname: '',
         username: '',
+        dateOfBirth: '',
+        email: '',
         role: ''
     })
     const setInfo = (userInfo) => {
@@ -13,6 +15,8 @@ export const useRoleStore = defineStore("role", () => {
         userInformation.value.lastname = userInfo.lastname
         userInformation.value.username = userInfo.username
         userInformation.value.role = userInfo.role
+        userInformation.value.dateOfBirth = userInfo.dateOfBirth
+        userInformation.value.email = userInfo.email
     }
     const setRole= (roleUser) => {
         userInformation.value.role = roleUser

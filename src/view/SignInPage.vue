@@ -15,6 +15,10 @@ const isSuccess = ref(true)
 const userInformation = ref({
   username: '',
   password: '',
+  email: '',
+  firstname: '',
+  lastname: '',
+  dateOfBirth: '',
   role: '',
 })
 
@@ -30,6 +34,10 @@ const authentication = async () => {
   for (let i = 0; i < data.length; i++) {
     if (data[i].username === userInformation.value.username && data[i].password === userInformation.value.password) {
       userInformation.value.role = data[i].role
+      userInformation.value.firstname = data[i].firstname
+      userInformation.value.lastname = data[i].lastname
+      userInformation.value.email = data[i].email
+      userInformation.value.dateOfBirth = data[i].dateOfBirth
       role.setInfo(userInformation.value)
       await router.push('/')
     }

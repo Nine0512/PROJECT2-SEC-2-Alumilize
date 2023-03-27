@@ -25,7 +25,8 @@ const userInformation = ref({
   email: '',
   username: '',
   password: '',
-  confirmPasswordField: ''
+  confirmPasswordField: '',
+  dateOfBirth: ''
 })
 
 const reg = async () => {
@@ -74,6 +75,7 @@ const reg = async () => {
           email: userInformation.value.email,
           username: userInformation.value.username,
           password: userInformation.value.password,
+          dateOfBirth: userInformation.value.dateOfBirth,
           role: 'user'
         })
       })
@@ -108,9 +110,18 @@ const reg = async () => {
                      :class="isLastnameValid ? '' : 'border-2 border-red-500'">
               <CationValidInput text="Please Do not Empty Lastname" :check="isLastnameValid" />
             </div>
-
-
           </div>
+
+          <div>
+            <div class="relative">
+              <div class="absolute inset-y-0 left-0 ml-2 flex items-center pr-3 cursor-pointer">
+                <img src="https://api.iconify.design/mdi:cake-variant.svg?color=%23000000" class="w-5 h-5 z-10"
+                     alt="userIcon" >
+              </div>
+              <input type="date" class="input pl-10 input-bordered w-[30em] max-xl:w-[20em] bg-white" v-model="userInformation.dateOfBirth">
+            </div>
+          </div>
+
           <div>
             <div class="relative">
               <div class="absolute inset-y-0 left-0 ml-2 flex items-center pr-3 cursor-pointer">
