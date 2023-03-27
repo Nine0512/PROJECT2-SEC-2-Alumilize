@@ -1,8 +1,7 @@
 <script setup>
-import {inject, ref} from "vue";
-
+import {ref} from "vue";
+import {useRoleStore} from "@/store/roleChecking"
 import Card from "../component/Card.vue";
-
 import Navbar from "@/component/Navbar.vue";
 import Footer from "@/component/Footer.vue";
 
@@ -20,7 +19,7 @@ async function getAllBook() {
 getAllBook();
 
 const categoryArr = ref(['Art', 'Design', 'Photography', 'Programming', 'Science', 'Technology']);
-const publisherArr = ref(["Rose", "Piccolo", "Iris"]);
+const publisherArr = ref(["Siam Inter Comics", "ASCII Media Works","Kodansha Comics","Viz Media","Yen Press","One Peace Books"]);
 
 let authorCheck = [];
 let categoryCheck = [];
@@ -93,7 +92,6 @@ function sortPrice(item) {
   });
 }
 
-import {useRoleStore} from "@/store/roleChecking"
 const getRole = useRoleStore().role
 
 </script>
@@ -198,16 +196,16 @@ const getRole = useRoleStore().role
         <div class="w-full col-start-2 flex">
           <div class="w-full">
             <div
-              class="w-full cursor-pointer border-b-2 border-gray-300 pl-2 text-gray-600 text-lg"
+              class="w-full cursor-pointer border-b-2 border-gray-300 pl-2 text-gray-600"
               @click="dropdown('res')"
             >
-            <div class="flex justify-between">
+            <div class="flex justify-between max-sm:text-md lg:text-lg">
               <span>ฟิลเตอร์หนังสือ</span>
               ▼
             </div>
             </div>
             
-            <div v-if="togleRes" class="bg-white opacity-90 border border-gray-300 w-64 absolute z-50 rounded-lg p-2">
+            <div v-if="togleRes" class="bg-white opacity-90 border border-gray-300 md:w-60 absolute z-50 rounded-lg p-2">
               <span class="flex justify-start items-center"
                 >เลือกตามหมวดหมู่</span
               >
@@ -244,17 +242,17 @@ const getRole = useRoleStore().role
         </div>
         <div class="col-start-1 text-xs text-red-400 pl-2 h-1 pb-2">* คำสำหรับการค้นหาหนังสือ</div>
         <div class="col-span-2 grid grid-cols-12 gap-4 h-[2rem]">
-          <div class="col-span-8 text-lg text-gray-600 pl-3">
-            แสดงหนังสือ {{ filBook.length }} เล่ม จากทั้งหมด
+          <div class="col-span-8 text-gray-600 pl-3 max-sm:text-md lg:text-lg flex items-center">
+            แสดงหนังสือ {{ filBook.length }} เล่มจาก
             {{ allBook.length }} เล่ม
           </div>
           <div class="col-span-4 flex justify-end">
             <div class="border-b-2 border-gray-300">
-              <button class="text-gray-600 text-lg" @click="dropdown('drop')">
-                ║เรียงตาม แนะนำ▼
+              <button class="text-gray-600 max-sm:text-sm md:text-lg" @click="dropdown('drop')">
+                ║เรียงตาม ▼
               </button>
               <div
-                class="bg-white opacity-80 border border-gray-300 w-40 absolute z-50 rounded-lg p-2"
+                class="bg-white opacity-80 border border-gray-300 :w-40 absolute z-50 rounded-lg p-2"
                 v-if="toggle"
               >
                 <p
