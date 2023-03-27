@@ -2,6 +2,8 @@
 import router from "@/router";
 import { ref,computed } from "vue";
 import Card from "@/component/Card.vue";
+import Navbar from "@/component/Navbar.vue";
+import {useRoleStore} from "@/store/roleChecking";
 
 
 
@@ -77,7 +79,7 @@ const letShowHistory = () => {
 
 const name = ref("");
 const dmy = ref("");
-const email = ref("");
+// const email = ref("");
 const tel = ref("");
 
 const settingUser = (name, dmy, email, tel) => {
@@ -239,22 +241,34 @@ const history = ref([
     tag: "Tag",
   },
 ]);
+
+const  {
+  firstname,
+  lastname,
+  username,
+  dateOfBirth,
+  email,
+  role
+} = useRoleStore().userInformation
+
 </script>
 
 <template>
+  <Navbar/>
   <div class="w-full min-h-screen flex justify-center">
     <div class="w-full lg:w-4/6 grid grid-cols-3 lg:grid-cols-6 gap-4 text-black">
 
         <!-- right zone -->
-      <div class="col-span-1 w-full md:w-5/12 lg:w-9/12">
-        <img
-          src="../assets/image/carBBB.png"
-          class="rounded-full mt-14 border border-black"
-          alt="userPic"
-        />
+      <div class="col-span-1 pt-10 w-full md:w-5/12 lg:w-9/12">
+        <div class="btn btn-ghost btn-circle avatar w-full items-center">
+          <div class="w-20 rounded-full">
+            <img src="/images/image4.png"/>
+          </div>
+        </div>
+
 
         <div class="text-black">
-          <h1 class="text-xl font-bold flex justify-center mt-5">User Name</h1>
+          <h1 class="text-xl font-bold flex justify-center mt-5"> {{ username }} </h1>
           <button
             @click="
               //
@@ -460,16 +474,16 @@ const history = ref([
         <div v-show="shpwProfile">
           <div class="text-black grid grid-rows-4 ml-64 mt-48 gap-y-5">
             <div class="gap-2">
-              <label class="w-44">Name : {{ user[0].name }}</label>
+              <label class="w-44">Firstname: {{ firstname }}</label>
+            </div>
+            <div class="gap-2">
+              <label class="w-44">Lastname: {{ lastname }}</label>
             </div>
             <div class="text-black gap-2">
-              <label class="w-40">DD/MM/YY : {{ user[0].DateOfBirth }} </label>
+              <label class="w-40">YY/MM/DD : {{ dateOfBirth }} </label>
             </div>
             <div class="text-black w-96 gap-2">
-              <label class="">Email : {{ user[0].Email }} </label>
-            </div>
-            <div class="text-black gap-2">
-              <label class="w-40">Tel : {{ user[0].Tel }} </label>
+              <label class="">Email : {{ email }} </label>
             </div>
           </div>
         </div>
@@ -489,8 +503,6 @@ const history = ref([
 
                 </div>
               </div>
-            
-          
         </div>
 
         <div v-show="showUserDetail">
