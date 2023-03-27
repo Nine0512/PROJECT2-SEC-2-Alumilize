@@ -11,17 +11,17 @@ let infoArr = ref([])
 
 onMounted(() => {
   fetch('http://localhost:5000/Book').then(
-    res => res.json()
+      res => res.json()
   ).then(
-    data => {
-      data.forEach(item => {
-        let infoObj = {
-          id: item.id,
-          title: item.title
-        }
-        infoArr.value.push(infoObj)
-      })
-    }
+      data => {
+        data.forEach(item => {
+          let infoObj = {
+            id: item.id,
+            title: item.title
+          }
+          infoArr.value.push(infoObj)
+        })
+      }
   )
 })
 
@@ -43,6 +43,7 @@ let selectBook = (id) => {
 }
 
 import {useRoleStore} from "@/store/roleChecking"
+
 const getRole = useRoleStore().userInformation.role
 const setRole = (role) => {
   useRoleStore().setRole(role)
@@ -56,7 +57,7 @@ const setRole = (role) => {
       <router-link to="/" class="flex-1 w-full md:w-5/12 lg:w-9/12 cursor-pointer" @click="router.push('/')">
         <img :src="logo" alt="logo">
       </router-link>
-      <div class="col-span-3 max-xl:hidden grid grid-cols-4 place-items-center font-bold">
+      <div class="col-span-3 max-lg:hidden grid grid-cols-4 place-items-center font-bold">
         <router-link to="/">Home</router-link>
         <a href="#">Category</a>
         <a href="#">Highlight</a>
@@ -85,7 +86,8 @@ const setRole = (role) => {
           <router-link to="/login" class="btn" v-show="getRole === ''">
             sign in
           </router-link>
-          <ul  v-show="getRole !== ''" tabindex="0" class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
+          <ul v-show="getRole !== ''" tabindex="0"
+              class="mt-3 p-2 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52">
             <li>
               <a class="justify-between">
                 Profile
@@ -93,7 +95,9 @@ const setRole = (role) => {
               </a>
             </li>
             <li><a>Settings</a></li>
-            <li><router-link to="/login" @click="setRole('')">Logout</router-link></li>
+            <li>
+              <router-link to="/login" @click="setRole('')">Logout</router-link>
+            </li>
           </ul>
         </div>
         <div class="dropdown dropdown-end w-5/12 lg:hidden">
@@ -116,7 +120,7 @@ const setRole = (role) => {
               <router-link to="/">Category</router-link>
             </li>
             <li>
-                <router-link to="/">Highlight</router-link>
+              <router-link to="/">Highlight</router-link>
             </li>
             <li>
               <router-link to="/AllBook">All Book</router-link>
@@ -126,4 +130,13 @@ const setRole = (role) => {
       </div>
     </div>
   </div>
+
 </template>
+
+<style scoped>
+@media screen and (max-width: 1980px) {
+  .showHidden {
+    display: none;
+  }
+}
+</style>
