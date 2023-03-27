@@ -5,6 +5,7 @@ import toggleIconShowHidePassword from '../composable/toggleShowPassword.js'
 import CationValidInput from "@/component/CationValidInput.vue";
 import Footer from "@/component/Footer.vue";
 import router from "@/router";
+import {useRoleStore} from "@/store/roleChecking"
 
 // toggle show icon password
 const passwordField = ref(null)
@@ -20,10 +21,14 @@ const userInformation = ref({
   lastname: '',
   dateOfBirth: '',
   role: '',
+<<<<<<< HEAD
   cart: []
+=======
+  id: ''
+>>>>>>> 914ddf8cecd1facb857733140bb46720fe2b979f
 })
 
-import {useRoleStore} from "@/store/roleChecking"
+
 
 const role = useRoleStore()
 
@@ -39,7 +44,11 @@ const authentication = async () => {
       userInformation.value.lastname = data[i].lastname
       userInformation.value.email = data[i].email
       userInformation.value.dateOfBirth = data[i].dateOfBirth
+<<<<<<< HEAD
       userInformation.value.cart = data[i].cart
+=======
+      userInformation.value.id = data[i].id
+>>>>>>> 914ddf8cecd1facb857733140bb46720fe2b979f
       role.setInfo(userInformation.value)
       await router.push('/')
     }
