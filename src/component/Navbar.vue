@@ -1,6 +1,7 @@
 <script setup>
 import {computed, onMounted, ref} from "vue";
 import router from "@/router";
+import {getBook} from "@/composable/fetch.js";
 
 const logo = '/images/Logo.png'
 const profile = '/images/image4.png'
@@ -9,20 +10,15 @@ let search = ref('')
 let infoArr = ref([])
 
 
-onMounted(() => {
-  fetch('http://localhost:5000/Book').then(
-      res => res.json()
-  ).then(
-      data => {
-        data.forEach(item => {
-          let infoObj = {
-            id: item.id,
-            title: item.title
-          }
-          infoArr.value.push(infoObj)
-        })
-      }
-  )
+onMounted(async () => {
+  const res = await getBook()
+  res.forEach(item => {
+    let infoObj = {
+      id: item.id,
+      title: item.title
+    }
+    infoArr.value.push(infoObj)
+  })
 })
 
 let searchChoice = computed(() => {
