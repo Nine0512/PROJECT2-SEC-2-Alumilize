@@ -8,8 +8,8 @@ import {getBook} from "@/composable/fetch.js";
 onMounted(async ()=>{
   const data = await getBook()
 })
-
 let getCart = useRoleStore().userInformation.cart
+let getBooked = useRoleStore().userInformation.bookId
 let cartChecked = ref([])//item ที่เลือกแล้วใน cart
 let total = ref(0)
 let outCheckedAll = ref(null)
@@ -27,7 +27,7 @@ let checked = (event,id)=>{
   if(outChecked.value.checked){
     total.value += selectedBookCart.price
     cartChecked.value.push(selectedBookCart)
-    console.log("true")
+    getBooked.push(selectedBookCart.id)
   }else{
     total.value -= selectedBookCart.price
     cartChecked.value.pop(selectedBookCart)
@@ -44,11 +44,10 @@ let checkAll = ()=>{
       cartChecked.value.pop(getCart[i])
     }
   }
-
 }
 let submitOncart = async ()=>{
-  fetch('http://localhost:3000/cart', {
-    method: 'POST',
+  await fetch(`http://localhost:5000/Book/{}`, {
+    method: 'PATCH',
     headers: {
       'Content-Type': 'application/json'
     },
