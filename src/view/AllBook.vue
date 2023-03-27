@@ -1,24 +1,22 @@
 <script setup>
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 import {useRoleStore} from "@/store/roleChecking"
 import Card from "../component/Card.vue";
 import Navbar from "@/component/Navbar.vue";
 import Footer from "@/component/Footer.vue";
+import { getBook } from "../composable/fetch.js"
+
 
 let allBook = ref([]);
 let filBook = ref([]);
 
-async function getAllBook() {
-  const response = await fetch("http://localhost:5000/Book");
-  const data = await response.json();
-  allBook.value = data;
-  filBook.value = allBook.value;
-  return data;
-}
+onMounted(async ()=>{
+  const data = await getBook()
+  allBook.value = data
+  filBook.value = allBook.value
+})
 
-getAllBook();
-
-const categoryArr = ref(['Art', 'Design', 'Photography', 'Programming', 'Science', 'Technology']);
+const categoryArr = ref(['Art', 'Design','Photography', 'Programming', 'Science', 'Technology']);
 const publisherArr = ref(["Siam Inter Comics", "ASCII Media Works","Kodansha Comics","Viz Media","Yen Press","One Peace Books"]);
 
 let authorCheck = [];
@@ -182,7 +180,7 @@ const getRole = useRoleStore().role
       </div>
     </div>
 
-    <!-- responsive -->
+    
     <div class="lg:hidden w-full m-5">
       <div class="grid grid-cols-2 gap-2">
         <div class="flex h-[2rem] pr-2 pl-2">
