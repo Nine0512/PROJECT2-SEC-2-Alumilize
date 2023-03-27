@@ -8,13 +8,14 @@ import {getBook} from "@/composable/fetch.js";
 onMounted(async ()=>{
   const data = await getBook()
 })
+let getUserId = useRoleStore().userInformation.id
 let getCart = useRoleStore().userInformation.cart
 let getBooked = useRoleStore().userInformation.bookId
 let cartChecked = ref([])//item ที่เลือกแล้วใน cart
 let total = ref(0)
 let outCheckedAll = ref(null)
 let outChecked = ref(null)
-
+console.log(typeof getBooked)
 let removeBookfromCart = (item)=>{
   let index = getCart.indexOf(item)
   if (index > -1) {
@@ -24,14 +25,19 @@ let removeBookfromCart = (item)=>{
 let checked = (event,id)=>{
   outChecked.value = event.target
   let selectedBookCart = getCart.find(item => item.id === id)
-  if(outChecked.value.checked){
+  if(outChecked.value.checked ){
     total.value += selectedBookCart.price
     cartChecked.value.push(selectedBookCart)
-    getBooked.push(selectedBookCart.id)
+    if (!getBooked){
+      getBooked = []
+      getBooked.push(selectedBookCart.id)
+    }else{
+      getBooked.push(selectedBookCart.id)
+      cartChecked.value.pop(selectedBookCart)
+    }
   }else{
     total.value -= selectedBookCart.price
-    cartChecked.value.pop(selectedBookCart)
-    console.log("false")
+    getBooked = getBooked.filter(item => item !== selectedBookCart.id)
   }
 }
 let checkAll = ()=>{
@@ -39,24 +45,33 @@ let checkAll = ()=>{
   if(outCheckedAll.value.checked){
       total.value += getCart[i].price
       cartChecked.value.push(getCart[i])
+      if (!getBooked){
+      getBooked = []
+      getBooked.push(getCart[i].id)
+      }else{
+        getBooked.push(getCart[i].id)
+      }
   }else{
       total.value -= getCart[i].price
-      cartChecked.value.pop(getCart[i])
+      getBooked = getBooked.filter(item => item !== getCart.id)
+    cartChecked.value.pop(getCart[i])
     }
   }
 }
 let submitOncart = async ()=>{
-  await fetch(`http://localhost:5000/Book/{}`, {
+  await fetch(`http://localhost:5000/login/${getUserId}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(cartChecked.value)
+    body: JSON.stringify({
+      bookId: getBooked
+    })
   })
   let ids = new Set(cartChecked.value.map(({ id }) => id));
   getCart = getCart.filter(({ id }) => !ids.has(id));
-  console.log(ids)
   total.value = 0
+  getBooked = []
   cartChecked.value = []
   outCheckedAll.value.checked = false
 }
@@ -64,6 +79,7 @@ let submitOncart = async ()=>{
 </script>
 <template>
   <Navbar/>
+  {{}}
   <div class="w-full min-h-screen ">
     <!-- 1.Information bar -->
     <div class="bg-[#FEC4A2] text-black my-5 lg:mx-64 py-2  grid lg:grid-cols-4 max-[1100px]:grid-cols-3 md:grid-cols-4 max-[768px]:grid-cols-1 max-[768px]:justify-items-center max-[90px]:grid-cols-1 justify-between rounded-box place-items-center ">

@@ -21,11 +21,8 @@ const userInformation = ref({
   lastname: '',
   dateOfBirth: '',
   role: '',
-<<<<<<< HEAD
-  cart: []
-=======
+  cart: [],
   id: ''
->>>>>>> 914ddf8cecd1facb857733140bb46720fe2b979f
 })
 
 
@@ -44,11 +41,8 @@ const authentication = async () => {
       userInformation.value.lastname = data[i].lastname
       userInformation.value.email = data[i].email
       userInformation.value.dateOfBirth = data[i].dateOfBirth
-<<<<<<< HEAD
       userInformation.value.cart = data[i].cart
-=======
       userInformation.value.id = data[i].id
->>>>>>> 914ddf8cecd1facb857733140bb46720fe2b979f
       role.setInfo(userInformation.value)
       await router.push('/')
     }
