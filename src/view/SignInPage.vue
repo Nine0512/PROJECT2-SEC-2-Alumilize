@@ -20,6 +20,7 @@ const userInformation = ref({
   lastname: '',
   dateOfBirth: '',
   role: '',
+  cart: []
 })
 
 import {useRoleStore} from "@/store/roleChecking"
@@ -38,6 +39,7 @@ const authentication = async () => {
       userInformation.value.lastname = data[i].lastname
       userInformation.value.email = data[i].email
       userInformation.value.dateOfBirth = data[i].dateOfBirth
+      userInformation.value.cart = data[i].cart
       role.setInfo(userInformation.value)
       await router.push('/')
     }

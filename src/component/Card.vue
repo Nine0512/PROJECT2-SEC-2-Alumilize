@@ -1,4 +1,7 @@
 <script setup>
+import {useRoleStore} from "@/store/roleChecking"
+import { getBook } from "../composable/fetch.js"
+import {onMounted, ref} from "vue";
 const props = defineProps({
   item: {
     type: Object,
@@ -9,7 +12,23 @@ const props = defineProps({
     default: false
   }
 })
+let allBook = ref([]);
+let filBook = ref([]);
 
+onMounted(async ()=>{
+  const data = await getBook()
+  allBook.value = data
+  filBook.value = allBook.value
+})
+
+const getCart = useRoleStore().userInformation.cart
+let addBooktoCart = (event,id)=>{
+  let selectedBook = allBook.value.find(item => item.id === id)
+  if (selectedBook && !getCart.some(item => item.id === selectedBook.id)) {
+    getCart.push(selectedBook)
+    console.log(getCart)
+  }
+}
 </script>
 
 <template>
@@ -32,7 +51,7 @@ const props = defineProps({
     <div class="grid place-items-center">
       <button class="w-full lg:w-11/12 py-0.5 rounded-xl bg-yellow-500 text-sm lg:text-black mb-4" v-if="isMyBook">Download
       </button>
-      <button class="w-full lg:w-11/12 py-0.5 rounded-xl bg-yellow-500 text-sm lg:text-black mb-4" v-else>Add to cart
+      <button class="w-full lg:w-11/12 py-0.5 rounded-xl bg-yellow-500 text-sm lg:text-black mb-4" v-else @click="addBooktoCart($event,item.id)">Add to cart
       </button>
     </div>
   </div>
