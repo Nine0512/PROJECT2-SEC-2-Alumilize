@@ -3,6 +3,10 @@ const props = defineProps({
   item: {
     type: Object,
     required: true
+  },
+  isMyBook: {
+    type: Boolean,
+    default: false
   }
 })
 
@@ -20,12 +24,15 @@ const props = defineProps({
           <h2 class="text-base">{{ item.title }}</h2>
           <h3 class="text-sm">{{ item.author }}</h3>
           <h3 class="text-sm">{{ item.category.join(',') }}</h3>
-          <h3 class="text-lg font-bold lg:text-2xl lg:font-semibold text-orange-500">{{ item.price }} Baht</h3>
+          <h3 class="text-lg font-bold lg:text-2xl lg:font-semibold text-orange-500" v-if="!isMyBook">{{ item.price }}
+            Baht</h3>
         </div>
       </div>
     </router-link>
     <div class="grid place-items-center">
-      <button class="w-full lg:w-11/12 py-0.5 rounded-xl bg-yellow-500 text-sm lg:text-black mb-4">Add to cart
+      <button class="w-full lg:w-11/12 py-0.5 rounded-xl bg-yellow-500 text-sm lg:text-black mb-4" v-if="isMyBook">Download
+      </button>
+      <button class="w-full lg:w-11/12 py-0.5 rounded-xl bg-yellow-500 text-sm lg:text-black mb-4" v-else>Add to cart
       </button>
     </div>
   </div>
