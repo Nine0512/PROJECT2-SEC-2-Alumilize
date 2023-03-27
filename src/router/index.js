@@ -39,6 +39,11 @@ const router = createRouter({
                     component: () => import('../view/ManageBook.vue')
                 }
             ]
+        },
+        {
+            path: '/cart',
+            name: 'cart',
+            component: () => import('../view/Cart.vue')
         }
     ]
 })
