@@ -2,6 +2,7 @@
 
 import {ref, watch} from 'vue'
 import {useRoute} from 'vue-router'
+import router from "@/router";
 import book from '../book/Ore no Imouto ga Konna ni Kawaii Wake ga Nai Ayase IF.pdf'
 import {getBookById, deleteBook} from "@/composable/fetch";
 import Navbar from "@/component/Navbar.vue";
@@ -112,7 +113,7 @@ const getRole = useRoleStore().userInformation.role
             <h3 class="font-bold text-lg">Are you sure!</h3>
             <p class="py-4">You won't be able to revert this!</p>
             <div class="modal-action">
-              <a href="/" class="btn btn-error" @click="deleteBook(bookInfo?.id)">Delete</a>
+              <button class="btn btn-error" @click="deleteBook(bookInfo?.id).then(() => router.go(-1))">Delete</button>
               <label for="my-modal-6" class="btn">Cancel</label>
             </div>
           </div>
