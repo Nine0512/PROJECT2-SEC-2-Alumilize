@@ -25,20 +25,19 @@ let removeBookfromCart = (item)=>{
 let checked = (event,id)=>{
   outChecked.value = event.target
   let selectedBookCart = getCart.find(item => item.id === id)
-  if(outChecked.value.checked ){
-    total.value += selectedBookCart.price
-    cartChecked.value.push(selectedBookCart)
-    if (!getBooked){
+  if(outChecked.value.checked){
+    if(!getBooked){
       getBooked = []
       getBooked.push(selectedBookCart.id)
-    }else{
-      getBooked.push(selectedBookCart.id)
-      cartChecked.value.pop(selectedBookCart)
     }
+    total.value += selectedBookCart.price
+    cartChecked.value.push(selectedBookCart)
   }else{
     total.value -= selectedBookCart.price
+    cartChecked.value.pop(selectedBookCart)
     getBooked = getBooked.filter(item => item !== selectedBookCart.id)
   }
+  console.log(cartChecked.value)
 }
 let checkAll = ()=>{
   for(let i = 0; i < getCart.length; i++){
@@ -70,10 +69,11 @@ let submitOncart = async ()=>{
   })
   let ids = new Set(cartChecked.value.map(({ id }) => id));
   getCart = getCart.filter(({ id }) => !ids.has(id));
+  useRoleStore().setCartToEmpty()
   total.value = 0
-  getBooked = []
   cartChecked.value = []
   outCheckedAll.value.checked = false
+  console.log(getCart)
 }
 
 </script>

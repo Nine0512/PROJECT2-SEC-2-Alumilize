@@ -11,7 +11,8 @@ export const useRoleStore = defineStore("role", () => {
         role: '',
         id:'',
         bookId: [],
-        cart: []
+        cart: [],
+        cartCheck: []
     })
     const setInfo = (userInfo) => {
         userInformation.value.firstname = userInfo.firstname
@@ -23,10 +24,15 @@ export const useRoleStore = defineStore("role", () => {
         userInformation.value.email = userInfo.email
         userInformation.value.bookId = userInfo.bookId
         userInformation.value.cart = userInfo.cart
+        userInformation.value.cartChecked = userInfo.cartCheck
     }
     const setRole= (roleUser) => {
         userInformation.value.role = roleUser
     }
 
-    return {userInformation, setInfo, setRole}
+    const setCartToEmpty = () => {
+        userInformation.value.cart = []
+    }
+
+    return {userInformation, setCartToEmpty, setInfo, setRole}
 })

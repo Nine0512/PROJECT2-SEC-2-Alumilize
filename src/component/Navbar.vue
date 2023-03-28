@@ -1,5 +1,5 @@
 <script setup>
-import {computed, onMounted, ref} from "vue";
+import {computed, onMounted, ref, watch} from "vue";
 import router from "@/router";
 import {getBook} from "@/composable/fetch.js";
 
@@ -42,18 +42,16 @@ import {useRoleStore} from "@/store/roleChecking"
 
 const getRole = useRoleStore().userInformation.role
 
-const getBooked = useRoleStore().userInformation.bookId
+const getBooked = useRoleStore().userInformation.cart
 
-// let price = computed(() => {
-//   let total = 0
-//   getBooked.forEach(item => {
-//     total += item.price
-//   })
-//   return total
-// })
-// let cartLength = computed(() => {
-//   return getBooked.length
-// })
+let total = ref(0)
+let cartLength = ref(0)
+
+watch(() => getBooked.length, () => {
+  cartLength.value = getBooked.length
+  getBooked.forEach(item => {
+    total.value += item.price
+})})
 
 const setRole = (role) => {
   useRoleStore().setRole(role)
@@ -97,8 +95,8 @@ const setRole = (role) => {
             </label>
             <div tabindex="0" class="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow">
               <div class="card-body">
-<!--                <span class="font-bold text-lg">{{ cartLength }} Items</span>-->
-<!--                <span class="text-info">Subtotal: {{ price }}</span>-->
+                <span class="font-bold text-lg">{{ cartLength }} Items</span>
+                <span class="text-info">Subtotal: {{ total }}</span>
                 <div class="card-actions">
                   <router-link to="/Cart"><button class="btn btn-primary btn-block">View cart</button></router-link>
                 </div>
