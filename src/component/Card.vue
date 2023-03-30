@@ -13,22 +13,23 @@ const props = defineProps({
 })
 
 let getCart = useRoleStore().userInformation.cart
-let addCart = ref([])
-let addBooktoCart = (event)=>{
-  let even = event.target.id
-    addCart.value.push(even)
-  const uniqeObj = Object.values(addCart.value).reduce((acc, current) => {
-    if (!acc.includes(current)) {
-      acc.push(current)
-    }
-      return acc;
-  }, []);
-    addCart.value = uniqeObj.map(it=>parseInt(it))
-  addCart.value.forEach((object) => {
-    let stringValue = object.toString();
-    getCart.push(stringValue);
-  });
-  console.log(getCart)
+
+
+let addBookToCart = (event)=>{
+
+  let even = event.target.id;
+  let num = parseInt(even);
+  let addCart = [];
+  if (getCart.includes(num)) {
+    return addCart
+  }else{
+    useRoleStore().setCartLength()
+    addCart.push(num);
+    getCart.push(addCart);
+    getCart = getCart.flat().map(it=>parseInt(it));
+    console.log(getCart);
+  }
+  console.log(getCart);
 }
 </script>
 
@@ -52,7 +53,7 @@ let addBooktoCart = (event)=>{
     <div class="grid place-items-center">
       <button class="w-full lg:w-11/12 py-0.5 rounded-xl bg-yellow-500 text-sm lg:text-black mb-4" v-if="isMyBook">Download
       </button>
-      <button :id="item.id" class="w-full lg:w-11/12 py-0.5 rounded-xl bg-yellow-500 text-sm lg:text-black mb-4" v-else @click="addBooktoCart">Add to cart
+      <button :id="item.id" class="w-full lg:w-11/12 py-0.5 rounded-xl bg-yellow-500 text-sm lg:text-black mb-4" v-else @click="addBookToCart">Add to cart
       </button>
     </div>
   </div>

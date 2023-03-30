@@ -5,26 +5,16 @@ import Navbar from "@/component/Navbar.vue";
 import {useRoleStore} from "@/store/roleChecking"
 import {getBook} from "@/composable/fetch.js";
 
-onMounted(async ()=>{
-  const data = await getBook()
-})
 let getUserId = useRoleStore().userInformation.id
 let getCart = useRoleStore().userInformation.cart
-let getBooked = useRoleStore().userInformation.bookId
+getCart = getCart.filter((item, index) => getCart.indexOf(item) === index);
+let getPrice = useRoleStore().userInformation.price
+let getBookId = useRoleStore().userInformation.bookId
 let cartChecked = ref([])//item ที่เลือกแล้วใน cart
 let total = ref(0)
 let outCheckedAll = ref(null)
 let outChecked = ref(null)
-
 let infoArr= ref([])
-//
-// fetch('http://localhost:5000/Book/')
-//     .then(response => response.json()) // แปลง response เป็น json
-//     .then(data => { // ตัวอย่าง array ที่เก็บตัวเลขไว้
-//       const filteredBooks = data.filter(book => getCart.includes(book.id)); // กรองหนังสือจาก data.json ที่มี id ตรงกับตัวเลขใน array
-//       console.log(filteredBooks); // แสดงผลลัพธ์
-//     })
-//     .catch(error => console.log(error));
 console.log(Object.values(getCart.map(it=>parseInt(it))))
 
 let dataJson = async ()=>{
@@ -50,34 +40,50 @@ let checked = (event,id)=>{
   outChecked.value = event.target
   let selectedBookCart = infoArr.value.find(item => item.id === id)
   if(outChecked.value.checked){
-    if(!getBooked){
-      getBooked = []
-      getBooked.push(selectedBookCart.id)
+    if(!getCart){
+      getCart = []
+      getCart.push(selectedBookCart.id)
+    }else{
+      getCart.push(selectedBookCart.id)
+    }
+    if(!getBookId){
+      getBookId = []
+      getBookId.push(selectedBookCart.id)
+    }else{
+      getBookId.push(selectedBookCart.id)
     }
     total.value += selectedBookCart.price
     cartChecked.value.push(selectedBookCart)
   }else{
     total.value -= selectedBookCart.price
     cartChecked.value.pop(selectedBookCart)
-    getBooked = getBooked.filter(item => item !== selectedBookCart.id)
+    getCart = getCart.filter(item => item !== selectedBookCart.id)
+    getBookId = getBookId.filter(item => item !== selectedBookCart.id)
   }
   console.log(cartChecked.value)
 }
 let checkAll = ()=>{
-  for(let i = 0; i < getCart.length; i++){
+  for(let i = 0; i < infoArr.value.length; i++){
   if(outCheckedAll.value.checked){
-      total.value += infoArr[i].value.price
-      cartChecked.value.push(infoArr[i].value)
-      if (!getBooked){
-      getBooked = []
-      getBooked.push(infoArr[i].value.id)
+      total.value += infoArr.value[i].price
+      cartChecked.value.push(infoArr.value[i])
+      if (!getCart){
+        getCart = []
+        getCart.push(infoArr.value[i].id)
       }else{
-        getBooked.push(infoArr[i].value.id)
+        getCart.push(infoArr.value[i].id)
+      }
+      if (!getBookId) {
+        getBookId = []
+        getBookId.push(infoArr.value[i].id)
+      }else {
+        getBookId.push(infoArr.value[i].id)
       }
   }else{
-      total.value -= infoArr[i].value.price
-      getBooked = getBooked.filter(item => item !== infoArr[i].value.id)
-    cartChecked.value.pop(infoArr[i].value)
+      total.value -= infoArr.value[i].price
+      getCart = getCart.filter(item => item !== infoArr.value[i].id)
+      getBookId = getBookId.filter(item => item !== infoArr.value[i].id)
+    cartChecked.value.pop(infoArr.value[i])
     }
   }
 }
@@ -88,14 +94,15 @@ let submitOncart = async ()=>{
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      bookId: getBooked
+      bookId: {getBookId}
     })
   })
   let ids = new Set(cartChecked.value.map(({ id }) => id));
-  getCart = getCart.filter(({ id }) => !ids.has(id));
   infoArr.value = infoArr.value.filter(({ id }) => !ids.has(id));
   useRoleStore().setCartToRemain()
   total.value = 0
+  getCart.length = 0
+  getBookId.length = 0
   cartChecked.value = []
   outCheckedAll.value.checked = false
   console.log(getCart)

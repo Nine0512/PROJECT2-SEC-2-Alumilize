@@ -41,11 +41,11 @@ let selectBook = (id) => {
 import {useRoleStore} from "@/store/roleChecking"
 
 const getRole = useRoleStore().userInformation.role
-
-const getBooked = useRoleStore().userInformation.cart
-
-const getTotal = useRoleStore().getPrice
-
+useRoleStore().setCartLength()
+const getTotal = useRoleStore().userInformation.price
+if (getTotal === []){
+  getTotal.value = 0
+}
 const setRole = (role) => {
   useRoleStore().setRole(role)
 }
@@ -88,7 +88,7 @@ const setRole = (role) => {
             </label>
             <div tabindex="0" class="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow">
               <div class="card-body">
-                <span class="font-bold text-lg">{{ getBooked.length }} Items</span>
+                <span class="font-bold text-lg">{{ useRoleStore().userInformation.cart.length }} Items</span>
                 <span class="text-info">Subtotal: {{ getTotal }}</span>
                 <div class="card-actions">
                   <router-link to="/Cart"><button class="btn btn-primary btn-block">View cart</button></router-link>
