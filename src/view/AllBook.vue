@@ -21,7 +21,7 @@ const publisherArr = ref(["Siam Inter Comics", "ASCII Media Works","Kodansha Com
 
 let authorCheck = [];
 let categoryCheck = [];
-let plublisherCheck = [];
+let publisherCheck = [];
 let removeCheck;
 
 function filterAllCheck(arr) {
@@ -31,7 +31,7 @@ function filterAllCheck(arr) {
         return i.category.includes(c);
       } else if (arr === authorCheck) {
         return i.author.includes(c);
-      } else if (arr === plublisherCheck) {
+      } else if (arr === publisherCheck) {
         return i.publisher.includes(c);
       }
     })
@@ -90,26 +90,27 @@ function sortPrice(item) {
   });
 }
 
-const getRole = useRoleStore().role
+// const getRole = useRoleStore().role
 
 </script>
 
 <template>
-  <Navbar/>
+  <div class="flex flex-col min-h-screen">
+    <Navbar/>
   <div class="flex justify-center w-full">
     <div class="w-4/6 grid grid-cols-10 max-lg:hidden p-5">
       <div class=" col-span-2 h-[25rem]">
         <div class="flex h-[2rem] pr-2">
           <input
             type="text"
-            placeholder="คำค้นหา"
+            placeholder="search word"
             class="rounded-md w-11/12 max-w-xs h-[2rem] border border-gray-300 bg-white pl-2"
             @input="filterBook"
           />
         </div>
-        <span class="text-xs text-red-400">* คำสำหรับการค้นหาหนังสือ</span>
+        <span class="text-xs text-red-400">* word for book search</span>
         <span class="flex justify-start items-center"
-          >เลือกตามหมวดหมู่</span
+          >Category</span
         >
         <ul>
           <li
@@ -125,7 +126,7 @@ const getRole = useRoleStore().role
         </ul>
         <hr class="border-gray-300 w-full my-3" />
         <span class=" flex justify-start items-center"
-          >สำนักพิมพ์</span
+          >publisher</span
         >
         <ul>
           <li
@@ -134,7 +135,7 @@ const getRole = useRoleStore().role
           >
             <input
               type="checkbox"
-              @click="allChecked(plublisherCheck, item)"
+              @click="allChecked(publisherCheck, item)"
               class="mr-2 border cursor-pointer"
             />{{ item }}
           </li>
@@ -145,12 +146,12 @@ const getRole = useRoleStore().role
       <div class="grid col-span-8 grid-cols-4 gap-4">
         <div class="col-span-4 grid grid-cols-12 gap-4 h-[2rem]">
           <div class="col-span-8 text-lg text-gray-600 pl-3">
-            แสดงหนังสือ {{ filBook.length }} เล่ม จากทั้งหมด
-            {{ allBook.length }} เล่ม
+            display {{ filBook.length }} books from all
+            {{ allBook.length }} books
           </div>
           <div class="col-span-3 border-b-2 border-gray-300 col-start-10 ">
             <button class="text-gray-600" @click="dropdown('drop')">
-              ║เรียงตาม แนะนำ&nbsp;&nbsp;▼
+              ║Sort by Advise ▼
             </button>
             <div
               class="bg-gray-100 border opacity-80 border-gray-300 w-44 absolute z-50 rounded-lg p-2"
@@ -160,13 +161,13 @@ const getRole = useRoleStore().role
                 class="cursor-pointer text-sm text-gray-700 hover:bg-gray-300"
                 @click="sortPrice(sortDesc)"
               >
-                เรียงตามราคา <span class="text-red-600">มาก-น้อย</span>
+              sort by price <span class="text-red-600">max-min</span>
               </p>
               <p
                 class="cursor-pointer text-sm text-gray-700 hover:bg-gray-300"
                 @click="sortPrice(sortAsc)"
               >
-                เรียงตามราคา <span class="text-red-600">น้อย-มาก</span>
+                sort by price <span class="text-red-600">min-max</span>
               </p>
             </div>
           </div>
@@ -186,7 +187,7 @@ const getRole = useRoleStore().role
         <div class="flex h-[2rem] pr-2 pl-2">
           <input
             type="text"
-            placeholder="คำค้นหา"
+            placeholder="search word"
             class="rounded-md w-11/12 max-w-xs h-[2rem] border border-gray-300 bg-white pl-2"
             @input="filterBook"
           />
@@ -198,14 +199,14 @@ const getRole = useRoleStore().role
               @click="dropdown('res')"
             >
             <div class="flex justify-between max-sm:text-md lg:text-lg">
-              <span>ฟิลเตอร์หนังสือ</span>
+              <span>book filter</span>
               ▼
             </div>
             </div>
             
             <div v-if="togleRes" class="bg-white opacity-90 border border-gray-300 md:w-60 absolute z-50 rounded-lg p-2">
               <span class="flex justify-start items-center"
-                >เลือกตามหมวดหมู่</span
+                >Search by Category</span
               >
               <div>
                 <ul>
@@ -222,7 +223,7 @@ const getRole = useRoleStore().role
                 </ul>
               </div>
               <hr class="border-gray-300 m-2"/>
-              <span class="flex justify-start items-center">สำนักพิมพ์</span>
+              <span class="flex justify-start items-center">Search by publisher</span>
               <ul>
                 <li
                   v-for="item in publisherArr"
@@ -230,7 +231,7 @@ const getRole = useRoleStore().role
                 >
                   <input
                     type="checkbox"
-                    @click="allChecked(plublisherCheck, item)"
+                    @click="allChecked(publisherCheck, item)"
                     class="mr-2 border cursor-pointer"
                   />{{ item }}
                 </li>
@@ -238,16 +239,16 @@ const getRole = useRoleStore().role
             </div>
           </div>
         </div>
-        <div class="col-start-1 text-xs text-red-400 pl-2 h-1 pb-2">* คำสำหรับการค้นหาหนังสือ</div>
+        <div class="col-start-1 text-xs text-red-400 pl-2 h-1 pb-2">* word for book search</div>
         <div class="col-span-2 grid grid-cols-12 gap-4 h-[2rem]">
           <div class="col-span-8 text-gray-600 pl-3 max-sm:text-md lg:text-lg flex items-center">
-            แสดงหนังสือ {{ filBook.length }} เล่มจาก
-            {{ allBook.length }} เล่ม
+            display {{ filBook.length }} from
+            {{ allBook.length }} books
           </div>
           <div class="col-span-4 flex justify-end">
             <div class="border-b-2 border-gray-300">
               <button class="text-gray-600 max-sm:text-sm md:text-lg" @click="dropdown('drop')">
-                ║เรียงตาม ▼
+                ║Sort by ▼
               </button>
               <div
                 class="bg-white opacity-80 border border-gray-300 :w-40 absolute z-50 rounded-lg p-2"
@@ -257,13 +258,13 @@ const getRole = useRoleStore().role
                   class="cursor-pointer text-sm text-gray-700 hover:bg-gray-300"
                   @click="sortPrice(sortDesc)"
                 >
-                  เรียงตามราคา <span class="text-red-600">มาก-น้อย</span>
+                sort by price <span class="text-red-600">max-min</span>
                 </p>
                 <p
                   class="cursor-pointer text-sm text-gray-700 hover:bg-gray-300"
                   @click="sortPrice(sortAsc)"
                 >
-                  เรียงตามราคา <span class="text-red-600">น้อย-มาก</span>
+                sort by price <span class="text-red-600">min-max</span>
                 </p>
               </div>
             </div>
@@ -278,7 +279,8 @@ const getRole = useRoleStore().role
       </div>
     </div>
   </div>
+  </div>
   <Footer/>
-</template>
+  </template>
 
 <style scoped></style>
