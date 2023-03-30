@@ -15,7 +15,31 @@ let cartChecked = ref([])//item ที่เลือกแล้วใน cart
 let total = ref(0)
 let outCheckedAll = ref(null)
 let outChecked = ref(null)
-console.log(typeof getBooked)
+
+let infoArr= ref([])
+//
+// fetch('http://localhost:5000/Book/')
+//     .then(response => response.json()) // แปลง response เป็น json
+//     .then(data => { // ตัวอย่าง array ที่เก็บตัวเลขไว้
+//       const filteredBooks = data.filter(book => getCart.includes(book.id)); // กรองหนังสือจาก data.json ที่มี id ตรงกับตัวเลขใน array
+//       console.log(filteredBooks); // แสดงผลลัพธ์
+//     })
+//     .catch(error => console.log(error));
+console.log(Object.values(getCart.map(it=>parseInt(it))))
+
+let dataJson = async ()=>{
+  let res = await fetch('http://localhost:5000/Book/')
+  let data = await res.json()
+  data.forEach(book=>{
+    if(Object.values(getCart.map(it=>parseInt(it))).includes(book.id)){
+      infoArr.value.push(book)
+    }
+  }
+  )
+  console.log(infoArr.value)
+}
+dataJson()
+
 let removeBookfromCart = (item)=>{
   let index = getCart.indexOf(item)
   if (index > -1) {
@@ -24,7 +48,7 @@ let removeBookfromCart = (item)=>{
 }
 let checked = (event,id)=>{
   outChecked.value = event.target
-  let selectedBookCart = getCart.find(item => item.id === id)
+  let selectedBookCart = infoArr.value.find(item => item.id === id)
   if(outChecked.value.checked){
     if(!getBooked){
       getBooked = []
@@ -42,18 +66,18 @@ let checked = (event,id)=>{
 let checkAll = ()=>{
   for(let i = 0; i < getCart.length; i++){
   if(outCheckedAll.value.checked){
-      total.value += getCart[i].price
-      cartChecked.value.push(getCart[i])
+      total.value += infoArr[i].value.price
+      cartChecked.value.push(infoArr[i].value)
       if (!getBooked){
       getBooked = []
-      getBooked.push(getCart[i].id)
+      getBooked.push(infoArr[i].value.id)
       }else{
-        getBooked.push(getCart[i].id)
+        getBooked.push(infoArr[i].value.id)
       }
   }else{
-      total.value -= getCart[i].price
-      getBooked = getBooked.filter(item => item !== getCart.id)
-    cartChecked.value.pop(getCart[i])
+      total.value -= infoArr[i].value.price
+      getBooked = getBooked.filter(item => item !== infoArr[i].value.id)
+    cartChecked.value.pop(infoArr[i].value)
     }
   }
 }
@@ -69,7 +93,8 @@ let submitOncart = async ()=>{
   })
   let ids = new Set(cartChecked.value.map(({ id }) => id));
   getCart = getCart.filter(({ id }) => !ids.has(id));
-  useRoleStore().setCartToEmpty()
+  infoArr.value = infoArr.value.filter(({ id }) => !ids.has(id));
+  useRoleStore().setCartToRemain()
   total.value = 0
   cartChecked.value = []
   outCheckedAll.value.checked = false
@@ -94,7 +119,7 @@ let submitOncart = async ()=>{
       <div class="lg:ml-16 md:col-end-5 max-[1100px]:relative max-[768px]:hidden sm:ml-0 ">Remove</div>
     </div>
     <!-- 2.item bar -->
-    <div v-for="item in getCart" :key="item.id" class="my-5 lg:mx-64 ">
+    <div v-for="item in infoArr" :key="item.id" class="my-5 lg:mx-64 ">
       <div class="bg-[#FEC4A2] text-black grid lg:grid-cols-6 md:grid-cols-4 py-3.5 place-items-center rounded-box">
         <div class="grid grid-cols-3 mr-2 sm:auto-rows-max">
           <div class="grid place-items-center">

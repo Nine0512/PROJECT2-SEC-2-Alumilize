@@ -1,4 +1,4 @@
-import {defineStore} from "pinia";
+import {defineStore,acceptHMRUpdate} from "pinia";
 import {computed, ref} from "vue";
 
 export const useRoleStore = defineStore("role", () => {
@@ -24,15 +24,27 @@ export const useRoleStore = defineStore("role", () => {
         userInformation.value.email = userInfo.email
         userInformation.value.bookId = userInfo.bookId
         userInformation.value.cart = userInfo.cart
-        userInformation.value.cartChecked = userInfo.cartCheck
+        userInformation.value.cartCheck = userInfo.cartCheck
     }
     const setRole= (roleUser) => {
         userInformation.value.role = roleUser
     }
 
-    const setCartToEmpty = () => {
-        userInformation.value.cart = []
+    const setCartToRemain = () => {
+        userInformation.value.cart.filter(val => {
+            return userInformation.value.cartCheck.indexOf(val) === -1;
+        });
+        // userInformation.value.cart.filter(val => !userInformation.value.cartCheck.includes(val));
     }
-
-    return {userInformation, setCartToEmpty, setInfo, setRole}
+    const getPrice = computed(()=>{
+        let total = ref(0)
+        userInformation.value.cart.forEach(item => {
+            total.value += item.price
+        })
+        return total.value
+    })
+    return {userInformation, setCartToRemain, setInfo, setRole,getPrice}
 })
+if(import.meta.hot){
+    import.meta.hot.accept(acceptHMRUpdate(useRoleStore, import.meta.hot))
+}

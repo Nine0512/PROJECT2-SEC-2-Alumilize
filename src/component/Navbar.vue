@@ -44,14 +44,7 @@ const getRole = useRoleStore().userInformation.role
 
 const getBooked = useRoleStore().userInformation.cart
 
-let total = ref(0)
-let cartLength = ref(0)
-
-watch(() => getBooked.length, () => {
-  cartLength.value = getBooked.length
-  getBooked.forEach(item => {
-    total.value += item.price
-})})
+const getTotal = useRoleStore().getPrice
 
 const setRole = (role) => {
   useRoleStore().setRole(role)
@@ -95,8 +88,8 @@ const setRole = (role) => {
             </label>
             <div tabindex="0" class="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow">
               <div class="card-body">
-                <span class="font-bold text-lg">{{ cartLength }} Items</span>
-                <span class="text-info">Subtotal: {{ total }}</span>
+                <span class="font-bold text-lg">{{ getBooked.length }} Items</span>
+                <span class="text-info">Subtotal: {{ getTotal }}</span>
                 <div class="card-actions">
                   <router-link to="/Cart"><button class="btn btn-primary btn-block">View cart</button></router-link>
                 </div>
