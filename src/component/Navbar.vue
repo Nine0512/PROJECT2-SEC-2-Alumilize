@@ -42,10 +42,7 @@ import {useRoleStore} from "@/store/roleChecking"
 
 const getRole = useRoleStore().userInformation.role
 useRoleStore().setCartLength()
-const getTotal = useRoleStore().userInformation.price
-if (getTotal === []){
-  getTotal.value = 0
-}
+const getTotal = useRoleStore().getPrice
 const setRole = (role) => {
   useRoleStore().setRole(role)
 }

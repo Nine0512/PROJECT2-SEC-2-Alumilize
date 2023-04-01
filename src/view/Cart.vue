@@ -1,22 +1,23 @@
 <script setup>
-import {onMounted, ref} from 'vue'
+import {onMounted, ref, watch} from 'vue'
 import Footer from "@/component/Footer.vue";
 import Navbar from "@/component/Navbar.vue";
 import {useRoleStore} from "@/store/roleChecking"
 import {getBook} from "@/composable/fetch.js";
+import {info} from "autoprefixer";
 
 let getUserId = useRoleStore().userInformation.id
 let getCart = useRoleStore().userInformation.cart
 getCart = getCart.filter((item, index) => getCart.indexOf(item) === index);
-let getPrice = useRoleStore().userInformation.price
-let getBookId = useRoleStore().userInformation.bookId
-let cartChecked = ref([])//item ที่เลือกแล้วใน cart
+let cartChecked = useRoleStore().userInformation.cartCheck
+let cartCheckOutput = ref([])
 let total = ref(0)
 let outCheckedAll = ref(null)
 let outChecked = ref(null)
 let infoArr= ref([])
-console.log(Object.values(getCart.map(it=>parseInt(it))))
-
+if(cartChecked === undefined){
+  cartChecked = []
+}
 let dataJson = async ()=>{
   let res = await fetch('http://localhost:5000/Book/')
   let data = await res.json()
@@ -29,7 +30,6 @@ let dataJson = async ()=>{
   console.log(infoArr.value)
 }
 dataJson()
-
 let removeBookfromCart = (item)=>{
   let index = getCart.indexOf(item)
   if (index > -1) {
@@ -46,64 +46,57 @@ let checked = (event,id)=>{
     }else{
       getCart.push(selectedBookCart.id)
     }
-    if(!getBookId){
-      getBookId = []
-      getBookId.push(selectedBookCart.id)
-    }else{
-      getBookId.push(selectedBookCart.id)
-    }
     total.value += selectedBookCart.price
-    cartChecked.value.push(selectedBookCart)
+    cartChecked.push(selectedBookCart.id)
+    cartCheckOutput.value.push(selectedBookCart.id)
   }else{
     total.value -= selectedBookCart.price
-    cartChecked.value.pop(selectedBookCart)
+    cartChecked.pop(selectedBookCart.id)
+    cartCheckOutput.value.pop(selectedBookCart.id)
     getCart = getCart.filter(item => item !== selectedBookCart.id)
-    getBookId = getBookId.filter(item => item !== selectedBookCart.id)
   }
-  console.log(cartChecked.value)
+  console.log(cartChecked)
 }
 let checkAll = ()=>{
   for(let i = 0; i < infoArr.value.length; i++){
   if(outCheckedAll.value.checked){
       total.value += infoArr.value[i].price
-      cartChecked.value.push(infoArr.value[i])
+      cartChecked.push(infoArr.value[i].id)
+
+    cartCheckOutput.value.push(infoArr.value[i].id)
       if (!getCart){
         getCart = []
         getCart.push(infoArr.value[i].id)
       }else{
         getCart.push(infoArr.value[i].id)
       }
-      if (!getBookId) {
-        getBookId = []
-        getBookId.push(infoArr.value[i].id)
-      }else {
-        getBookId.push(infoArr.value[i].id)
-      }
   }else{
       total.value -= infoArr.value[i].price
       getCart = getCart.filter(item => item !== infoArr.value[i].id)
-      getBookId = getBookId.filter(item => item !== infoArr.value[i].id)
-    cartChecked.value.pop(infoArr.value[i])
+    cartChecked.pop(infoArr.value[i].id)
+    cartCheckOutput.value.pop(infoArr.value[i].id)
     }
   }
+  console.log(cartChecked)
 }
 let submitOncart = async ()=>{
+  const now = new Date().toISOString(); // สร้าง Object Date ขึ้นมาแล้วแปลงเป็น ISO string
+  const data = {
+    bookId: cartChecked.map(item => item.id),
+    timestamp: now // เพิ่มค่า timestamp ที่มีค่าเป็นเวลาปัจจุบันเข้าไป
+  }
   await fetch(`http://localhost:5000/login/${getUserId}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({
-      bookId: {getBookId}
-    })
+    body: JSON.stringify(data)
   })
-  let ids = new Set(cartChecked.value.map(({ id }) => id));
-  infoArr.value = infoArr.value.filter(({ id }) => !ids.has(id));
+  infoArr.value = infoArr.value.filter(item => cartChecked.includes(item));
   useRoleStore().setCartToRemain()
   total.value = 0
-  getCart.length = 0
-  getBookId.length = 0
-  cartChecked.value = []
+  cartChecked.length = 0
+  cartCheckOutput.value.length = 0
   outCheckedAll.value.checked = false
   console.log(getCart)
 }
@@ -159,7 +152,7 @@ let submitOncart = async ()=>{
             Total: {{ total }} $
           </div>
           <div class="font-semibold grid justify-items-center whitespace-nowrap">
-            ({{ cartChecked.length }} piece)
+            ({{ cartCheckOutput.length }} piece)
           </div>
         </div>
         <div class="lg:col-end-7 lg:col-span-1 card font-semibold btn btn-ghost whitespace-nowrap" @click="submitOncart()">

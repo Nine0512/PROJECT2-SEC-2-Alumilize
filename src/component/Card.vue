@@ -13,23 +13,13 @@ const props = defineProps({
 })
 
 let getCart = useRoleStore().userInformation.cart
-
-
-let addBookToCart = (event)=>{
-
+let addBookToCart = (event) => {
   let even = event.target.id;
   let num = parseInt(even);
-  let addCart = [];
-  if (getCart.includes(num)) {
-    return addCart
-  }else{
-    useRoleStore().setCartLength()
-    addCart.push(num);
-    getCart.push(addCart);
-    getCart = getCart.flat().map(it=>parseInt(it));
-    console.log(getCart);
+  if(!getCart.includes(num)){
+    getCart.push(num)
+    console.log(getCart)
   }
-  console.log(getCart);
 }
 </script>
 

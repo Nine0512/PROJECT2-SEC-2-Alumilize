@@ -1,5 +1,6 @@
 import {defineStore,acceptHMRUpdate} from "pinia";
-import {computed, ref} from "vue";
+import {computed, ref, watch} from "vue";
+import {loadConfigFromFile} from "vite";
 
 export const useRoleStore = defineStore("role", () => {
     const userInformation = ref({
@@ -12,8 +13,7 @@ export const useRoleStore = defineStore("role", () => {
         id:'',
         cart: [],
         cartCheck: [],
-        price: [],
-        bookId: []
+        price: 0
     })
     const setInfo = (userInfo) => {
         userInformation.value.firstname = userInfo.firstname
@@ -26,26 +26,39 @@ export const useRoleStore = defineStore("role", () => {
         userInformation.value.cart = userInfo.cart
         userInformation.value.cartCheck = userInfo.cartCheck
         userInformation.value.price = userInfo.price
-        userInformation.value.bookId = userInfo.bookId
     }
     const setRole= (roleUser) => {
         userInformation.value.role = roleUser
     }
     const setCartLength = () => {
-        userInformation.value.cart.filter((item, index) => userInformation.value.cart.indexOf(item) === index)
+        userInformation.value.cart = userInformation.value.cart.filter((item, index) => userInformation.value.cart.indexOf(item) === index)
     }
     const getLength = computed(() => {
         userInformation.value.cart.length
     })
+    const getPrice = computed(() => {
+        let dataJson = async ()=>{
+            let res = await fetch('http://localhost:5000/Book/')
+            let data = await res.json()
+            data.forEach(book=>{
+                    if(Object.values(userInformation.value.cart.map(it=>parseInt(it))).includes(book.id)){
+                        userInformation.value.price += book.price
+                    }
+                }
+            )
+            return userInformation.value.price
+        }
+        dataJson()
+    })
     const setCartToRemain = () => {
-        userInformation.value.cart.filter(val => {
-            if(userInformation.value.cartCheck === undefined){
-                userInformation.value.cartCheck = []
-            return userInformation.value.cartCheck.indexOf(val) === -1;
-        }});
-        // userInformation.value.cart.filter(val => !userInformation.value.cartCheck.includes(val));
-    }
-    return {userInformation, setCartToRemain, setInfo, setRole,getLength,setCartLength}
+        // userInformation.value.cartCheck = []
+        console.log(useRoleStore().userInformation.cartCheck)
+        useRoleStore().userInformation.cart.filter((item) => useRoleStore().userInformation.cartCheck.indexOf(item))
+        userInformation.value.cartCheck = []
+        console.log(useRoleStore().userInformation.cart)
+     }
+
+    return {userInformation, setCartToRemain, setInfo, setRole,getLength,setCartLength, getPrice}
 })
 if(import.meta.hot){
     import.meta.hot.accept(acceptHMRUpdate(useRoleStore, import.meta.hot))
