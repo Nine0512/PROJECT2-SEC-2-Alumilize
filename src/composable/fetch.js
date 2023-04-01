@@ -1,33 +1,52 @@
 const getBook = async () => {
-    try{
+    try {
         const res = await fetch('http://localhost:5000/Book')
-        const data = await res.json()
-        return data
-    }catch (err){
+        if (res.status === 200) {
+            const data = await res.json()
+            return data
+        }
+    } catch (err) {
         console.log(err)
     }
 }
 
 const getBookById = async (id) => {
-    try{
+    try {
         const res = await fetch(`http://localhost:5000/Book/${id}`)
-        const data = await res.json()
-        return data
-    }catch (err){
+        if (res.status === 200) {
+            const data = await res.json()
+            return data
+        }
+    } catch (err) {
         console.log(err)
     }
 }
 
 const deleteBook = async (id) => {
-    try{
+    try {
         const res = await fetch(`http://localhost:5000/Book/${id}`, {
             method: 'DELETE'
         })
-        const data = await res.json()
-        return data
-    }catch (err){
+        if (res.status === 200) {
+            const data = await res.json()
+            return data
+        }
+    } catch (err) {
         console.log(err)
     }
 }
 
-export { getBook , getBookById, deleteBook }
+const filterBook = async (filter, value) => {
+    try {
+        const res = await fetch(`http://localhost:5000/Book?${filter}=${value}`)
+        if (res.status === 200) {
+            const data = await res.json()
+            return data
+        }
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+
+export {getBook, getBookById, deleteBook , filterBook}

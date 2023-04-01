@@ -32,9 +32,9 @@ let addBookToCart = (event) => {
       </div>
       <div class="py-4 h-40">
         <div class="">
-          <h2 class="text-base">{{ item.title }}</h2>
-          <h3 class="text-sm">{{ item.author }}</h3>
-          <h3 class="text-sm">{{ item.category.join(',') }}</h3>
+          <h2 class="md:text-base text-sm">{{ item.title }}</h2>
+          <h3 class="md:text-sm text-xs">{{ item.author }}</h3>
+          <h3 class="md:text-sm text-xs">{{ item.category.join(',') }}</h3>
           <h3 class="text-lg font-bold lg:text-2xl lg:font-semibold text-orange-500" v-if="!isMyBook">{{ item.price }}
             Baht</h3>
         </div>
