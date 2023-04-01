@@ -3,6 +3,11 @@ import {onMounted, ref, watch} from 'vue'
 import Footer from "@/component/Footer.vue";
 import Navbar from "@/component/Navbar.vue";
 import {useRoleStore} from "@/store/roleChecking"
+<<<<<<< HEAD
+=======
+import {getBook} from "@/composable/fetch.js";
+import {info} from "autoprefixer";
+>>>>>>> 356a43b78ec7785e737dc1a5b788c4bc28c24d84
 
 let getUserId = useRoleStore().userInformation.id
 let getCart = useRoleStore().userInformation.cart
@@ -80,7 +85,11 @@ let checkAll = ()=>{
 let submitOncart = async ()=>{
   const now = new Date().toISOString(); // สร้าง Object Date ขึ้นมาแล้วแปลงเป็น ISO string
   const data = {
+<<<<<<< HEAD
     bookId: cartChecked.map(item => item),
+=======
+    bookId: cartChecked.map(item => item.id),
+>>>>>>> 356a43b78ec7785e737dc1a5b788c4bc28c24d84
     timestamp: now // เพิ่มค่า timestamp ที่มีค่าเป็นเวลาปัจจุบันเข้าไป
   }
   await fetch(`http://localhost:5000/login/${getUserId}`, {

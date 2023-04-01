@@ -11,6 +11,10 @@ export const useRoleStore = defineStore("role", () => {
         role: '',
         id:'',
         cart: [],
+<<<<<<< HEAD
+=======
+        cartCheck: [],
+>>>>>>> 356a43b78ec7785e737dc1a5b788c4bc28c24d84
         price: 0
     })
     const setInfo = (userInfo) => {
@@ -48,11 +52,18 @@ export const useRoleStore = defineStore("role", () => {
         dataJson()
     })
     const setCartToRemain = () => {
+<<<<<<< HEAD
         // userInformation.value.cartCheck = []
         console.log(userInformation.value.cartCheck)
         console.log(userInformation.value.cart)
         userInformation.value.cart.filter((item) => userInformation.value.cartCheck.indexOf(item))
         userInformation.value.cartCheck = []
+=======
+        // // userInformation.value.cartCheck = []
+        // console.log(useRoleStore().userInformation.cartCheck)
+        // useRoleStore().userInformation.cart.filter((item) => useRoleStore().userInformation.cartCheck.indexOf(item))
+        // userInformation.value.cartCheck = []
+>>>>>>> 356a43b78ec7785e737dc1a5b788c4bc28c24d84
         // console.log(useRoleStore().userInformation.cart)
      }
 
