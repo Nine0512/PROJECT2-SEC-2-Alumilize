@@ -51,11 +51,11 @@ export const useRoleStore = defineStore("role", () => {
         dataJson()
     })
     const setCartToRemain = () => {
+        // // userInformation.value.cartCheck = []
+        // console.log(useRoleStore().userInformation.cartCheck)
+        // useRoleStore().userInformation.cart.filter((item) => useRoleStore().userInformation.cartCheck.indexOf(item))
         // userInformation.value.cartCheck = []
-        console.log(useRoleStore().userInformation.cartCheck)
-        useRoleStore().userInformation.cart.filter((item) => useRoleStore().userInformation.cartCheck.indexOf(item))
-        userInformation.value.cartCheck = []
-        console.log(useRoleStore().userInformation.cart)
+        // console.log(useRoleStore().userInformation.cart)
      }
 
     return {userInformation, setCartToRemain, setInfo, setRole,getLength,setCartLength, getPrice}
