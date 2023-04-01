@@ -92,6 +92,7 @@ let submitOncart = async ()=>{
   total.value = 0
   outCheckedAll.value.checked = false
   outChecked.value.checked = false
+  useRoleStore().setBookId(data.bookId)
 }
 
 </script>

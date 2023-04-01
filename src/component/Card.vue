@@ -2,26 +2,25 @@
 import {useRoleStore} from "@/store/roleChecking"
 import {ref} from "vue";
 
+import book from '../book/Ore no Imouto ga Konna ni Kawaii Wake ga Nai Ayase IF.pdf'
+import router from "@/router";
 const props = defineProps({
   item: {
     type: Object,
     required: true
-  },
-  isMyBook: {
-    type: Boolean,
-    default: false
   }
 })
 
+let getBookId = useRoleStore().userInformation.bookId
 let getCart = useRoleStore().userInformation.cart
 
 let addBookToCart = (event,price) => {
   let even = {id:parseInt(event.target.id),price:price}
-  if (!getCart.some(item => item.id === even.id)) {
+  if (useRoleStore().userInformation.role === ''){
+    router.push('/login')
+  }else if(!getCart.some(item => item.id === even.id)) {
     useRoleStore().addToCart(even)
-    console.log(getCart)
   }
-
   // await fetch(`http://localhost:5000/login/${useRoleStore().userInformation.id}`, {
   //   method: 'PATCH',
   //   headers: {
@@ -32,7 +31,6 @@ let addBookToCart = (event,price) => {
   //       cart: getCart
   //     }
   //   )
-
   }
 </script>
 
@@ -54,11 +52,17 @@ let addBookToCart = (event,price) => {
       </div>
     </router-link>
     <div class="grid place-items-center">
-      <button class="w-full lg:w-11/12 py-0.5 rounded-xl bg-yellow-500 text-sm lg:text-black mb-4" v-if="isMyBook">
+      <a :href="book" target="_blank" class="w-full lg:w-11/12 py-0.5 bg-green-500 text-sm lg:text-black mb-4 btn border-none rounded-full hover:bg-green-600 hover:transition" v-if="getBookId.includes(item.id)">
         Download
+<<<<<<< HEAD
       </button>
       <button :id="item.id"  class="w-full lg:w-11/12 py-0.5 rounded-xl bg-yellow-500 text-sm lg:text-black mb-4" v-else
               @click="addBookToCart($event,item.price)">Add to cart
+=======
+      </a>
+      <button :id="item.id" class="w-full lg:w-11/12 py-0.5 bg-yellow-500 text-sm lg:text-black mb-4 btn border-none rounded-full hover:bg-yellow-600 hover:transition" v-else
+              @click="addBookToCart">Add to cart
+>>>>>>> 6bc210a4e6827bbcb011b553c5a2983aa5064e5a
       </button>
     </div>
   </div>

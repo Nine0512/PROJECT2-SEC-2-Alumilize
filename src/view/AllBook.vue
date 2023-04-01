@@ -4,11 +4,14 @@ import Card from "../component/Card.vue";
 import Navbar from "@/component/Navbar.vue";
 import Footer from "@/component/Footer.vue";
 import { getBook } from "../composable/fetch.js";
+import Loading from "@/component/Loading.vue";
 
 let allBook = ref([]);
 let filBook = ref([]);
+
 onMounted(async () => {
   const data = await getBook();
+  loading.value = false;
   allBook.value = data;
   filBook.value = allBook.value;
 });
@@ -48,8 +51,10 @@ function filterAllCheck(arr) {
     })
   );
 }
-const category = ref(categoryArr.value.slice())
-const publisher = ref(publisherArr.value.slice())
+const category = ref([])
+const publisher = ref([])
+let loading = ref(true)
+
 function allChecked(arr, item, event) {
   if (event.target.checked) {
     arr.push(item);
@@ -78,11 +83,11 @@ function filterBook(event) {
 }
 
 const toggle = ref(false);
-const togleRes = ref(false);
+const toggleRes = ref(false);
 
 function dropdown(item) {
   if (item === "res") {
-    togleRes.value = !togleRes.value;
+    toggleRes.value = !toggleRes.value;
   }
   if (item === "drop") {
     toggle.value = !toggle.value;
@@ -177,10 +182,13 @@ function sortPrice(item) {
               </div>
             </div>
           </div>
+          <div class="col-span-4 grid place-items-center" v-show="loading">
+            <Loading />
+          </div>
           <div v-for="item in filBook">
             <Card :item="item" />
           </div>
-          <div class="text-6xl m-5 text-red-500">
+          <div class="col-span-4 grid place-items-center text-6xl m-5 text-red-500">
             {{ msg }}
           </div>
         </div>
@@ -209,7 +217,7 @@ function sortPrice(item) {
               </div>
 
               <div
-                v-if="togleRes"
+                v-if="toggleRes"
                 class="bg-white opacity-90 border border-gray-300 md:w-60 absolute z-50 rounded-lg p-2"
               >
                 <span class="flex justify-start items-center"
@@ -285,10 +293,13 @@ function sortPrice(item) {
               </div>
             </div>
           </div>
+          <div class="col-span-2 grid place-items-center" v-show="loading">
+            <Loading />
+          </div>
           <div v-for="item in filBook">
             <Card :item="item" />
           </div>
-          <div class="text-6xl m-5 text-red-400">
+          <div class="col-span-2 grid place-items-center text-6xl m-5 text-red-400">
             {{ msg }}
           </div>
         </div>
