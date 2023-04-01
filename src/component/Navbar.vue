@@ -57,8 +57,6 @@ const setRole = (role) => {
       </router-link>
       <div class="col-span-3 max-lg:hidden grid grid-cols-4 place-items-center font-bold">
         <router-link to="/">Home</router-link>
-        <a href="#">Category</a>
-        <a href="#">Highlight</a>
         <router-link to="/Allbook">All Book</router-link>
       </div>
       <div class="col-span-2 grid grid-cols-4 lg:grid-cols-3 place-items-center">
@@ -107,10 +105,11 @@ const setRole = (role) => {
               <li>
                 <router-link to="/user" class="justify-between">
                   Profile
-                  <span class="badge">New</span>
                 </router-link>
               </li>
-              <li><a>Settings</a></li>
+              <li v-if="getRole === 'admin'">
+                <router-link to="/manage" class="justify-between">Add Book</router-link>
+              </li>
               <li>
                 <router-link to="/login" @click="setRole('')">Logout</router-link>
               </li>
@@ -132,12 +131,6 @@ const setRole = (role) => {
           <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
             <li>
               <router-link to="/">Home</router-link>
-            </li>
-            <li>
-              <router-link to="/">Category</router-link>
-            </li>
-            <li>
-              <router-link to="/">Highlight</router-link>
             </li>
             <li>
               <router-link to="/AllBook">All Book</router-link>

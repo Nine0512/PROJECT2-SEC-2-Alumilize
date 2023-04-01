@@ -89,6 +89,7 @@ let submitOncart = async ()=>{
     },
     body: JSON.stringify(data)
   })
+  useRoleStore().setBookId(data.bookId)
   cartChecked.value.length = 0
 }
 

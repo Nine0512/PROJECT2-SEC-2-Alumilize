@@ -57,7 +57,7 @@ const getRole = useRoleStore().userInformation.role
           <div class="flex-col justify-self-end">
             <div class="place-items-center grid mt-10">
               <p class="text-4xl text-orange-500 font-bold">{{ bookInfo?.price }} Baht</p>
-              <button class="btn border-none rounded-full bg-yellow-500 hover:bg-yellow-600 w-4/6 lg:w-full mt-8 ">Buy now</button>
+              <button class="btn border-none rounded-full bg-yellow-500 hover:bg-yellow-600 w-4/6 lg:w-full mt-8 ">Add to cart</button>
             </div>
           </div>
           <div class="md:col-span-2 w-full grid place-content-center mb-5">

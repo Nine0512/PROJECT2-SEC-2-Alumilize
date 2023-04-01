@@ -82,9 +82,9 @@ onMounted( () => {
         <Card :item="item"/>
       </div>
 
-      <div v-if="getRole === 'admin'" class="col-span-2 lg:col-span-4 xl:col-span-6 flex justify-end">
-        <router-link to="/manage" class="btn">Add Book</router-link>
-      </div>
+<!--      <div v-if="getRole === 'admin'" class="col-span-2 lg:col-span-4 xl:col-span-6 flex justify-end">-->
+<!--        <router-link to="/manage" class="btn">Add Book</router-link>-->
+<!--      </div>-->
     </div>
   </div>
   <Footer/>
