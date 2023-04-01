@@ -13,18 +13,14 @@ const props = defineProps({
 })
 
 let getCart = useRoleStore().userInformation.cart
-<<<<<<< HEAD
-let addBookToCart = async (event) => {
-=======
 let addBookToCart = (event) => {
->>>>>>> 356a43b78ec7785e737dc1a5b788c4bc28c24d84
   let even = event.target.id;
   let num = parseInt(even);
   if(!getCart.includes(num)){
     getCart.push(num)
     console.log(getCart)
   }
-<<<<<<< HEAD
+
   // await fetch(`http://localhost:5000/login/${useRoleStore().userInformation.id}`, {
   //   method: 'PATCH',
   //   headers: {
@@ -35,10 +31,7 @@ let addBookToCart = (event) => {
   //       cart: getCart
   //     }
   //   )
-  // })
-=======
->>>>>>> 356a43b78ec7785e737dc1a5b788c4bc28c24d84
-}
+  }
 </script>
 
 <template>

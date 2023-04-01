@@ -3,24 +3,15 @@ import {onMounted, ref, watch} from 'vue'
 import Footer from "@/component/Footer.vue";
 import Navbar from "@/component/Navbar.vue";
 import {useRoleStore} from "@/store/roleChecking"
-<<<<<<< HEAD
-=======
-import {getBook} from "@/composable/fetch.js";
-import {info} from "autoprefixer";
->>>>>>> 356a43b78ec7785e737dc1a5b788c4bc28c24d84
 
 let getUserId = useRoleStore().userInformation.id
 let getCart = useRoleStore().userInformation.cart
 getCart = getCart.filter((item, index) => getCart.indexOf(item) === index);
-let cartChecked = useRoleStore().userInformation.cartCheck
-let cartCheckOutput = ref([])
+let cartChecked = ref([])
 let total = ref(0)
 let outCheckedAll = ref(null)
 let outChecked = ref(null)
 let infoArr= ref([])
-if(cartChecked === undefined){
-  cartChecked = []
-}
 let dataJson = async ()=>{
   let res = await fetch('http://localhost:5000/Book/')
   let data = await res.json()
@@ -30,7 +21,7 @@ let dataJson = async ()=>{
     }
   }
   )
-  console.log(infoArr.value)
+  cartChecked.length = 0
 }
 dataJson()
 let removeBookfromCart = (item)=>{
@@ -50,23 +41,20 @@ let checked = (event,id)=>{
       getCart.push(selectedBookCart.id)
     }
     total.value += selectedBookCart.price
-    cartChecked.push(selectedBookCart.id)
-    cartCheckOutput.value.push(selectedBookCart.id)
+    cartChecked.value.push(selectedBookCart.id)
   }else{
     total.value -= selectedBookCart.price
-    cartChecked.pop(selectedBookCart.id)
-    cartCheckOutput.value.pop(selectedBookCart.id)
+    cartChecked.value.pop(selectedBookCart.id)
     getCart = getCart.filter(item => item !== selectedBookCart.id)
   }
-  console.log(cartChecked)
+  console.log(infoArr.value)
+  console.log(cartChecked.value)
 }
 let checkAll = ()=>{
   for(let i = 0; i < infoArr.value.length; i++){
   if(outCheckedAll.value.checked){
       total.value += infoArr.value[i].price
-      cartChecked.push(infoArr.value[i].id)
-
-    cartCheckOutput.value.push(infoArr.value[i].id)
+    cartChecked.value.push(infoArr.value[i].id)
       if (!getCart){
         getCart = []
         getCart.push(infoArr.value[i].id)
@@ -76,35 +64,28 @@ let checkAll = ()=>{
   }else{
       total.value -= infoArr.value[i].price
       getCart = getCart.filter(item => item !== infoArr.value[i].id)
-    cartChecked.pop(infoArr.value[i].id)
-    cartCheckOutput.value.pop(infoArr.value[i].id)
+      cartChecked.value.pop(infoArr.value[i].id)
     }
   }
   console.log(cartChecked)
 }
 let submitOncart = async ()=>{
-  const now = new Date().toISOString(); // สร้าง Object Date ขึ้นมาแล้วแปลงเป็น ISO string
-  const data = {
-<<<<<<< HEAD
-    bookId: cartChecked.map(item => item),
-=======
-    bookId: cartChecked.map(item => item.id),
->>>>>>> 356a43b78ec7785e737dc1a5b788c4bc28c24d84
-    timestamp: now // เพิ่มค่า timestamp ที่มีค่าเป็นเวลาปัจจุบันเข้าไป
-  }
   await fetch(`http://localhost:5000/login/${getUserId}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify({
+      bookId: cartChecked.value,
+      timestamp: new Date().toISOString() // เพิ่มค่า timestamp ที่มีค่าเป็นเวลาปัจจุบันเข้าไป
+    })
   })
-  infoArr.value = infoArr.value.filter(item => cartChecked.includes(item));
-  useRoleStore().setCartToRemain()
+  infoArr.value = infoArr.value.filter(item => !cartChecked.value.find(id => id === item.id))
+  useRoleStore().setCart(useRoleStore().userInformation.cart.filter(item => !cartChecked.value.find(id => id === item)))
   total.value = 0
-  cartChecked.length = 0
-  cartCheckOutput.value.length = 0
+  cartChecked.value.length = 0
   outCheckedAll.value.checked = false
+  console.log(infoArr.value)
   console.log(getCart)
 }
 
@@ -159,7 +140,7 @@ let submitOncart = async ()=>{
             Total: {{ total }} $
           </div>
           <div class="font-semibold grid justify-items-center whitespace-nowrap">
-            ({{ cartCheckOutput.length }} piece)
+            ({{ cartChecked.length }} piece)
           </div>
         </div>
         <div class="lg:col-end-7 lg:col-span-1 card font-semibold btn btn-ghost whitespace-nowrap" @click="submitOncart()">
