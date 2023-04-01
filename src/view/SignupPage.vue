@@ -81,6 +81,7 @@ const reg = async () => {
           dateOfBirth: userInformation.value.dateOfBirth,
           cart: userInformation.value.cart,
           cartCheck: userInformation.value.cartCheck,
+          bookId: userInformation.value.bookId,
           role: 'user'
         })
       })
