@@ -4,6 +4,7 @@ import Footer from "@/component/Footer.vue";
 import Navbar from "@/component/Navbar.vue";
 import {useRoleStore} from "@/store/roleChecking"
 
+
 let getUserId = useRoleStore().userInformation.id
 let getCart = useRoleStore().userInformation.cart
 getCart = getCart.filter((item, index) => getCart.indexOf(item) === index);
@@ -21,9 +22,10 @@ let dataJson = async ()=>{
     }
   }
   )
-  cartChecked.length = 0
+  cartChecked.value.length = 0
 }
 dataJson()
+
 let removeBookfromCart = (item)=>{
   let index = getCart.indexOf(item)
   if (index > -1) {
@@ -31,6 +33,7 @@ let removeBookfromCart = (item)=>{
   }
 }
 let checked = (event,id)=>{
+  outCheckedAll.value.checked = false
   outChecked.value = event.target
   let selectedBookCart = infoArr.value.find(item => item.id === id)
   if(outChecked.value.checked){
@@ -47,8 +50,6 @@ let checked = (event,id)=>{
     cartChecked.value.pop(selectedBookCart.id)
     getCart = getCart.filter(item => item !== selectedBookCart.id)
   }
-  console.log(infoArr.value)
-  console.log(cartChecked.value)
 }
 let checkAll = ()=>{
   for(let i = 0; i < infoArr.value.length; i++){
@@ -67,9 +68,17 @@ let checkAll = ()=>{
       cartChecked.value.pop(infoArr.value[i].id)
     }
   }
-  console.log(cartChecked)
+  total.value = 0
+  outChecked.value.checked = true
 }
 let submitOncart = async ()=>{
+  const data = {
+    bookId: [],
+  }
+  let raw = await fetch(`http://localhost:5000/login/${getUserId}`)
+  let user = await raw.json()
+  data.bookId = user.bookId.concat(cartChecked.value.filter(id => user.bookId.find(e => e.id !== id)))
+
   await fetch(`http://localhost:5000/login/${getUserId}`, {
     method: 'PATCH',
     headers: {
@@ -85,8 +94,7 @@ let submitOncart = async ()=>{
   total.value = 0
   cartChecked.value.length = 0
   outCheckedAll.value.checked = false
-  console.log(infoArr.value)
-  console.log(getCart)
+  cartChecked.length = 0
 }
 
 </script>

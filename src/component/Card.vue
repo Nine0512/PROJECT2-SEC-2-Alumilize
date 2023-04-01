@@ -1,6 +1,7 @@
 <script setup>
 import {useRoleStore} from "@/store/roleChecking"
 import {ref} from "vue";
+
 const props = defineProps({
   item: {
     type: Object,
@@ -13,10 +14,11 @@ const props = defineProps({
 })
 
 let getCart = useRoleStore().userInformation.cart
+
 let addBookToCart = (event) => {
   let even = event.target.id;
   let num = parseInt(even);
-  if(!getCart.includes(num)){
+  if (!getCart.includes(num)) {
     getCart.push(num)
     console.log(getCart)
   }
@@ -52,9 +54,11 @@ let addBookToCart = (event) => {
       </div>
     </router-link>
     <div class="grid place-items-center">
-      <button class="w-full lg:w-11/12 py-0.5 rounded-xl bg-yellow-500 text-sm lg:text-black mb-4" v-if="isMyBook">Download
+      <button class="w-full lg:w-11/12 py-0.5 rounded-xl bg-yellow-500 text-sm lg:text-black mb-4" v-if="isMyBook">
+        Download
       </button>
-      <button :id="item.id" class="w-full lg:w-11/12 py-0.5 rounded-xl bg-yellow-500 text-sm lg:text-black mb-4" v-else @click="addBookToCart">Add to cart
+      <button :id="item.id" class="w-full lg:w-11/12 py-0.5 rounded-xl bg-yellow-500 text-sm lg:text-black mb-4" v-else
+              @click="addBookToCart">Add to cart
       </button>
     </div>
   </div>

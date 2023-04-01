@@ -23,6 +23,7 @@ const userInformation = ref({
   role: '',
   cart: [],
   cartCheck: [],
+  bookId: [],
   id: ''
 })
 
@@ -45,6 +46,7 @@ const authentication = async () => {
       userInformation.value.cart = data[i].cart
       userInformation.value.cartCheck = data[i].cartCheck
       userInformation.value.id = data[i].id
+      userInformation.value.bookId = data[i].bookId
       role.setInfo(userInformation.value)
       await router.push('/')
     }

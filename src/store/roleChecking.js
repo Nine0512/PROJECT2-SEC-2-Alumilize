@@ -10,8 +10,9 @@ export const useRoleStore = defineStore("role", () => {
         email: '',
         role: '',
         id:'',
+        price: 0,
         cart: [],
-        price: 0
+        bookId: []
     })
     const setInfo = (userInfo) => {
         userInformation.value.firstname = userInfo.firstname
@@ -23,6 +24,7 @@ export const useRoleStore = defineStore("role", () => {
         userInformation.value.email = userInfo.email
         userInformation.value.cart = userInfo.cart
         userInformation.value.price = userInfo.price
+        userInformation.value.bookId = userInfo.bookId
     }
     const setRole= (roleUser) => {
         userInformation.value.role = roleUser
@@ -34,19 +36,8 @@ export const useRoleStore = defineStore("role", () => {
         userInformation.value.cart.length
     })
     const getPrice = computed(() => {
-        let dataJson = async ()=>{
-            let res = await fetch('http://localhost:5000/Book/')
-            let data = await res.json()
-            data.forEach(book=>{
-                    if(Object.values(userInformation.value.cart.map(it=>parseInt(it))).includes(book.id)){
-                        userInformation.value.price += book.price
-                    }
-                }
-            )
-            return userInformation.value.price
-        }
-        dataJson()
-    })
+    }
+    )
     const setCart = (Cart) => {
         userInformation.value.cart = Cart
      }
