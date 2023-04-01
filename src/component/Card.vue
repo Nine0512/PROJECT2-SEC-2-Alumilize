@@ -13,23 +13,24 @@ const props = defineProps({
 })
 
 let getCart = useRoleStore().userInformation.cart
-
-
-let addBookToCart = (event)=>{
-
+let addBookToCart = async (event) => {
   let even = event.target.id;
   let num = parseInt(even);
-  let addCart = [];
-  if (getCart.includes(num)) {
-    return addCart
-  }else{
-    useRoleStore().setCartLength()
-    addCart.push(num);
-    getCart.push(addCart);
-    getCart = getCart.flat().map(it=>parseInt(it));
-    console.log(getCart);
+  if(!getCart.includes(num)){
+    getCart.push(num)
+    console.log(getCart)
   }
-  console.log(getCart);
+  // await fetch(`http://localhost:5000/login/${useRoleStore().userInformation.id}`, {
+  //   method: 'PATCH',
+  //   headers: {
+  //     'Content-Type': 'application/json'
+  //   },
+  //   body: JSON.stringify(
+  //     {
+  //       cart: getCart
+  //     }
+  //   )
+  // })
 }
 </script>
 
@@ -42,9 +43,9 @@ let addBookToCart = (event)=>{
       </div>
       <div class="py-4 h-40">
         <div class="">
-          <h2 class="text-base">{{ item.title }}</h2>
-          <h3 class="text-sm">{{ item.author }}</h3>
-          <h3 class="text-sm">{{ item.category.join(',') }}</h3>
+          <h2 class="md:text-base text-sm">{{ item.title }}</h2>
+          <h3 class="md:text-sm text-xs">{{ item.author }}</h3>
+          <h3 class="md:text-sm text-xs">{{ item.category.join(',') }}</h3>
           <h3 class="text-lg font-bold lg:text-2xl lg:font-semibold text-orange-500" v-if="!isMyBook">{{ item.price }}
             Baht</h3>
         </div>
