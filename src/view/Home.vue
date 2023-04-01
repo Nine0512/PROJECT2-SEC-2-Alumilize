@@ -2,13 +2,13 @@
 import {computed, onMounted, ref} from 'vue'
 import Card from '../component/Card.vue'
 import Carousel from "@/component/Carousel.vue"
-import {getBook, filterBook} from '@/composable/fetch.js'
+import {filterBook} from '@/composable/fetch.js'
 import Navbar from "@/component/Navbar.vue"
 import Footer from "@/component/Footer.vue";
 
-let bookArr = ref([])
 let bookByViz = ref([])
 let bookByCategory = ref([])
+let bookByYenPress = ref([])
 
 import {useRoleStore} from "@/store/roleChecking"
 import Loading from "@/component/Loading.vue";
@@ -27,27 +27,23 @@ let colForBook = computed(() => {
   }
 })
 let isLoading = ref(true)
-const renderBook = async () => {
-  const books = await getBook()
-  bookArr.value = books
-}
-const renderBookByPublisher = async (filter,value) => {
+const renderBookByFilter = async (filter,value) => {
   const books = await filterBook(filter, value)
-  bookByViz.value = books
-}
-
-const renderBookByCategory = async () => {
-  const books = await filterBook('category_like', 'Science')
-  bookByCategory.value = books
   isLoading.value = false
+  return books
 }
 
-onMounted((() => {
-  renderBook()
-  renderBookByPublisher('publisher_like', 'Viz Media')
-  renderBookByCategory()
-}))
-
+onMounted( () => {
+  renderBookByFilter('publisher_like', 'Viz Media').then((res) => {
+    bookByViz.value = res
+  })
+  renderBookByFilter('category_like', 'Science').then((res) => {
+    bookByCategory.value = res
+  })
+  renderBookByFilter('publisher_like', 'Yen Press').then((res) => {
+    bookByYenPress.value = res
+  })
+})
 
 </script>
 
@@ -66,6 +62,13 @@ onMounted((() => {
         <h1 class="text-2xl font-bold text-sm md:text-lg lg:text-2xl flex justify-end mt-2">More ></h1>
       </div>
       <div v-for="item in bookByViz.slice(0,colForBook)" :key="item.id" class="mx-5 mt-5 lg:mx-0">
+        <Card :item="item"/>
+      </div>
+      <div class="col-span-2 md:col-span-4 lg:col-span-6 grid grid-cols-2 px-5 lg:px-0" v-show="!isLoading">
+        <h1 class="text-2xl font-bold text-sm md:text-lg lg:text-2xl flex justify-start mt-2">Book by Yen Press</h1>
+        <h1 class="text-2xl font-bold text-sm md:text-lg lg:text-2xl flex justify-end mt-2">More ></h1>
+      </div>
+      <div v-for="item in bookByYenPress.slice(0,colForBook)" :key="item.id" class="mx-5 mt-5 lg:mx-0">
         <Card :item="item"/>
       </div>
       <div class="col-span-2 md:col-span-4 lg:col-span-6 grid grid-cols-2 px-5 lg:px-0" v-show="!isLoading">
