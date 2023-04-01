@@ -27,7 +27,6 @@ const userInformation = ref({
   password: '',
   confirmPasswordField: '',
   dateOfBirth: '',
-  cartCheck: [],
   cart: [],
   bookId: []
 })
@@ -80,7 +79,6 @@ const reg = async () => {
           password: userInformation.value.password,
           dateOfBirth: userInformation.value.dateOfBirth,
           cart: userInformation.value.cart,
-          cartCheck: userInformation.value.cartCheck,
           bookId: userInformation.value.bookId,
           role: 'user'
         })

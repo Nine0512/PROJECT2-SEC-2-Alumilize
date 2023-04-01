@@ -29,9 +29,11 @@ export const useRoleStore = defineStore("role", () => {
     const setCartLength = () => {
         userInformation.value.cart = userInformation.value.cart.filter((item, index) => userInformation.value.cart.indexOf(item) === index)
     }
+
     const getLength = computed(() => {
         userInformation.value.cart.length
     })
+
     const getPrice = computed(() => {
         let dataJson = async ()=>{
             let res = await fetch('http://localhost:5000/Book/')

@@ -9,15 +9,12 @@ import {getBook} from "@/composable/fetch.js";
 let getUserId = useRoleStore().userInformation.id
 let getCart = useRoleStore().userInformation.cart
 getCart = getCart.filter((item, index) => getCart.indexOf(item) === index);
-let cartChecked = useRoleStore().userInformation.cartCheck
+let cartChecked = []
 let cartCheckOutput = ref([])
 let total = ref(0)
 let outCheckedAll = ref(null)
 let outChecked = ref(null)
 let infoArr= ref([])
-if(cartChecked === undefined){
-  cartChecked = []
-}
 let dataJson = async ()=>{
   let res = await fetch('http://localhost:5000/Book/')
   let data = await res.json()

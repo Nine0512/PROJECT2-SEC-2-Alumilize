@@ -22,7 +22,6 @@ const userInformation = ref({
   dateOfBirth: '',
   role: '',
   cart: [],
-  cartCheck: [],
   id: '',
   bookId: []
 })
@@ -44,7 +43,6 @@ const authentication = async () => {
       userInformation.value.email = data[i].email
       userInformation.value.dateOfBirth = data[i].dateOfBirth
       userInformation.value.cart = data[i].cart
-      userInformation.value.cartCheck = data[i].cartCheck
       userInformation.value.id = data[i].id
       userInformation.value.bookId = data[i].bookId
       role.setInfo(userInformation.value)
