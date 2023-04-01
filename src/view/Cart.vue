@@ -89,7 +89,7 @@ let submitOncart = async ()=>{
   }
   let raw = await fetch(`http://localhost:5000/login/${getUserId}`)
   let user = await raw.json()
-  data.bookId = user.bookId.concat(cartChecked.filter(id => user.bookId.find(e => e.id !== id)))
+  data.bookId = user.bookId.concat(cartChecked.filter(e => !user.bookId.find(item => item === e)))
 
   await fetch(`http://localhost:5000/login/${getUserId}`, {
     method: 'PATCH',
