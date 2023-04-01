@@ -8,7 +8,12 @@ import {useRoleStore} from "@/store/roleChecking"
 let getUserId = useRoleStore().userInformation.id
 let getCart = useRoleStore().userInformation.cart
 getCart = getCart.filter((item, index) => getCart.indexOf(item) === index);
+<<<<<<< HEAD
 let cartChecked = ref([])
+=======
+let cartChecked = []
+let cartCheckOutput = ref([])
+>>>>>>> 3f104db84898d0fa74fb9c5edb03e06fd9e53897
 let total = ref(0)
 let outCheckedAll = ref(null)
 let outChecked = ref(null)
