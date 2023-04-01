@@ -4,7 +4,7 @@ import Footer from "@/component/Footer.vue";
 import Navbar from "@/component/Navbar.vue";
 import {useRoleStore} from "@/store/roleChecking"
 
-
+const bin = '/icon/bin.svg'
 let getUserId = useRoleStore().userInformation.id
 let getCart = useRoleStore().userInformation.cart
 getCart = getCart.filter((item, index) => getCart.indexOf(item) === index);
@@ -133,7 +133,7 @@ let submitOnCart = async ()=>{
             <p class="font-semibold lg:text-4xl whitespace-nowrap md:text-2xl">Price: {{ item.price }} $</p>
           </div>
           <div class="lg:ml-16" @click="removeBookFromCart(item)">
-            <button class="btn"/>
+            <img :src="bin" alt="bin" class="w-1/3 cursor-pointer">
           </div>
         </div>
       </div>
@@ -158,8 +158,4 @@ let submitOnCart = async ()=>{
   <Footer/>
 </template>
 <style scoped>
-img {
-  width:6rem;
-  height:9rem;
-}
 </style>
