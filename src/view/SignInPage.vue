@@ -21,15 +21,7 @@ const userInformation = ref({
   lastname: '',
   dateOfBirth: '',
   role: '',
-  cart: [],
-<<<<<<< HEAD
-  cartCheck: [],
-  bookId: [],
-  id: ''
-=======
-  id: '',
-  bookId: []
->>>>>>> 3f104db84898d0fa74fb9c5edb03e06fd9e53897
+  cart: []
 })
 
 

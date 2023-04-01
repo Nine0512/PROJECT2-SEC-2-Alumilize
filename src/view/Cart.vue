@@ -8,12 +8,8 @@ import {useRoleStore} from "@/store/roleChecking"
 let getUserId = useRoleStore().userInformation.id
 let getCart = useRoleStore().userInformation.cart
 getCart = getCart.filter((item, index) => getCart.indexOf(item) === index);
-<<<<<<< HEAD
 let cartChecked = ref([])
-=======
-let cartChecked = []
 let cartCheckOutput = ref([])
->>>>>>> 3f104db84898d0fa74fb9c5edb03e06fd9e53897
 let total = ref(0)
 let outCheckedAll = ref(null)
 let outChecked = ref(null)
@@ -77,29 +73,23 @@ let checkAll = ()=>{
   outChecked.value.checked = true
 }
 let submitOncart = async ()=>{
+  // const now = new Date().toISOString(); // สร้าง Object Date ขึ้นมาแล้วแปลงเป็น ISO string
+  useRoleStore().setCart(useRoleStore().userInformation.cart.filter(item => !cartChecked.value.find(id => id === item)))
+  infoArr.value = infoArr.value.filter(item => !cartChecked.value.find(e => e === item.id))
   const data = {
     bookId: [],
   }
   let raw = await fetch(`http://localhost:5000/login/${getUserId}`)
   let user = await raw.json()
-  data.bookId = user.bookId.concat(cartChecked.value.filter(id => user.bookId.find(e => e.id !== id)))
   data.bookId = user.bookId.concat(cartChecked.value.filter(e => !user.bookId.find(item => item === e)))
-
   await fetch(`http://localhost:5000/login/${getUserId}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({
-      bookId: cartChecked.value,
-      timestamp: new Date().toISOString() // เพิ่มค่า timestamp ที่มีค่าเป็นเวลาปัจจุบันเข้าไป
-    })
+    body: JSON.stringify(data)
   })
-  infoArr.value = infoArr.value.filter(item => !cartChecked.value.find(id => id === item.id))
-  useRoleStore().setCart(useRoleStore().userInformation.cart.filter(item => !cartChecked.value.find(id => id === item)))
-  total.value = 0
   cartChecked.value.length = 0
-  outCheckedAll.value.checked = false
 }
 
 </script>
