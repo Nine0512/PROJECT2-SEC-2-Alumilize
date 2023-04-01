@@ -15,11 +15,10 @@ const props = defineProps({
 
 let getCart = useRoleStore().userInformation.cart
 
-let addBookToCart = (event) => {
-  let even = event.target.id;
-  let num = parseInt(even);
-  if (!getCart.includes(num)) {
-    getCart.push(num)
+let addBookToCart = (event,price) => {
+  let even = {id:parseInt(event.target.id),price:price}
+  if (!getCart.some(item => item.id === even.id)) {
+    useRoleStore().addToCart(even)
     console.log(getCart)
   }
 
@@ -33,6 +32,7 @@ let addBookToCart = (event) => {
   //       cart: getCart
   //     }
   //   )
+
   }
 </script>
 
@@ -57,8 +57,8 @@ let addBookToCart = (event) => {
       <button class="w-full lg:w-11/12 py-0.5 rounded-xl bg-yellow-500 text-sm lg:text-black mb-4" v-if="isMyBook">
         Download
       </button>
-      <button :id="item.id" class="w-full lg:w-11/12 py-0.5 rounded-xl bg-yellow-500 text-sm lg:text-black mb-4" v-else
-              @click="addBookToCart">Add to cart
+      <button :id="item.id"  class="w-full lg:w-11/12 py-0.5 rounded-xl bg-yellow-500 text-sm lg:text-black mb-4" v-else
+              @click="addBookToCart($event,item.price)">Add to cart
       </button>
     </div>
   </div>

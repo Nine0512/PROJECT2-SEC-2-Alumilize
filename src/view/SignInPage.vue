@@ -21,10 +21,10 @@ const userInformation = ref({
   lastname: '',
   dateOfBirth: '',
   role: '',
-  cart: [],
   cartCheck: [],
   bookId: [],
-  id: ''
+  id: '',
+  cart: []
 })
 
 

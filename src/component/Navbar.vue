@@ -8,10 +8,10 @@ const profile = '/images/image4.png'
 
 let search = ref('')
 let infoArr = ref([])
-
-
 onMounted(async () => {
   const res = await getBook()
+  let resS = await fetch('http://localhost:5000/Book/')
+  let data = await resS.json()
   res.forEach(item => {
     let infoObj = {
       id: item.id,
@@ -20,7 +20,6 @@ onMounted(async () => {
     infoArr.value.push(infoObj)
   })
 })
-
 let searchChoice = computed(() => {
   if (search.value === '') {
     return []
@@ -33,6 +32,16 @@ let searchChoice = computed(() => {
   }
 })
 
+let getTotal = useRoleStore().userInformation.cart.reduce((acc, cur) => acc + cur.price, 0)
+
+console.log(getTotal)
+// let getCart = ()=>{
+//     useRoleStore().userInformation.cart.forEach(item=>{
+//       useRoleStore().userInformation.cart.price += item.price
+//   })
+//   return useRoleStore().userInformation.cart.price
+// }
+// getCart()
 let selectBook = (id) => {
   search.value = ''
   router.push({name: 'book', params: {id: id}})
@@ -42,7 +51,6 @@ import {useRoleStore} from "@/store/roleChecking"
 
 const getRole = useRoleStore().userInformation.role
 useRoleStore().setCartLength()
-const getTotal = useRoleStore().getPrice
 const setRole = (role) => {
   useRoleStore().setRole(role)
 }
@@ -86,7 +94,7 @@ const setRole = (role) => {
             <div tabindex="0" class="mt-3 card card-compact dropdown-content w-52 bg-base-100 shadow">
               <div class="card-body">
                 <span class="font-bold text-lg">{{ useRoleStore().userInformation.cart.length }} Items</span>
-                <span class="text-info">Subtotal: {{ getTotal }}</span>
+                <span class="text-info">Subtotal: {{ useRoleStore().getPriceFromCart }}</span>
                 <div class="card-actions">
                   <router-link to="/Cart"><button class="btn btn-primary btn-block">View cart</button></router-link>
                 </div>

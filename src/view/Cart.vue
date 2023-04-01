@@ -17,12 +17,11 @@ let dataJson = async ()=>{
   let res = await fetch('http://localhost:5000/Book/')
   let data = await res.json()
   data.forEach(book=>{
-    if(Object.values(getCart.map(it=>parseInt(it))).includes(book.id)){
+    if(getCart.some(item => item.id === book.id)){
       infoArr.value.push(book)
     }
-  }
-  )
-  cartChecked.value.length = 0
+  })
+  cartChecked.length = 0
 }
 dataJson()
 
@@ -45,10 +44,10 @@ let checked = (event,id)=>{
       getCart.push(selectedBookCart.id)
     }
     total.value += selectedBookCart.price
-    cartChecked.value.push(selectedBookCart.id)
+    cartChecked.push(selectedBookCart.id)
   }else{
     total.value -= selectedBookCart.price
-    cartChecked.value.pop(selectedBookCart.id)
+    cartChecked.pop(selectedBookCart.id)
     getCart = getCart.filter(item => item !== selectedBookCart.id)
   }
 }
@@ -57,7 +56,7 @@ let checkAll = ()=>{
   for(let i = 0; i < infoArr.value.length; i++){
   if(outCheckedAll.value.checked){
       total.value += infoArr.value[i].price
-    cartChecked.value.push(infoArr.value[i].id)
+    cartChecked.push(infoArr.value[i].id)
       if (!getCart){
         getCart = []
         getCart.push(infoArr.value[i].id)
@@ -67,35 +66,32 @@ let checkAll = ()=>{
   }else{
       total.value -= infoArr.value[i].price
       getCart = getCart.filter(item => item !== infoArr.value[i].id)
-      cartChecked.value.pop(infoArr.value[i].id)
+      cartChecked.pop(infoArr.value[i].id)
     }
   }
   outChecked.value.checked = true
 }
 let submitOncart = async ()=>{
+  // const now = new Date().toISOString(); // สร้าง Object Date ขึ้นมาแล้วแปลงเป็น ISO string
+  useRoleStore().setCart(useRoleStore().userInformation.cart.filter(item => !cartChecked.find(id => id === item)))
+  infoArr.value = infoArr.value.filter(item => !cartChecked.find(e => e === item.id))
   const data = {
     bookId: [],
   }
   let raw = await fetch(`http://localhost:5000/login/${getUserId}`)
   let user = await raw.json()
-  data.bookId = user.bookId.concat(cartChecked.value.filter(id => user.bookId.find(e => e.id !== id)))
-  data.bookId = user.bookId.concat(cartChecked.value.filter(e => !user.bookId.find(item => item === e)))
-
+  data.bookId = user.bookId.concat(cartChecked.filter(e => !user.bookId.find(item => item === e)))
   await fetch(`http://localhost:5000/login/${getUserId}`, {
     method: 'PATCH',
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({
-      bookId: cartChecked.value,
-      timestamp: new Date().toISOString() // เพิ่มค่า timestamp ที่มีค่าเป็นเวลาปัจจุบันเข้าไป
-    })
+    body: JSON.stringify(data)
   })
-  infoArr.value = infoArr.value.filter(item => !cartChecked.value.find(id => id === item.id))
-  useRoleStore().setCart(useRoleStore().userInformation.cart.filter(item => !cartChecked.value.find(id => id === item)))
+  cartChecked.length = 0
   total.value = 0
-  cartChecked.value.length = 0
   outCheckedAll.value.checked = false
+  outChecked.value.checked = false
 }
 
 </script>

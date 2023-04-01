@@ -7,7 +7,6 @@ import { getBook } from "../composable/fetch.js";
 
 let allBook = ref([]);
 let filBook = ref([]);
-
 onMounted(async () => {
   const data = await getBook();
   allBook.value = data;
