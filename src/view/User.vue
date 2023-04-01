@@ -14,7 +14,7 @@ const showHistory = ref(false);
 
 const showEditProfile = () => {
   editProfile.value = true;
-  shpwProfile.value = false;
+  showProfile.value = false;
   showLibrary.value = false;
   showUserDetail.value = false;
   showFavBook.value = false;
@@ -71,7 +71,7 @@ const copy = {
   dateOfBirth: dateOfBirth,
   bookId: bookId,
 };
-let booked = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+let booked = copy.bookId
 let bookUser = "http://localhost:5000/Book?id=" + booked.join("&id=");
 const userLibrary = async () => {
   let res = await fetch(bookUser);
@@ -140,36 +140,6 @@ const userLibrary = async () => {
                   />
                 </svg>
                 Library
-              </button>
-            </div>
-            <div class="flex flex-row">
-              <button
-                @click="letShowHistory()"
-                class="mt-2 whitespace-nowrap flex flex-row gap-1"
-              >
-                <svg
-                  width="29"
-                  height="29"
-                  viewBox="0 0 29 29"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M6.6795 20.1819C8.04775 22.0651 10.0496 23.3914 12.3173 23.917C14.5849 24.4426 16.9661 24.1323 19.0233 23.043C21.0806 21.9538 22.6756 20.1588 23.5155 17.9878C24.3554 15.8168 24.3837 13.4157 23.5951 11.2255C22.8067 9.03536 21.2543 7.20328 19.2234 6.06587C17.1924 4.92847 14.8191 4.56214 12.5397 5.03417C10.2603 5.50622 8.22778 6.78494 6.81555 8.6354C5.40332 10.4859 4.70624 12.7838 4.85242 15.1069M4.85242 15.1069L3.03992 13.2944M4.85242 15.1069L6.66492 13.2944"
-                    stroke="black"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                  <path
-                    d="M14.5 9.66663V14.5L18.125 18.125"
-                    stroke="black"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                  />
-                </svg>
-                History
               </button>
             </div>
           </div>
@@ -245,13 +215,6 @@ const userLibrary = async () => {
             </div>
           </div>
           <div v-show="showLibrary">
-            <div class="grid grid-cols-2 lg:grid-cols-4 mt-16 gap-4">
-              <div v-for="book in books" :key="book.id">
-                <Card :item="book" :isMyBook="true" />
-              </div>
-            </div>
-          </div>
-          <div v-show="showHistory">
             <div class="grid grid-cols-2 lg:grid-cols-4 mt-16 gap-4">
               <div v-for="book in books" :key="book.id">
                 <Card :item="book" :isMyBook="true" />
