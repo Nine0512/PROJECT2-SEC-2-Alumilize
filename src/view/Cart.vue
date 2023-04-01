@@ -8,12 +8,7 @@ import {useRoleStore} from "@/store/roleChecking"
 let getUserId = useRoleStore().userInformation.id
 let getCart = useRoleStore().userInformation.cart
 getCart = getCart.filter((item, index) => getCart.indexOf(item) === index);
-<<<<<<< HEAD
-let cartChecked = ref([])
-=======
 let cartChecked = []
-let cartCheckOutput = ref([])
->>>>>>> 3f104db84898d0fa74fb9c5edb03e06fd9e53897
 let total = ref(0)
 let outCheckedAll = ref(null)
 let outChecked = ref(null)
@@ -38,6 +33,7 @@ let removeBookfromCart = (item)=>{
   }
 }
 let checked = (event,id)=>{
+
   outCheckedAll.value.checked = false
   outChecked.value = event.target
   let selectedBookCart = infoArr.value.find(item => item.id === id)
@@ -57,6 +53,7 @@ let checked = (event,id)=>{
   }
 }
 let checkAll = ()=>{
+  total.value = 0
   for(let i = 0; i < infoArr.value.length; i++){
   if(outCheckedAll.value.checked){
       total.value += infoArr.value[i].price
@@ -73,7 +70,6 @@ let checkAll = ()=>{
       cartChecked.value.pop(infoArr.value[i].id)
     }
   }
-  total.value = 0
   outChecked.value.checked = true
 }
 let submitOncart = async ()=>{
