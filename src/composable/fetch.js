@@ -1,3 +1,6 @@
+import {useRoleStore} from "@/store/roleChecking";
+import router from "@/router";
+
 const getBook = async () => {
     try {
         const res = await fetch('http://localhost:5000/Book')
@@ -48,5 +51,26 @@ const filterBook = async (filter, value) => {
     }
 }
 
+let addBookToCart = async (event, price, role, userId, cart) => {
+    let even = {id: parseInt(event.target.id), price: price}
+    console.log(even)
+    if (role === '') {
+        await router.push('/login')
+    } else if (!cart.some(item => item.id === even.id)) {
+        useRoleStore().addToCart(even)
+        await fetch(`http://localhost:5000/login/${userId}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(
+                {
+                    cart: cart
+                }
+            )
+        })
+    }
+}
 
-export {getBook, getBookById, deleteBook , filterBook}
+
+export {getBook, getBookById, deleteBook , filterBook, addBookToCart}

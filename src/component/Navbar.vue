@@ -30,13 +30,8 @@ let searchChoice = computed(() => {
   }
 })
 
-// let getCart = ()=>{
-//     useRoleStore().userInformation.cart.forEach(item=>{
-//       useRoleStore().userInformation.cart.price += item.price
-//   })
-//   return useRoleStore().userInformation.cart.price
-// }
-// getCart()
+
+
 let selectBook = (id) => {
   search.value = ''
   router.push({name: 'book', params: {id: id}})
@@ -46,8 +41,21 @@ import {useRoleStore} from "@/store/roleChecking"
 
 const getRole = useRoleStore().userInformation.role
 useRoleStore().setCartLength()
-const setRole = (role) => {
-  useRoleStore().setRole(role)
+
+const logout = () => {
+  useRoleStore().setRole('')
+  useRoleStore().userInformation = {
+    firstname: '',
+    lastname: '',
+    username: '',
+    dateOfBirth: '',
+    email: '',
+    role: '',
+    id: '',
+    price: 0,
+    cart: [],
+    bookId: []
+  }
 }
 
 </script>
@@ -120,7 +128,7 @@ const setRole = (role) => {
                 <router-link to="/manage" class="justify-between">Add Book <span class="badge">admin</span></router-link>
               </li>
               <li>
-                <router-link to="/login" @click="setRole('')">Logout</router-link>
+                <router-link to="/login" @click="logout">Logout</router-link>
               </li>
             </ul>
           </div>

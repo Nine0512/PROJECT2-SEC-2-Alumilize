@@ -44,9 +44,10 @@ export const useRoleStore = defineStore("role", () => {
         userInformation.value.bookId = bookId
     }
     const removeFromCart = (item) => {
-        userInformation.value.cart.splice(item, 1)
+       userInformation.value.cart = userInformation.value.cart.filter(e => e.id !== item.id)
     }
-    return {userInformation, setCart, setInfo, setRole,addToCart,setCartLength,getPriceFromCart,setBookId,removeFromCart}
+
+    return {userInformation, setCart, setInfo, setRole,addToCart,setCartLength,getPriceFromCart,setBookId, removeFromCart}
 
 })
 if (import.meta.hot) {

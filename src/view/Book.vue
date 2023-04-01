@@ -4,7 +4,7 @@ import {ref, watch} from 'vue'
 import {useRoute} from 'vue-router'
 import router from "@/router";
 import book from '../book/Ore no Imouto ga Konna ni Kawaii Wake ga Nai Ayase IF.pdf'
-import {getBookById, deleteBook} from "@/composable/fetch";
+import {getBookById, deleteBook, addBookToCart} from "@/composable/fetch";
 import Navbar from "@/component/Navbar.vue";
 import Footer from "@/component/Footer.vue";
 
@@ -57,7 +57,7 @@ let getBookId = useRoleStore().userInformation.bookId
           <div class="flex-col justify-self-end">
             <div class="place-items-center grid mt-10">
               <p class="text-4xl text-orange-500 font-bold">{{ bookInfo?.price }} Baht</p>
-              <button class="btn border-none rounded-full bg-yellow-500 hover:bg-yellow-600 w-4/6 lg:w-full mt-8 " v-if="!getBookId.includes(parseInt(id))">Add to cart</button>
+              <button :id="id" class="btn border-none rounded-full bg-yellow-500 hover:bg-yellow-600 w-4/6 lg:w-full mt-8 " @click="addBookToCart($event, bookInfo.price, useRoleStore().userInformation.role, useRoleStore().userInformation.id, useRoleStore().userInformation.cart)" v-if="!getBookId.includes(parseInt(id))">Add to cart</button>
               <a :href="book" target="_blank" class="btn border-none rounded-full bg-green-500 hover:bg-green-600 w-4/6 lg:w-full mt-8 " v-else>Download</a>
             </div>
           </div>
