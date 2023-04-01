@@ -80,6 +80,7 @@ let submitOncart = async ()=>{
   let raw = await fetch(`http://localhost:5000/login/${getUserId}`)
   let user = await raw.json()
   data.bookId = user.bookId.concat(cartChecked.filter(e => !user.bookId.find(item => item === e)))
+  useRoleStore().userInformation.cart = infoArr.value
   await fetch(`http://localhost:5000/login/${getUserId}`, {
     method: 'PATCH',
     headers: {
