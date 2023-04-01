@@ -25,10 +25,10 @@ let dataJson = async ()=>{
 }
 dataJson()
 
-let removeBookfromCart = (item)=>{
-  let index = getCart.indexOf(item)
-  if (index > -1) {
-    getCart.splice(index, 1)
+let removeBookFromCart = (item)=>{
+  if(getCart.some(items => items.id === item.id)) {
+    useRoleStore().removeFromCart(item)
+    infoArr.value.splice(item, 1)
   }
 }
 let checked = (event,id)=>{
@@ -70,7 +70,7 @@ let checkAll = ()=>{
   }
   outChecked.value.checked = true
 }
-let submitOncart = async ()=>{
+let submitOnCart = async ()=>{
   // const now = new Date().toISOString(); // สร้าง Object Date ขึ้นมาแล้วแปลงเป็น ISO string
   useRoleStore().setCart(useRoleStore().userInformation.cart.filter(item => !cartChecked.find(id => id === item)))
   infoArr.value = infoArr.value.filter(item => !cartChecked.find(e => e === item.id))
@@ -132,7 +132,7 @@ let submitOncart = async ()=>{
           <div class="lg:pl-4">
             <p class="font-semibold lg:text-4xl whitespace-nowrap md:text-2xl">Price: {{ item.price }} $</p>
           </div>
-          <div class="lg:ml-16" @click="removeBookfromCart(item)">
+          <div class="lg:ml-16" @click="removeBookFromCart(item)">
             <button class="btn"/>
           </div>
         </div>
@@ -149,7 +149,7 @@ let submitOncart = async ()=>{
             ({{ cartChecked.length }} piece)
           </div>
         </div>
-        <div class="lg:col-end-7 lg:col-span-1 card font-semibold btn btn-ghost whitespace-nowrap" @click="submitOncart()">
+        <div class="lg:col-end-7 lg:col-span-1 card font-semibold btn btn-ghost whitespace-nowrap" @click="submitOnCart()">
           Purchase
         </div>
       </div>
