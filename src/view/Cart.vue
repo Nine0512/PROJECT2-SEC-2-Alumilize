@@ -52,7 +52,6 @@ let checked = (event,id)=>{
   }
 }
 let checkAll = ()=>{
-  total.value = 0
   for(let i = 0; i < infoArr.value.length; i++){
   if(outCheckedAll.value.checked){
       total.value += infoArr.value[i].price

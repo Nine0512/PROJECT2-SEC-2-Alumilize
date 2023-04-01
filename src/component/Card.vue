@@ -54,15 +54,9 @@ let addBookToCart = (event,price) => {
     <div class="grid place-items-center">
       <a :href="book" target="_blank" class="w-full lg:w-11/12 py-0.5 bg-green-500 text-sm lg:text-black mb-4 btn border-none rounded-full hover:bg-green-600 hover:transition" v-if="getBookId.includes(item.id)">
         Download
-<<<<<<< HEAD
-      </button>
+      </a>
       <button :id="item.id"  class="w-full lg:w-11/12 py-0.5 rounded-xl bg-yellow-500 text-sm lg:text-black mb-4" v-else
               @click="addBookToCart($event,item.price)">Add to cart
-=======
-      </a>
-      <button :id="item.id" class="w-full lg:w-11/12 py-0.5 bg-yellow-500 text-sm lg:text-black mb-4 btn border-none rounded-full hover:bg-yellow-600 hover:transition" v-else
-              @click="addBookToCart">Add to cart
->>>>>>> 6bc210a4e6827bbcb011b553c5a2983aa5064e5a
       </button>
     </div>
   </div>

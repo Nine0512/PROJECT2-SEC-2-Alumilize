@@ -9,7 +9,7 @@ export const useRoleStore = defineStore("role", () => {
         dateOfBirth: '',
         email: '',
         role: '',
-        id:'',
+        id: '',
         price: 0,
         cart: [],
         bookId: []
@@ -37,11 +37,14 @@ export const useRoleStore = defineStore("role", () => {
     const setCart = (Cart) => {
         userInformation.value.cart = Cart
      }
+    const getPriceFromCart = computed(() => {
+        return userInformation.value.cart.reduce((acc, cur) => acc + cur.price, 0)
+    })
     const setBookId = (bookId) => {
         userInformation.value.bookId = bookId
     }
+    return {userInformation, setCart, setInfo, setRole,addToCart,setCartLength,getPriceFromCart,setBookId}
 
-    return {userInformation, setCart, setInfo, setRole, setCartLength ,setBookId}
 })
 if (import.meta.hot) {
     import.meta.hot.accept(acceptHMRUpdate(useRoleStore, import.meta.hot))

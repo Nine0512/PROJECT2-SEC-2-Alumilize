@@ -10,8 +10,6 @@ let search = ref('')
 let infoArr = ref([])
 onMounted(async () => {
   const res = await getBook()
-  let resS = await fetch('http://localhost:5000/Book/')
-  let data = await resS.json()
   res.forEach(item => {
     let infoObj = {
       id: item.id,
@@ -32,7 +30,6 @@ let searchChoice = computed(() => {
   }
 })
 
-console.log(getTotal)
 // let getCart = ()=>{
 //     useRoleStore().userInformation.cart.forEach(item=>{
 //       useRoleStore().userInformation.cart.price += item.price
