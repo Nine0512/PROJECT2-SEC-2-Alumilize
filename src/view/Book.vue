@@ -32,9 +32,9 @@ const renderImg = async () => {
 
 renderImg()
 
-import {useRoleStore} from "@/store/roleChecking"
+import {useRoleStore} from "@/store/roleChecking.js"
 const getRole = useRoleStore().userInformation.role
-
+let getBookId = useRoleStore().userInformation.bookId
 
 </script>
 
@@ -57,7 +57,8 @@ const getRole = useRoleStore().userInformation.role
           <div class="flex-col justify-self-end">
             <div class="place-items-center grid mt-10">
               <p class="text-4xl text-orange-500 font-bold">{{ bookInfo?.price }} Baht</p>
-              <button class="btn border-none rounded-full bg-yellow-500 hover:bg-yellow-600 w-4/6 lg:w-full mt-8 ">Add to cart</button>
+              <button class="btn border-none rounded-full bg-yellow-500 hover:bg-yellow-600 w-4/6 lg:w-full mt-8 " v-if="!getBookId.includes(parseInt(id))">Add to cart</button>
+              <a :href="book" target="_blank" class="btn border-none rounded-full bg-green-500 hover:bg-green-600 w-4/6 lg:w-full mt-8 " v-else>Download</a>
             </div>
           </div>
           <div class="md:col-span-2 w-full grid place-content-center mb-5">
@@ -101,9 +102,9 @@ const getRole = useRoleStore().userInformation.role
           <p class="text-lg my-4 text-justify">&nbsp;&nbsp;&nbsp;&nbsp;{{ bookInfo?.description }}</p>
         </div>
       </div>
-      <div class="col-span-6">
-        <a :href="book" class="btn" target="_blank">Download</a>
-      </div>
+<!--      <div class="col-span-6">-->
+<!--        <a :href="book" class="btn" target="_blank">Download</a>-->
+<!--      </div>-->
       <div class="col-span-6 flex justify-end my-5" v-if="getRole === 'admin'" >
         <router-link :to="'/manage/update/' + bookInfo?.id" class="btn ml-2">Update</router-link>
         <label for="my-modal-6" class="btn ml-2">Delete</label>
