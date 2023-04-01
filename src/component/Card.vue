@@ -1,6 +1,7 @@
 <script setup>
 import {useRoleStore} from "@/store/roleChecking"
 import {ref} from "vue";
+
 const props = defineProps({
   item: {
     type: Object,
@@ -13,32 +14,16 @@ const props = defineProps({
 })
 
 let getCart = useRoleStore().userInformation.cart
-<<<<<<< HEAD
-let addBookToCart = async (event) => {
-=======
+
 let addBookToCart = (event) => {
->>>>>>> 356a43b78ec7785e737dc1a5b788c4bc28c24d84
   let even = event.target.id;
   let num = parseInt(even);
-  if(!getCart.includes(num)){
+  if (!getCart.includes(num)) {
     getCart.push(num)
     console.log(getCart)
   }
-<<<<<<< HEAD
-  // await fetch(`http://localhost:5000/login/${useRoleStore().userInformation.id}`, {
-  //   method: 'PATCH',
-  //   headers: {
-  //     'Content-Type': 'application/json'
-  //   },
-  //   body: JSON.stringify(
-  //     {
-  //       cart: getCart
-  //     }
-  //   )
-  // })
-=======
->>>>>>> 356a43b78ec7785e737dc1a5b788c4bc28c24d84
 }
+
 </script>
 
 <template>
@@ -59,9 +44,11 @@ let addBookToCart = (event) => {
       </div>
     </router-link>
     <div class="grid place-items-center">
-      <button class="w-full lg:w-11/12 py-0.5 rounded-xl bg-yellow-500 text-sm lg:text-black mb-4" v-if="isMyBook">Download
+      <button class="w-full lg:w-11/12 py-0.5 rounded-xl bg-yellow-500 text-sm lg:text-black mb-4" v-if="isMyBook">
+        Download
       </button>
-      <button :id="item.id" class="w-full lg:w-11/12 py-0.5 rounded-xl bg-yellow-500 text-sm lg:text-black mb-4" v-else @click="addBookToCart">Add to cart
+      <button :id="item.id" class="w-full lg:w-11/12 py-0.5 rounded-xl bg-yellow-500 text-sm lg:text-black mb-4" v-else
+              @click="addBookToCart">Add to cart
       </button>
     </div>
   </div>

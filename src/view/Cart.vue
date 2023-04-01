@@ -3,11 +3,8 @@ import {onMounted, ref, watch} from 'vue'
 import Footer from "@/component/Footer.vue";
 import Navbar from "@/component/Navbar.vue";
 import {useRoleStore} from "@/store/roleChecking"
-<<<<<<< HEAD
-=======
 import {getBook} from "@/composable/fetch.js";
-import {info} from "autoprefixer";
->>>>>>> 356a43b78ec7785e737dc1a5b788c4bc28c24d84
+
 
 let getUserId = useRoleStore().userInformation.id
 let getCart = useRoleStore().userInformation.cart
@@ -33,6 +30,7 @@ let dataJson = async ()=>{
   console.log(infoArr.value)
 }
 dataJson()
+
 let removeBookfromCart = (item)=>{
   let index = getCart.indexOf(item)
   if (index > -1) {
@@ -83,15 +81,16 @@ let checkAll = ()=>{
   console.log(cartChecked)
 }
 let submitOncart = async ()=>{
-  const now = new Date().toISOString(); // สร้าง Object Date ขึ้นมาแล้วแปลงเป็น ISO string
+  // const now = new Date().toISOString(); // สร้าง Object Date ขึ้นมาแล้วแปลงเป็น ISO string
+  useRoleStore().setCart(useRoleStore().userInformation.cart.filter(item => !cartChecked.find(id => id === item)))
+  infoArr.value = infoArr.value.filter(item => !cartChecked.find(e => e === item.id))
   const data = {
-<<<<<<< HEAD
-    bookId: cartChecked.map(item => item),
-=======
-    bookId: cartChecked.map(item => item.id),
->>>>>>> 356a43b78ec7785e737dc1a5b788c4bc28c24d84
-    timestamp: now // เพิ่มค่า timestamp ที่มีค่าเป็นเวลาปัจจุบันเข้าไป
+    bookId: [],
   }
+  let raw = await fetch(`http://localhost:5000/login/${getUserId}`)
+  let user = await raw.json()
+  data.bookId = user.bookId.concat(cartChecked.filter(id => user.bookId.find(e => e.id !== id)))
+
   await fetch(`http://localhost:5000/login/${getUserId}`, {
     method: 'PATCH',
     headers: {
@@ -99,13 +98,7 @@ let submitOncart = async ()=>{
     },
     body: JSON.stringify(data)
   })
-  infoArr.value = infoArr.value.filter(item => cartChecked.includes(item));
-  useRoleStore().setCartToRemain()
-  total.value = 0
   cartChecked.length = 0
-  cartCheckOutput.value.length = 0
-  outCheckedAll.value.checked = false
-  console.log(getCart)
 }
 
 </script>

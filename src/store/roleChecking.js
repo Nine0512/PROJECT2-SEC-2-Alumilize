@@ -10,12 +10,7 @@ export const useRoleStore = defineStore("role", () => {
         email: '',
         role: '',
         id:'',
-        cart: [],
-<<<<<<< HEAD
-=======
-        cartCheck: [],
->>>>>>> 356a43b78ec7785e737dc1a5b788c4bc28c24d84
-        price: 0
+        cart: []
     })
     const setInfo = (userInfo) => {
         userInformation.value.firstname = userInfo.firstname
@@ -51,23 +46,12 @@ export const useRoleStore = defineStore("role", () => {
         }
         dataJson()
     })
-    const setCartToRemain = () => {
-<<<<<<< HEAD
-        // userInformation.value.cartCheck = []
-        console.log(userInformation.value.cartCheck)
-        console.log(userInformation.value.cart)
-        userInformation.value.cart.filter((item) => userInformation.value.cartCheck.indexOf(item))
-        userInformation.value.cartCheck = []
-=======
-        // // userInformation.value.cartCheck = []
-        // console.log(useRoleStore().userInformation.cartCheck)
-        // useRoleStore().userInformation.cart.filter((item) => useRoleStore().userInformation.cartCheck.indexOf(item))
-        // userInformation.value.cartCheck = []
->>>>>>> 356a43b78ec7785e737dc1a5b788c4bc28c24d84
-        // console.log(useRoleStore().userInformation.cart)
-     }
 
-    return {userInformation, setCartToRemain, setInfo, setRole,getLength,setCartLength, getPrice}
+    const setCart = (Cart) => {
+        userInformation.value.cart = Cart
+    }
+
+    return {userInformation, setInfo, setCart, setRole,getLength,setCartLength, getPrice}
 })
 if(import.meta.hot){
     import.meta.hot.accept(acceptHMRUpdate(useRoleStore, import.meta.hot))
