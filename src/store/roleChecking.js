@@ -1,6 +1,5 @@
 import {defineStore,acceptHMRUpdate} from "pinia";
 import {computed, ref, watch} from "vue";
-import {loadConfigFromFile} from "vite";
 
 export const useRoleStore = defineStore("role", () => {
     const userInformation = ref({
