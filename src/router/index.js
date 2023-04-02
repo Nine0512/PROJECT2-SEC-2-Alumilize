@@ -50,6 +50,11 @@ const router = createRouter({
             name: 'Cart',
             component: () => import('../view/Cart.vue')
         },
+        {
+            path: '/:pathMatch(.*)*',
+            name: 'not-found',
+            component: () => import('../view/NotFound.vue')
+        }
     ],
     linkActiveClass: 'underline underline-offset-4',
     linkExactActiveClass: ''
