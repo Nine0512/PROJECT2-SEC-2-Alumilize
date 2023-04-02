@@ -7,7 +7,7 @@ import router from "@/router";
 let route = useRoute()
 const file = ref(null)
 let fileReader
-let category = ref([])
+
 let previewImg = ref('')
 let categoryArr = ref(['Art', 'Design', 'Photography', 'Programming', 'Science', 'Technology'])
 let fileExtension = ['.png', '.jpg', '.jpeg', '.gif', '.svg']
@@ -40,6 +40,8 @@ onMounted(async () => {
     })
   }
 })
+
+
 
 const handleFileChange = (e) => {
   console.log(e.target.files[0].name)

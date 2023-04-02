@@ -87,7 +87,7 @@ const userLibrary = async () => {
     >
       <!-- left zone -->
       <div class="col-span-1 pt-10 w-full md:w-5/12 lg:w-9/12">
-        <div class="avatar w-full items-center">
+        <div class="avatar w-full grid place-items-center">
           <div class="w-20 rounded-full"><img src="/images/image4.png" /></div>
         </div>
         <div class="text-black">

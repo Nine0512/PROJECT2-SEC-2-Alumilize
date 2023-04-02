@@ -8,12 +8,19 @@ import Loading from "@/component/Loading.vue";
 
 let allBook = ref([]);
 let filBook = ref([]);
+const publisherArr = ref([])
+
 
 onMounted(async () => {
   const data = await getBook();
   loading.value = false;
   allBook.value = data;
   filBook.value = allBook.value;
+  allBook.value.forEach((item) => {
+    if (!publisherArr.value.includes(item.publisher)) {
+      publisherArr.value.push(item.publisher);
+    }
+  });
 });
 
 const categoryArr = ref([
@@ -24,14 +31,7 @@ const categoryArr = ref([
   "Science",
   "Technology",
 ]);
-const publisherArr = ref([
-  "Siam Inter Comics",
-  "ASCII Media Works",
-  "Kodansha Comics",
-  "Viz Media",
-  "Yen Press",
-  "One Peace Books",
-]);
+
 
 let authorCheck = [];
 let categoryCheck = [];
