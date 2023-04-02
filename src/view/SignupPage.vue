@@ -21,7 +21,7 @@ const userInformation = ref({
   firstname: '',
   lastname: '',
   email: '',
-  username: '',
+  username: ''.trim(),
   password: '',
   confirmPasswordField: '',
   dateOfBirth: '',
@@ -47,7 +47,7 @@ const reg = async () => {
       isFirstnameValid.value = true
       isLastnameValid.value = true
       isEmailValid.value = false
-    } else if (data.find(e => e.username === userInformation.value.username) || userInformation.value.username.length === 0) {
+    } else if (data.find(e => e.username === userInformation.value.username) || userInformation.value.username.length === 0 || userInformation.value.username.trim().length !== userInformation.value.username.length) {
       isFirstnameValid.value = true
       isLastnameValid.value = true
       isEmailValid.value = true
@@ -146,7 +146,7 @@ const reg = async () => {
                      placeholder="username" v-model="userInformation.username" ref="usernameField"
                      :class="isUsernameValid ? '' : 'border-2 border-red-500'">
             </div>
-            <CationValidInput text="Username is already exits" :check="isUsernameValid" />
+            <CationValidInput text="Username is already exits or Invalid username" :check="isUsernameValid" />
           </div>
 
           <div class="flex flex-col text-black">

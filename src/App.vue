@@ -6,7 +6,7 @@ import Card from "@/component/Card.vue";
 </script>
 
 <template>
-  <div data-theme="garden">
+  <div data-theme="garden" >
     <router-view></router-view>
   </div>
 </template>

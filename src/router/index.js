@@ -49,8 +49,10 @@ const router = createRouter({
             path: '/Cart',
             name: 'Cart',
             component: () => import('../view/Cart.vue')
-        }
-    ]
+        },
+    ],
+    linkActiveClass: 'underline underline-offset-4',
+    linkExactActiveClass: ''
 })
 
 export default router

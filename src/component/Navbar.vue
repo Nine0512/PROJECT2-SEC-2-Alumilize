@@ -65,7 +65,7 @@ const logout = () => {
         <img :src="logo" alt="logo">
       </router-link>
       <div class="col-span-3 max-lg:hidden grid grid-cols-4 place-items-center font-bold">
-        <router-link to="/">Home</router-link>
+        <router-link  to="/">Home</router-link>
         <router-link to="/Allbook">All Book</router-link>
       </div>
       <div class="col-span-2 grid grid-cols-4 lg:grid-cols-3 place-items-center">
