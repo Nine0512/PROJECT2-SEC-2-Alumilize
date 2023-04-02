@@ -18,6 +18,7 @@ onMounted(async () => {
     infoArr.value.push(infoObj)
   })
 })
+
 let searchChoice = computed(() => {
   if (search.value === '') {
     return []
@@ -30,8 +31,6 @@ let searchChoice = computed(() => {
   }
 })
 
-
-
 let selectBook = (id) => {
   search.value = ''
   router.push({name: 'book', params: {id: id}})
@@ -40,7 +39,6 @@ let selectBook = (id) => {
 import {useRoleStore} from "@/store/roleChecking"
 
 const getRole = useRoleStore().userInformation.role
-useRoleStore().setCartLength()
 
 const logout = () => {
   useRoleStore().setRole('')

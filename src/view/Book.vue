@@ -4,9 +4,10 @@ import {ref, watch} from 'vue'
 import {useRoute} from 'vue-router'
 import router from "@/router";
 import book from '../book/Ore no Imouto ga Konna ni Kawaii Wake ga Nai Ayase IF.pdf'
-import {getBookById, deleteBook, addBookToCart} from "@/composable/fetch";
+import {addBookToCart, deleteBook, getBookById} from "@/composable/fetch";
 import Navbar from "@/component/Navbar.vue";
 import Footer from "@/component/Footer.vue";
+import {useRoleStore} from "@/store/roleChecking.js"
 
 const bookIcon = '/icon/book.svg'
 const calendarIcon = '/icon/calendar.svg'
@@ -24,15 +25,11 @@ watch(() => route.params.id, () => {
 })
 
 const renderImg = async () => {
-  const img = await getBookById(id)
-  bookInfo.value = img
+  bookInfo.value = await getBookById(id)
 }
-
-
 
 renderImg()
 
-import {useRoleStore} from "@/store/roleChecking.js"
 const getRole = useRoleStore().userInformation.role
 let getBookId = useRoleStore().userInformation.bookId
 

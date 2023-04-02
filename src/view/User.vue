@@ -1,10 +1,10 @@
 <script setup>
-import router from "@/router";
-import { ref, computed, onMounted } from "vue";
+import {onMounted, ref} from "vue";
 import Card from "@/component/Card.vue";
 import Navbar from "@/component/Navbar.vue";
-import { useRoleStore } from "@/store/roleChecking";
-import { getBook } from "../composable/fetch.js";
+import {useRoleStore} from "@/store/roleChecking";
+import {getBook} from "../composable/fetch.js";
+
 const editProfile = ref(false);
 const showProfile = ref(true);
 const showLibrary = ref(false);
@@ -20,6 +20,7 @@ const showEditProfile = () => {
   showFavBook.value = false;
   showHistory.value = false;
 };
+
 const letShowProfile = () => {
   editProfile.value = false;
   showProfile.value = true;
@@ -36,24 +37,16 @@ const letShowLibrary = () => {
   showFavBook.value = false;
   showHistory.value = false;
 };
-const letShowHistory = () => {
-  editProfile.value = false;
-  showProfile.value = false;
-  showLibrary.value = false;
-  showUserDetail.value = false;
-  showFavBook.value = false;
-  showHistory.value = true;
-};
+
 let allBook = ref([]);
 let books = ref([]);
+
 onMounted(async () => {
-  const data = await getBook();
-  allBook.value = data;
+  allBook.value = await getBook();
   books.value = allBook.value;
 });
 
-const { firstname, lastname, username, dateOfBirth, email, role, id, bookId } =
-  useRoleStore().userInformation;
+const { firstname, lastname, username, dateOfBirth, email, role, id, bookId } = useRoleStore().userInformation;
 const updateUser = async () => {
   await fetch(`http://localhost:5000/login/${id}`, {
     method: "PATCH",
@@ -64,6 +57,7 @@ const updateUser = async () => {
     .then((data) => console.log(data))
     .catch((err) => console.log(err));
 };
+
 const copy = {
   firstname: firstname,
   lastname: lastname,
@@ -78,6 +72,7 @@ const userLibrary = async () => {
   let data = await res.json();
   books.value = data;
 };
+
 </script>
 <template>
   <Navbar />

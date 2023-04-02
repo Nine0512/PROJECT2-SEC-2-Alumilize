@@ -17,8 +17,6 @@ const isEmailValid = ref(true)
 const isUsernameValid = ref(true)
 const isPasswordValid = ref(true)
 
-const cationIcon = 'https://api.iconify.design/ep:warning-filled.svg?color=%23FF0000'
-
 const userInformation = ref({
   firstname: '',
   lastname: '',

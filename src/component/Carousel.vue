@@ -3,7 +3,6 @@ const banner1 = 'images/image.png'
 const banner2 = 'images/image2.png'
 const banner3 = 'images/image3.png'
 const banner4 = 'images/image4.png'
-
 </script>
 
 <template>

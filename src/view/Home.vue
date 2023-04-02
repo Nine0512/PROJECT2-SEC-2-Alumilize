@@ -12,7 +12,6 @@ import router from "@/router";
 let bookByViz = ref([])
 let bookByCategory = ref([])
 let bookByYenPress = ref([])
-const getRole = useRoleStore().userInformation.role
 
 let screenSize = ref(window.innerWidth)
 window.addEventListener('resize', () => {
@@ -25,6 +24,7 @@ let colForBook = computed(() => {
     return 6
   }
 })
+
 let isLoading = ref(true)
 const renderBookByFilter = async (filter,value) => {
   const books = await filterBook(filter, value)

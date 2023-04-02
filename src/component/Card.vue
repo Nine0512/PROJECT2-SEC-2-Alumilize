@@ -1,10 +1,7 @@
 <script setup>
 import {useRoleStore} from "@/store/roleChecking"
-import {ref} from "vue";
 import { addBookToCart } from "@/composable/fetch.js"
-
 import book from '../book/Ore no Imouto ga Konna ni Kawaii Wake ga Nai Ayase IF.pdf'
-import router from "@/router";
 
 const props = defineProps({
   item: {
@@ -12,31 +9,7 @@ const props = defineProps({
     required: true
   }
 })
-
 let getBookId = useRoleStore().userInformation.bookId
-let getCart = useRoleStore().userInformation.cart
-
-
-// let addBookToCart = async (event, price, role, userId, cart) => {
-//   let even = {id: parseInt(event.target.id), price: price}
-//
-//   if (useRoleStore().userInformation.role === '') {
-//      await router.push('/login')
-//   } else if (!getCart.some(item => item.id === even.id)) {
-//     useRoleStore().addToCart(even)
-//     await fetch(`http://localhost:5000/login/${useRoleStore().userInformation.id}`, {
-//       method: 'PATCH',
-//       headers: {
-//         'Content-Type': 'application/json'
-//       },
-//       body: JSON.stringify(
-//           {
-//             cart: useRoleStore().userInformation.cart
-//           }
-//       )
-//     })
-//   }
-// }
 
 </script>
 

@@ -27,10 +27,7 @@ const userInformation = ref({
   cart: []
 })
 
-
-
-const role = useRoleStore()
-
+const userInfo = useRoleStore()
 
 const authentication = async () => {
   isSuccess.value = true
@@ -46,7 +43,7 @@ const authentication = async () => {
       userInformation.value.cart = data[i].cart
       userInformation.value.id = data[i].id
       userInformation.value.bookId = data[i].bookId
-      role.setInfo(userInformation.value)
+      userInfo.setInfo(userInformation.value)
       await router.push('/')
     }
   }
@@ -55,12 +52,6 @@ const authentication = async () => {
     userInformation.value.username = ''
     userInformation.value.password = ''
   }
-}
-
-const logout = () => {
-  userInformation.value.username = ''
-  userInformation.value.password = ''
-  userInformation.value.role = ''
 }
 
 </script>

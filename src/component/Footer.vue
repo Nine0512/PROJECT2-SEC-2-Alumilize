@@ -7,10 +7,6 @@
     <div class="w-full  bg-[#FFAD96] h-64 flex justify-center max-md:hidden">
       <div class="w-4/6 grid grid-rows-3 pb-2">
         <div class="row-span-2">
-          <!-- <div class="grid grid-cols-4">
-            <div class="flex justify-end items-end h-40">
-              <img src="../../public//images/footerLogo.png" class="h-28" />
-            </div> -->
           <div
             class="flex justify-center items-center col-span-2 pt-5 relative"
           >
@@ -22,10 +18,6 @@
               />
             </div>
           </div>
-          <!-- <div class="flex justify-center items-center text-lg">
-                <div>นอนอ่าน e-book สนุกกว่า!</div>
-              </div>
-            </div> -->
           <hr class="border-gray-800" />
         </div>
         <div class="grid grid-cols-10">
