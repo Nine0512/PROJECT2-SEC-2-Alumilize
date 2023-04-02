@@ -13,9 +13,9 @@ const props = defineProps({
 
 let getBookId = useRoleStore().userInformation.bookId
 let getBookInCart = useRoleStore().userInformation.cart
-let findBookIdIncart = ref(getBookInCart.map( cart => cart.id ))
+let findBookIdInCart = ref(getBookInCart.map( cart => cart.id ))
 let pushBook = (id) => {
-     findBookIdIncart.value.push(id)
+  findBookIdInCart.value.push(id)
 }
 </script>
 
@@ -44,7 +44,7 @@ let pushBook = (id) => {
       </a>
       <button 
           class="w-full lg:w-11/12 py-0.5 bg-orange-500 text-sm lg:text-black mb-4 btn border-none rounded-full hover:bg-orange-600 hover:transition transition delay-150 duration-300 ease-in-out"
-          v-else-if="findBookIdIncart.includes(item.id)">
+          v-else-if="findBookIdInCart.includes(item.id)">
           Added !!!
       </button>
       

@@ -30,6 +30,11 @@ renderImg()
 
 const getRole = useRoleStore().userInformation.role
 let getBookId = useRoleStore().userInformation.bookId
+let getBookInCart = useRoleStore().userInformation.cart
+let findBookIdInCart = ref(getBookInCart.map( cart => cart.id ))
+let pushBook = (id) => {
+  findBookIdInCart.value.push(id)
+}
 
 </script>
 
@@ -51,7 +56,12 @@ let getBookId = useRoleStore().userInformation.bookId
           <div class="flex-col justify-self-end">
             <div class="place-items-center grid mt-10">
               <p class="text-4xl text-orange-500 font-bold">{{ bookInfo?.price }} Baht</p>
-              <button :id="id" class="btn border-none rounded-full bg-yellow-500 hover:bg-yellow-600 w-4/6 lg:w-full mt-8 " @click="addBookToCart($event, bookInfo.price, useRoleStore().userInformation.role, useRoleStore().userInformation.id, useRoleStore().userInformation.cart)" v-if="!getBookId.includes(parseInt(id))">Add to cart</button>
+              <button
+                  class="btn border-none rounded-full bg-orange-500 hover:bg-orange-600 w-4/6 lg:w-full mt-8"
+                  v-if="findBookIdInCart.includes(parseInt(id))">
+                Added !!!
+              </button>
+              <button :id="id" v-else-if="!getBookId.includes(parseInt(id))" class="btn border-none rounded-full bg-yellow-500 hover:bg-yellow-600 w-4/6 lg:w-full mt-8 " @click="addBookToCart($event, bookInfo.price, useRoleStore().userInformation.role, useRoleStore().userInformation.id, useRoleStore().userInformation.cart); pushBook(parseInt(id));">Add to cart</button>
               <a :href="book" target="_blank" class="btn border-none rounded-full bg-green-500 hover:bg-green-600 w-4/6 lg:w-full mt-8 " v-else>Download</a>
             </div>
           </div>

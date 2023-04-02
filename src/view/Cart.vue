@@ -51,7 +51,7 @@ let checked = (event, id) => {
     cartChecked.push(selectedBookCart.id)
   } else {
     total.value -= selectedBookCart.price
-    cartChecked.pop(selectedBookCart.id)
+    cartChecked = cartChecked.filter(e => e !== selectedBookCart.id)
     getCart = getCart.filter(item => item !== selectedBookCart.id)
   }
 }
@@ -60,6 +60,8 @@ let checkAll = () => {
   for (let i = 0; i < itemList.value.children.length; i++) {
     itemList.value.children[i].children[0].children[0].children[0].children[0].checked = outCheckedAll.value.checked
   }
+  total.value = 0
+  cartChecked.length = 0
   for (let i = 0; i < infoArr.value.length; i++) {
     if (outCheckedAll.value.checked) {
       total.value += infoArr.value[i].price
@@ -71,9 +73,9 @@ let checkAll = () => {
         getCart.push(infoArr.value[i].id)
       }
     } else {
-      total.value -= infoArr.value[i].price
+      // total.value -= infoArr.value[i].price
       getCart = getCart.filter(item => item !== infoArr.value[i].id)
-      cartChecked.pop(infoArr.value[i].id)
+      cartChecked = cartChecked.filter(e => e !== infoArr.value[i].id)
     }
   }
   outChecked.value.checked = true
@@ -149,7 +151,7 @@ let submitOnCart = async () => {
           <div
               class="lg:col-span-2 md:col-span-2 grid xl:grid-cols-2 md:grid-row-2 max-[1280px]:grid-rows-2 max-[768px]:grid-rows-2 max-[768px]:justify-items-center">
             <div class="lg:pl-4">
-              <p class="font-semibold lg:text-4xl whitespace-nowrap md:text-2xl">Price: {{ item.price }} $</p>
+              <p class="font-semibold lg:text-4xl whitespace-nowrap md:text-2xl">Price: {{ item.price }} Baht</p>
             </div>
             <div class="lg:ml-16" @click="removeBookFromCart(item)">
               <img :src="bin" alt="bin" class="w-1/3 cursor-pointer">
@@ -163,7 +165,7 @@ let submitOnCart = async () => {
       <div class="grid lg:grid-cols-6 md:grid-cols-2 ">
         <div class="lg:col-end-6 lg:col-span-1 grid max-[768px]:grid-rows-2 max-[768px]:justify-items-center ">
           <div class="lg:text-4xl md:text-2xl  font-semibold grid justify-items-end whitespace-nowrap">
-            Total: {{ total }} $
+            Total: {{ total }} Baht
           </div>
           <div class="font-semibold grid justify-items-center whitespace-nowrap">
             ({{ cartChecked.length }} piece)
