@@ -212,7 +212,7 @@ let pushCategory = (item) => {
           <input type="file" class="file-input" @change="handleFileChange"/>
         </div>
         <div class="flex justify-end modal-action mb-5">
-          <label v-if="btn === 'Add'" :for="handleSubmit?'':'my-modal'" class="btn bg-green-500 hover:bg-green-600 text-black"
+          <label v-if="btn === 'Add'" :for="handleSubmit?'':'my-modal'" class="btn bg-green-500 hover:bg-green-600 border-none text-black"
                  @click="handleSubmit">Submit</label>
           <label v-else-if="btn === 'Update'" for="my-modal" class="btn ml-2 border-none btn bg-green-500 hover:bg-green-600 text-black" @click="handleUpdate(id)">Update</label>
           <button class="btn ml-2 border-none" @click="router.go(-1)">Cancel</button>
