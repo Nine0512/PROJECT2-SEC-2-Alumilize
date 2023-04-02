@@ -107,8 +107,8 @@ let pushBook = (id) => {
         </div>
       </div>
       <div class="col-span-6 flex justify-end my-5" v-if="getRole === 'admin'" >
-        <router-link :to="'/manage/update/' + bookInfo?.id" class="btn ml-2">Update</router-link>
-        <label for="my-modal-6" class="btn ml-2">Delete</label>
+        <router-link :to="'/manage/update/' + bookInfo?.id" class="btn ml-2 border-none btn bg-green-500 hover:bg-green-600 text-black">Update</router-link>
+        <label for="my-modal-6" class="btn ml-2 bg-red-400 hover:bg-red-500 border-none text-black">Delete</label>
         <input type="checkbox" id="my-modal-6" class="modal-toggle"/>
         <div class="modal modal-bottom sm:modal-middle">
           <div class="modal-box">
