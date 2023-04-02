@@ -53,7 +53,6 @@ const filterBook = async (filter, value) => {
 
 let addBookToCart = async (event, price, role, userId, cart) => {
     let even = {id: parseInt(event.target.id), price: price}
-    console.log(even)
     if (role === '') {
         await router.push('/login')
     } else if (!cart.some(item => item.id === even.id)) {

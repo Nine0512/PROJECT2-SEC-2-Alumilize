@@ -2,6 +2,7 @@
 import {useRoleStore} from "@/store/roleChecking"
 import { addBookToCart } from "@/composable/fetch.js"
 import book from '../book/Ore no Imouto ga Konna ni Kawaii Wake ga Nai Ayase IF.pdf'
+import {ref} from 'vue'
 
 const props = defineProps({
   item: {
@@ -9,8 +10,13 @@ const props = defineProps({
     required: true
   }
 })
-let getBookId = useRoleStore().userInformation.bookId
 
+let getBookId = useRoleStore().userInformation.bookId
+let getBookInCart = useRoleStore().userInformation.cart
+let findBookIdIncart = ref(getBookInCart.map( cart => cart.id ))
+let pushBook = (id) => {
+     findBookIdIncart.value.push(id)
+}
 </script>
 
 <template>
@@ -36,11 +42,20 @@ let getBookId = useRoleStore().userInformation.bookId
          v-if="getBookId.includes(item.id)">
         Download
       </a>
+      <button 
+          class="w-full lg:w-11/12 py-0.5 bg-orange-500 text-sm lg:text-black mb-4 btn border-none rounded-full hover:bg-orange-600 hover:transition transition delay-150 duration-300 ease-in-out"
+          v-else-if="findBookIdIncart.includes(item.id)">
+          Added !!!
+      </button>
+      
       <button :id="item.id"
               class="w-full lg:w-11/12 py-0.5 bg-yellow-500 text-sm lg:text-black mb-4 btn border-none rounded-full hover:bg-yellow-600 hover:transition"
               v-else
-              @click="addBookToCart($event,item.price, useRoleStore().userInformation.role, useRoleStore().userInformation.id, useRoleStore().userInformation.cart)">Add to cart
-      </button>
+              @click="addBookToCart($event,item.price, useRoleStore().userInformation.role, useRoleStore().userInformation.id, useRoleStore().userInformation.cart);
+              pushBook(item.id);">Add to cart
+      </button> 
+
+
     </div>
   </div>
 
