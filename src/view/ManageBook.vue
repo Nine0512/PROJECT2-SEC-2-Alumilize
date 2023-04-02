@@ -44,7 +44,6 @@ onMounted(async () => {
 
 
 const handleFileChange = (e) => {
-  console.log(e.target.files[0].name)
   if (fileExtension.some(item => e.target.files[0].name.endsWith(item))) {
     warning.value = ''
     file.value = e.target.files[0]
