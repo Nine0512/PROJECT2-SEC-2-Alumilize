@@ -1,7 +1,5 @@
 <script setup>
 import {ref} from 'vue'
-import Footer from "@/component/Footer.vue";
-import Navbar from "@/component/Navbar.vue";
 import {useRoleStore} from "@/store/roleChecking"
 
 const bin = '/icon/bin.svg'
@@ -116,8 +114,6 @@ let submitOnCart = async () => {
 
 </script>
 <template>
-  <Navbar/>
-  {{}}
   <div class="w-full min-h-screen ">
     <!-- 1.Information bar -->
     <div
@@ -180,7 +176,6 @@ let submitOnCart = async () => {
       </div>
     </div>
   </div>
-  <Footer/>
 </template>
 <style scoped>
 </style>

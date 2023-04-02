@@ -1,5 +1,4 @@
 <script setup>
-import Navbar from '../component/Navbar.vue'
 import toggleIconShowHidePassword from "@/composable/toggleShowPassword";
 import {ref} from "vue";
 import router from "@/router";
@@ -90,7 +89,6 @@ const reg = async () => {
 
 <template>
   <div class="flex flex-col w-full h-screen ">
-    <Navbar/>
     <div class="flex h-screen">
       <div class="w-full flex flex-col justify-center items-center">
         <div class="flex flex-col space-y-5 p-20 max-lg:p-5 rounded-2xl items-center bg-[#FAE1D2] drop-shadow-2xl">

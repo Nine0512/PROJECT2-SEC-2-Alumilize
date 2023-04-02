@@ -5,8 +5,6 @@ import {useRoute} from 'vue-router'
 import router from "@/router";
 import book from '../book/Ore no Imouto ga Konna ni Kawaii Wake ga Nai Ayase IF.pdf'
 import {addBookToCart, deleteBook, getBookById} from "@/composable/fetch";
-import Navbar from "@/component/Navbar.vue";
-import Footer from "@/component/Footer.vue";
 import {useRoleStore} from "@/store/roleChecking.js"
 
 const bookIcon = '/icon/book.svg'
@@ -36,7 +34,6 @@ let getBookId = useRoleStore().userInformation.bookId
 </script>
 
 <template>
-  <Navbar/>
   <div class="w-full min-h-screen flex justify-center text-black">
     <div class="w-full lg:w-4/6 lg:grid lg:grid-cols-6 gap-4 mx-5 my-2 mt-10">
       <div class="col-span-6 grid grid-cols-2 md:grid-cols-6 gap-4">
@@ -99,9 +96,6 @@ let getBookId = useRoleStore().userInformation.bookId
           <p class="text-lg my-4 text-justify">&nbsp;&nbsp;&nbsp;&nbsp;{{ bookInfo?.description }}</p>
         </div>
       </div>
-<!--      <div class="col-span-6">-->
-<!--        <a :href="book" class="btn" target="_blank">Download</a>-->
-<!--      </div>-->
       <div class="col-span-6 flex justify-end my-5" v-if="getRole === 'admin'" >
         <router-link :to="'/manage/update/' + bookInfo?.id" class="btn ml-2">Update</router-link>
         <label for="my-modal-6" class="btn ml-2">Delete</label>
@@ -119,7 +113,6 @@ let getBookId = useRoleStore().userInformation.bookId
       </div>
     </div>
   </div>
-  <Footer/>
 </template>
 
 <style scoped>

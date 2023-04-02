@@ -1,13 +1,13 @@
 <script setup>
-import {ref} from "vue";
 import Navbar from "@/component/Navbar.vue";
-import Carousel from "@/component/Carousel.vue";
-import Card from "@/component/Card.vue";
+import Footer from "@/component/Footer.vue";
 </script>
 
 <template>
   <div data-theme="garden" >
+    <Navbar/>
     <router-view></router-view>
+    <Footer/>
   </div>
 </template>
 <style scoped>

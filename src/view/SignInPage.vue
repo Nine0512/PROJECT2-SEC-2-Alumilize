@@ -1,9 +1,7 @@
 <script setup>
-import Navbar from '../component/Navbar.vue'
 import {computed, provide, ref} from "vue";
 import toggleIconShowHidePassword from '../composable/toggleShowPassword.js'
 import CationValidInput from "@/component/CationValidInput.vue";
-import Footer from "@/component/Footer.vue";
 import router from "@/router";
 import {useRoleStore} from "@/store/roleChecking"
 
@@ -58,7 +56,6 @@ const authentication = async () => {
 
 <template>
   <div class="flex flex-col w-full h-screen">
-    <Navbar/>
 
     <!--    <div v-if="userInformation.role === 'admin'">-->
     <!--      <button class="btn">Edit</button>-->

@@ -1,7 +1,6 @@
 <script setup>
 import {onMounted, ref} from "vue";
 import Card from "@/component/Card.vue";
-import Navbar from "@/component/Navbar.vue";
 import {useRoleStore} from "@/store/roleChecking";
 import {getBook} from "../composable/fetch.js";
 
@@ -75,7 +74,6 @@ const userLibrary = async () => {
 
 </script>
 <template>
-  <Navbar />
   <div class="w-full min-h-screen flex justify-center">
     <div
       class="w-full lg:w-4/6 grid grid-cols-3 lg:grid-cols-6 gap-4 text-black"

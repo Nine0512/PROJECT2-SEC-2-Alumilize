@@ -5,7 +5,6 @@ import Carousel from "@/component/Carousel.vue"
 import {filterBook} from '@/composable/fetch.js'
 import Navbar from "@/component/Navbar.vue"
 import Footer from "@/component/Footer.vue";
-import {useRoleStore} from "@/store/roleChecking"
 import Loading from "@/component/Loading.vue";
 import router from "@/router";
 
@@ -51,7 +50,6 @@ onMounted( () => {
 </script>
 
 <template>
-  <Navbar/>
   <div class="w-full min-h-screen flex justify-center">
     <div class="w-full lg:w-4/6 grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 gap-1 lg:gap-4">
       <div class="col-span-2 lg:col-span-4 xl:col-span-6">
@@ -81,13 +79,8 @@ onMounted( () => {
       <div v-for="item in bookByCategory.slice(0,colForBook)" :key="item.id" class="mx-5 mt-5 lg:mx-0">
         <Card :item="item"/>
       </div>
-
-<!--      <div v-if="getRole === 'admin'" class="col-span-2 lg:col-span-4 xl:col-span-6 flex justify-end">-->
-<!--        <router-link to="/manage" class="btn">Add Book</router-link>-->
-<!--      </div>-->
     </div>
   </div>
-  <Footer/>
 </template>
 
 <style scoped>

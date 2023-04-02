@@ -1,8 +1,6 @@
 <script setup>
 import { onMounted, ref } from "vue";
 import Card from "../component/Card.vue";
-import Navbar from "@/component/Navbar.vue";
-import Footer from "@/component/Footer.vue";
 import { getBook } from "../composable/fetch.js";
 import Loading from "@/component/Loading.vue";
 
@@ -109,8 +107,6 @@ function sortPrice(item) {
 </script>
 
 <template>
-  <div class="flex flex-col min-h-screen">
-    <Navbar />
     <div class="flex justify-center w-full">
       <div class="w-4/6 grid grid-cols-10 max-lg:hidden p-5">
         <div class="col-span-2 h-[25rem]">
@@ -305,8 +301,6 @@ function sortPrice(item) {
         </div>
       </div>
     </div>
-  </div>
-  <Footer />
 </template>
 
 <style scoped></style>

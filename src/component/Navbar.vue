@@ -38,7 +38,11 @@ let selectBook = (id) => {
 
 import {useRoleStore} from "@/store/roleChecking"
 
-const getRole = useRoleStore().userInformation.role
+let getRole = useRoleStore().userInformation.role
+
+watch(()=> useRoleStore().userInformation.role, ()=>{
+  getRole = useRoleStore().userInformation.role
+})
 
 const logout = () => {
   useRoleStore().setRole('')
