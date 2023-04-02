@@ -3,8 +3,6 @@ import {computed, onMounted, ref} from 'vue'
 import Card from '../component/Card.vue'
 import Carousel from "@/component/Carousel.vue"
 import {filterBook} from '@/composable/fetch.js'
-import Navbar from "@/component/Navbar.vue"
-import Footer from "@/component/Footer.vue";
 import Loading from "@/component/Loading.vue";
 import router from "@/router";
 

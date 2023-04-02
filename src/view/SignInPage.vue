@@ -1,5 +1,5 @@
 <script setup>
-import {computed, provide, ref} from "vue";
+import {ref} from "vue";
 import toggleIconShowHidePassword from '../composable/toggleShowPassword.js'
 import CationValidInput from "@/component/CationValidInput.vue";
 import router from "@/router";
@@ -56,19 +56,6 @@ const authentication = async () => {
 
 <template>
   <div class="flex flex-col w-full h-screen">
-
-    <!--    <div v-if="userInformation.role === 'admin'">-->
-    <!--      <button class="btn">Edit</button>-->
-    <!--      <button class="btn" @click="logout">logout</button>-->
-    <!--    </div>-->
-    <!--    <div v-else-if="userInformation.role === 'user'">-->
-    <!--      <button class="btn">View</button>-->
-    <!--      <button class="btn" @click="logout">logout</button>-->
-    <!--    </div>-->
-    <!--    <div v-else>-->
-    <!--      <button class="btn">Please Login First</button>-->
-    <!--    </div>-->
-
     <div class="flex h-screen">
       <div class="w-full max-lg:w-full max-lg:pb-10 max-lg:pt-5 justify-center flex flex-col items-center space-y-5 ">
         <div

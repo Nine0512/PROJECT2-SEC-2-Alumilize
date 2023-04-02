@@ -19,14 +19,14 @@ let id = route.params.id
 
 watch(() => route.params.id, () => {
   id = route.params.id
-  renderImg()
+  renderBook()
 })
 
-const renderImg = async () => {
+const renderBook = async () => {
   bookInfo.value = await getBookById(id)
 }
 
-renderImg()
+renderBook()
 
 const getRole = useRoleStore().userInformation.role
 let getBookId = useRoleStore().userInformation.bookId
