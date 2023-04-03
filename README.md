@@ -25,10 +25,16 @@ Our manga and light novel section features some of the most popular titles in th
 
 ## How to use (Video Preview)
 [![videoPlay](https://user-images.githubusercontent.com/88127348/229463746-4a8740a1-4813-4203-b424-116497944aa4.png)](https://youtu.be/UYNNztdObIE)
-.
+
+1. Users, please apply for membership to become a member of the website and choose to buy books (in the event that you are not a member, you will be able to view the book but do not have the right to purchase).
+2. After becoming a member, users can choose to buy books and press to order.
+3. When the order is completed, your book will be in user library
+
 ## Component Diagram
 ![componentDiagram](https://user-images.githubusercontent.com/88127348/229457699-2b4a7cf6-a5c6-40c0-8ed9-5362d0a5f2e2.jpg)
 
+## UI Flow
+![jsProject2_page-0001](https://user-images.githubusercontent.com/88127348/229486908-97468032-4dc3-496c-a7af-94435f88ab3b.jpg)
 
 ## Reference
 
