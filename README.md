@@ -23,6 +23,13 @@ Our manga and light novel section features some of the most popular titles in th
 - Summary total E-book in cart, price of E-Book user has selected in cart and navigation bar.
 - Download book (mock up)
 
+## How to use (Video Preview)
+[![videoPlay](https://user-images.githubusercontent.com/88127348/229463746-4a8740a1-4813-4203-b424-116497944aa4.png)](https://youtu.be/UYNNztdObIE)
+.
+## Component Diagram
+![componentDiagram](https://user-images.githubusercontent.com/88127348/229457699-2b4a7cf6-a5c6-40c0-8ed9-5362d0a5f2e2.jpg)
+
+
 ## Reference
 
 - icon from [svgrepo](https://www.svgrepo.com/) and [icones](https://icones.js.org/)
@@ -32,13 +39,13 @@ Our manga and light novel section features some of the most popular titles in th
 
 ## Member
 
-- 074 : [Worawit Limthong](https://www.github.com/win2114)
+- 074 : [Worawit Limthong](https://www.github.com/win2114) [ 20% ]
 > sumary cart, cart page (view) and admin Management (view)
-- 099 : [Natdanai Nitipan](https://www.github.com/c3bosskung)
+- 099 : [Natdanai Nitipan](https://www.github.com/c3bosskung) [ 20% ]
 > authentication and authorization, sign in and sign up (view)
-- 101 : [Thaninpong Panthawong](https://www.github.com/nonybueno)    
+- 101 : [Thaninpong Panthawong](https://www.github.com/nonybueno) [ 20% ]   
 > search book filter, footer (component) and all book page (view)
-- 102 : [Thanwa Plaengman](https://www.github.com/Nine0512)                                     
+- 102 : [Thanwa Plaengman](https://www.github.com/Nine0512) [ 20% ]                                    
 > CRUD E-book in stock, Homepage (view), Book detail Page (view), Card(component), Navbar(component) and Banner Slide(component)
-- 106 : [Preeyaporn Petcharat](https://www.github.com/Preeyapornn)                             
+- 106 : [Preeyaporn Petcharat](https://www.github.com/Preeyapornn) [ 20% ]                            
 > add remove items in cart, user profile page (view) and admin Management (view)
