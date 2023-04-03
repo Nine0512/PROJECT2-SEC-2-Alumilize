@@ -50,3 +50,6 @@ _In these 2 weeks, we learned about router and fetch, so let's split the task to
 -   106 :  [Preeyaporn Petcharat](https://www.github.com/Preeyapornn)
 	- user profile page (view) and admin Management (view)
 
+# Responsibilities of each person in _week 4 - 5_
+
+###### We discuss about code, logic and fix bug and finally we have Project for send to Ajarn Jing 😊
