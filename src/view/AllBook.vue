@@ -41,9 +41,7 @@ function filterAllCheck(arr) {
     arr.some((c) => {
       if (arr === categoryCheck) {
         return i.category.includes(c);
-      } else if (arr === authorCheck) {
-        return i.author.includes(c);
-      } else if (arr === publisherCheck) {
+      }else if (arr === publisherCheck) {
         return i.publisher.includes(c);
       }
     })
@@ -56,11 +54,11 @@ let loading = ref(true)
 function allChecked(arr, item, event) {
   if (event.target.checked) {
     arr.push(item);
-    filterAllCheck(arr, item);
+    filterAllCheck(arr);
   } else {
     removeCheck = arr.indexOf(item);
     arr.splice(removeCheck, 1);
-    filterAllCheck(arr, item);
+    filterAllCheck(arr);
   }
   if (arr.length === 0) {
     filBook.value = allBook.value;

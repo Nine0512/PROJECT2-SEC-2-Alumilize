@@ -1,5 +1,5 @@
 <script setup>
-import {computed, onMounted, ref} from 'vue'
+import { onMounted, ref} from 'vue'
 import Card from '../component/Card.vue'
 import Carousel from "@/component/Carousel.vue"
 import {filterBook} from '@/composable/fetch.js'
