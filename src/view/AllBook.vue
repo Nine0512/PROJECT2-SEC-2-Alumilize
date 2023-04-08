@@ -181,7 +181,7 @@ function sortPrice(item) {
           <div class="col-span-4 grid place-items-center" v-show="loading">
             <Loading />
           </div>
-          <div v-for="item in filBook">
+          <div v-for="(item,index) in filBook" :key="index">
             <Card :item="item" />
           </div>
           <div class="col-span-4 grid place-items-center text-6xl m-5 text-red-500">
@@ -292,7 +292,7 @@ function sortPrice(item) {
           <div class="col-span-2 grid place-items-center" v-show="loading">
             <Loading />
           </div>
-          <div v-for="item in filBook">
+          <div v-for="(item,index) in filBook" :key="index">
             <Card :item="item" />
           </div>
           <div class="col-span-2 grid place-items-center text-6xl m-5 text-red-400">
