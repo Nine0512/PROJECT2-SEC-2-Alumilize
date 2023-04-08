@@ -94,6 +94,7 @@ let submitOnCart = async () => {
   let raw = await fetch(`http://localhost:5000/login/${getUserId}`)
   let user = await raw.json()
   data.bookId = user.bookId.concat(cartChecked.filter(e => !user.bookId.find(item => item === e)))
+  data.cart = useRoleStore().userInformation.cart
   // useRoleStore().userInformation.cart = infoArr.value
   await fetch(`http://localhost:5000/login/${getUserId}`, {
     method: 'PATCH',
@@ -101,15 +102,6 @@ let submitOnCart = async () => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(data)
-  })
-  await fetch(`http://localhost:5000/login/${getUserId}`, {
-    method: 'PATCH',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      cart: useRoleStore().userInformation.cart
-    })
   })
   cartChecked.length = 0
   total.value = 0
