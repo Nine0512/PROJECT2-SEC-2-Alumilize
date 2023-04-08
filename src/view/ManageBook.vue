@@ -3,6 +3,7 @@
 import {onMounted, ref} from "vue"
 import {useRoute} from 'vue-router'
 import router from "@/router";
+import {getBookById} from "@/composable/fetch.js";
 
 let route = useRoute()
 const file = ref(null)
@@ -34,7 +35,7 @@ onMounted(async () => {
     }
   } else {
     btn.value = 'Update'
-    fetch(`http://localhost:5000/Book/${id}`).then(res => res.json()).then(res => {
+    await getBookById(id).then(res => {
       bookObj.value = res
       previewImg.value = bookObj.value?.imageBase64
     })
