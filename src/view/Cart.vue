@@ -1,6 +1,7 @@
 <script setup>
 import {ref} from 'vue'
 import {useRoleStore} from "@/store/roleChecking"
+import {getBookListByIdList} from "@/composable/fetch.js";
 
 const bin = '/icon/bin.svg'
 let getUserId = useRoleStore().userInformation.id
@@ -14,8 +15,8 @@ let outChecked = ref(null)
 let infoArr = ref([])
 let itemList = ref(null)
 let dataJson = async () => {
-  let res = await fetch('http://localhost:5000/Book?id=' + getCartItemId.join('&id='))
-  infoArr.value = await res.json();
+  let idList = getCartItemId.join('&id=')
+  infoArr.value = await getBookListByIdList(idList)
 }
 
 dataJson()
