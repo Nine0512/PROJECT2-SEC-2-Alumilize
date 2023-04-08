@@ -71,5 +71,17 @@ let addBookToCart = async (event, price, role, userId, cart) => {
     }
 }
 
+const getBookListByIdList = async (id) => {
+    try {
+        const res = await fetch(`http://localhost:5000/Book?id=${id}`)
+        if (res.status === 200) {
+            const data = await res.json()
+            return data
+        }
+    } catch (err) {
+        console.log(err)
+    }
+}
 
-export {getBook, getBookById, deleteBook , filterBook, addBookToCart}
+
+export {getBook, getBookById, deleteBook , filterBook, addBookToCart, getBookListByIdList}

@@ -2,7 +2,7 @@
 import {onMounted, ref, watch} from "vue";
 import Card from "@/component/Card.vue";
 import {useRoleStore} from "@/store/roleChecking";
-import {getBook} from "@/composable/fetch";
+import {getBook,getBookListByIdList} from "@/composable/fetch";
 
 const editProfile = ref(false);
 const showProfile = ref(true);
@@ -70,12 +70,12 @@ const updateUser = async () => {
 
 
 let booked = copy.bookId
-let bookUser = "http://localhost:5000/Book?id=" + booked.join("&id=");
+
+let IdList = booked.join("&id=")
 const userLibrary = async () => {
-  let res = await fetch(bookUser);
-  let data = await res.json();
-  books.value = data;
-};
+  books.value = await getBookListByIdList(IdList)
+}
+
 
 </script>
 <template>
