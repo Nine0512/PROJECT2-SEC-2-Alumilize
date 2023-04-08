@@ -26,7 +26,7 @@ let removeBookFromCart = async (item) => {
     useRoleStore().removeFromCart(item)
     cartChecked = cartChecked.filter(e => e !== item.id)
     infoArr.value = infoArr.value.filter(e => e.id !== item.id)
-    total.value = useRoleStore().userInformation.cart.filter(e => !cartChecked.find(id => e.id !== id)).reduce((pre, curr) => pre + curr.price, 0)
+    total.value = useRoleStore().userInformation.cart.filter(e => cartChecked.includes(e.id)).reduce((pre, curr) => pre + curr.price, 0)
     await fetch(`http://localhost:5000/login/${getUserId}`, {
       method: 'PATCH',
       headers: {
